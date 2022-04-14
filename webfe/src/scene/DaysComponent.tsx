@@ -1,5 +1,6 @@
 import React, { Component } from "react"; 
 import { DayOfWeek } from '../model/DayOfWeek';
+import { Box, Text } from 'grommet';
 
 export class DaysComponent extends Component<{days:DayOfWeek[]}> {
     constructor(props: {days: DayOfWeek[]}) {
@@ -16,14 +17,14 @@ export class DaysComponent extends Component<{days:DayOfWeek[]}> {
 
     maybeAllDays() {
         if (this.isEveryDay()) {
-            return <p>Everyday</p>
+            return <Text>Everyday</Text>
         } 
     }
 
     maybeSingleDay() {
         if (this.isSingleDay()) {
             let day = this.props.days[0];
-            return <p>{this.getWeekDays()[day]}</p>
+            return <Text>{this.getWeekDays()[day]}</Text>
         }
     }
 
@@ -31,7 +32,20 @@ export class DaysComponent extends Component<{days:DayOfWeek[]}> {
         if (this.isEveryDay() || this.isSingleDay()) {
             return null;
         }
-        return <p>M T W T F S S</p>
+        let elements = [];
+        for(let i = 0; i < 7; ++i) {
+            let enabled = this.props.days.includes(i)
+            elements.push(this.letterDay(i, enabled))
+        }
+        return <Box direction="row">{elements}</Box>
+    }
+
+    letterDay(day: DayOfWeek, enabled: Boolean) {
+        let letter = this.getWeekDays()[day].charAt(0);
+        let color = enabled ? "brand" : "gray"
+        return <Box pad="xsmall">
+                <Text color={color}>{letter}</Text>
+            </Box>
     }
 
     isSingleDay() {
@@ -44,7 +58,7 @@ export class DaysComponent extends Component<{days:DayOfWeek[]}> {
 
     getWeekDays() {
         let locale = window.navigator.language;
-        var baseDate = new Date("01/05/2020"); // just a Monday
+        var baseDate = new Date("01/06/2020"); // just a Monday?
         var weekDays = [];
         for(let i = 0; i < 7; i++) {       
             weekDays.push(baseDate.toLocaleDateString(locale, { weekday: 'long' }));
