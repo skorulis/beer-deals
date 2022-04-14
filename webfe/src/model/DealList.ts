@@ -1,6 +1,6 @@
-import { Deal } from "./Deal"
+import { VenueDeals } from "./Deal"
 
 export interface DealList {
     
-    deals: Deal[]
+    deals: VenueDeals[]
 }

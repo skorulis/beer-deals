@@ -2,6 +2,8 @@ import React from 'react';
 import { Box, Button, Heading, Grommet } from 'grommet';
 import { Notification } from 'grommet-icons';
 import { DealCard } from './scene/DealCard';
+import { VenueDealsComponent } from './scene/VenueDealsComponent';
+import { venueDeals1 } from './model/TestModels';
 
 
 const theme = {
@@ -41,7 +43,7 @@ function App() {
         </AppBar>
         <Box direction='row' flex overflow={{ horizontal: 'hidden' }}>
           <Box flex align='center' justify='center'>
-          app body
+          <VenueDealsComponent deals={venueDeals1()} />
           <DealCard></DealCard>
           <DealCard></DealCard>
           </Box>

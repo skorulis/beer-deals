@@ -6,7 +6,7 @@ export interface Deal {
     days: DayOfWeek[]
     text: string
     link?: string
-    timeStart: number
+    timeStart: number // Minutes from 00:00
     timeEnd: number
     
 }
@@ -22,10 +22,10 @@ export enum DealType {
 }
 
 export enum DrinksType {
-    BEER,
-    WINE,
-    SPIRITS,
-    COCKTAIL
+    BEER = "beer",
+    WINE = "wine",
+    SPIRITS = "spirits",
+    COCKTAILS = "cocktails"
 }
 
 export enum FoodType {
