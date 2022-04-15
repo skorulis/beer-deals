@@ -1,5 +1,5 @@
 import { Component } from "react"; 
-import { Box, Text } from "grommet";
+import { Box, Text, Card } from "grommet";
 import { DayOfWeek } from '../model/DayOfWeek';
 import { VenueDeals } from "../model/Deal";
 import { SingleDealComponent } from "./SingleDealComponent";
@@ -11,10 +11,10 @@ export class VenueDealsComponent extends Component<{deals:VenueDeals}> {
     }
 
     render() {
-        return <Box direction="column">
+        return <Card direction="column" pad="medium">
             <VenueHeader venue={this.props.deals.venue} />
             {this.dealList()}
-        </Box>
+        </Card>
     }
 
     dealList() {

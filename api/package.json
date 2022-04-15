@@ -1,0 +1,14 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/skorulis/beer-deals",
+  "author": "Alex Skorulis",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "express": "^4.17.3",
+    "serverless-http": "^3.0.1",
+    "serverless-offline": "^8.7.0"
+  }
+}
