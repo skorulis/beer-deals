@@ -1,8 +1,9 @@
-import React, { Component } from "react"; 
+import { Component } from "react"; 
+import { Box, Text } from "grommet";
 import { DayOfWeek } from '../model/DayOfWeek';
-import { DaysComponent } from './DaysComponent';
 import { VenueDeals } from "../model/Deal";
 import { SingleDealComponent } from "./SingleDealComponent";
+import { VenueHeader } from "./VenueHeader";
 
 export class VenueDealsComponent extends Component<{deals:VenueDeals}> {
     constructor(props: {deals:VenueDeals}) {
@@ -10,10 +11,10 @@ export class VenueDealsComponent extends Component<{deals:VenueDeals}> {
     }
 
     render() {
-        return <div>
+        return <Box direction="column">
+            <VenueHeader venue={this.props.deals.venue} />
             {this.dealList()}
-            <DaysComponent days={this.days()} />
-        </div>
+        </Box>
     }
 
     dealList() {

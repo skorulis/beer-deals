@@ -42,20 +42,10 @@ function App() {
           
         </AppBar>
         <Box direction='row' flex overflow={{ horizontal: 'hidden' }}>
-          <Box flex align='center' justify='center'>
+          <Box pad="small">
           <VenueDealsComponent deals={venueDeals1()} />
-          <DealCard></DealCard>
-          <DealCard></DealCard>
           </Box>
-          <Box
-            width='medium'
-            background='light-2'
-            elevation='small'
-            align='center'
-            justify='center'
-          >
-            sidebar
-            </Box>
+          
         </Box>
       </Box>
      
