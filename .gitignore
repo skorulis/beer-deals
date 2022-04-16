@@ -1,3 +1,4 @@
 webfe/node_modules
 api/node_modules
 api/.serverless
+api/.dynamodb

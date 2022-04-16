@@ -6,7 +6,20 @@ const AWS = require('aws-sdk');
  
  
 const USERS_TABLE = process.env.USERS_TABLE;
-const dynamoDb = new AWS.DynamoDB.DocumentClient();
+const IS_OFFLINE = process.env.IS_OFFLINE;
+
+let dynamoDb;
+if (IS_OFFLINE === 'true') {
+    dynamoDb = new AWS.DynamoDB.DocumentClient({
+      region: 'localhost',
+      endpoint: 'http://localhost:8000',
+      accessKeyId: 'DEFAULT_ACCESS_KEY',  // needed if you don't have aws credentials at all in env
+      secretAccessKey: 'DEFAULT_SECRET' // needed if you don't have aws credentials at all in env
+    })
+    console.log(dynamoDb);
+  } else {
+    dynamoDb = new AWS.DynamoDB.DocumentClient();
+  };
  
 app.use(bodyParser.json({ strict: false }));
  
@@ -40,6 +53,8 @@ app.get('/users/:userId', function (req, res) {
 // Create User endpoint
 app.post('/users', function (req, res) {
   const { userId, name } = req.body;
+  console.log("POSTING USER " + userId)
+  console.log("------")
   if (typeof userId !== 'string') {
     res.status(400).json({ error: '"userId" must be a string' });
   } else if (typeof name !== 'string') {
