@@ -1,0 +1,14 @@
+
+
+
+* Decide where I'm going to host everything
+
+* Look at switching to reactstrap with a nice theme
+	- https://demos.creative-tim.com/argon-design-system-react/#/documentation/overview
+
+* How can I login / register users.
+	- Can this work offline (Need to fake offline)
+	
+	https://aws.amazon.com/cognito/
+
+* https://medium.com/@Da_vidgf/using-cognito-for-users-management-in-your-serverless-application-1695fec9e225
