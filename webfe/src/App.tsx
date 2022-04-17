@@ -1,56 +1,38 @@
-import React from 'react';
-import { Box, Button, Heading, Grommet } from 'grommet';
-import { Notification } from 'grommet-icons';
-import { DealCard } from './scene/DealCard';
-import { VenueDealsComponent } from './scene/VenueDealsComponent';
-import { venueDeals1 } from './model/TestModels';
+import * as React from "react"
+import {
+  ChakraProvider,
+  Box,
+  Text,
+  Link,
+  VStack,
+  Code,
+  Grid,
+  theme,
+} from "@chakra-ui/react"
+import { ColorModeSwitcher } from "./ColorModeSwitcher"
+import { PageHeader } from "./scene/PageHeader"
 
-
-const theme = {
-  global: {
-    colors: {
-      brand: '#ff8BE6',
-    },
-    font: {
-      family: 'Roboto',
-      size: '18px',
-      height: '20px',
-    },
-  },
-};
-
-const AppBar = (props: any) => (
-    <Box
-      tag='header'
-      direction='row'
-      align='center'
-      justify='between'
-      background='brand'
-      pad={{ left: 'medium', right: 'small', vertical: 'small' }}
-      elevation='medium'
-      style={{ zIndex: '1' }}
-      {...props}
-    />
-  );
-
-function App() {
-  return (
-    <Grommet theme={theme} full>
-      <Box fill>
-        <AppBar>
-          <Heading level='3' margin='none'>My App</Heading>
-          
-        </AppBar>
-        <Box direction='row' flex overflow={{ horizontal: 'hidden' }}>
-          <Box pad="small">
-          <VenueDealsComponent deals={venueDeals1()} />
-          </Box>
-          
-        </Box>
-      </Box>
-     
-    </Grommet>
-  );
-}
-
-export default App;
+export const App = () => (
+  <ChakraProvider theme={theme}>
+    <PageHeader />
+    <Box textAlign="center" fontSize="xl">
+      <Grid minH="100vh" p={3}>
+        <ColorModeSwitcher justifySelf="flex-end" />
+        <VStack spacing={8}>
+          <Text>
+            Edit <Code fontSize="xl">src/App.tsx</Code> and save to reload.
+          </Text>
+          <Link
+            color="teal.500"
+            href="https://chakra-ui.com"
+            fontSize="2xl"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Learn Chakra
+          </Link>
+        </VStack>
+      </Grid>
+    </Box>
+  </ChakraProvider>
+)

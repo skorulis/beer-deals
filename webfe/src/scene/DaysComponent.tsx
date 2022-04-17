@@ -1,6 +1,6 @@
-import React, { Component } from "react"; 
+import { Component } from "react"; 
 import { DayOfWeek } from '../model/DayOfWeek';
-import { Box, Text } from 'grommet';
+import { Box, Text, Flex } from "@chakra-ui/react";
 
 export class DaysComponent extends Component<{days:DayOfWeek[]}> {
     constructor(props: {days: DayOfWeek[]}) {
@@ -37,13 +37,13 @@ export class DaysComponent extends Component<{days:DayOfWeek[]}> {
             let enabled = this.props.days.includes(i)
             elements.push(this.letterDay(i, enabled))
         }
-        return <Box direction="row">{elements}</Box>
+        return <Flex direction="row">{elements}</Flex>
     }
 
     letterDay(day: DayOfWeek, enabled: Boolean) {
         let letter = this.getWeekDays()[day].charAt(0);
-        let color = enabled ? "brand" : "gray"
-        return <Box pad="xsmall">
+        let color = enabled ? "yellow.300" : "gray"
+        return <Box padding={1}>
                 <Text color={color}>{letter}</Text>
             </Box>
     }
