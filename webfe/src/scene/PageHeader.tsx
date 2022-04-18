@@ -1,4 +1,6 @@
 import {
+    Box,
+    Button,
     Heading,
     Flex,
     Text
@@ -16,8 +18,20 @@ export class PageHeader extends Component<{}> {
             <Heading as="h1" size="lg" >
                 BeerDeals
             </Heading>
-            <Text>Login</Text>
+            {this.profileButtons()}
+            
 
+        </Flex>
+    }
+
+    profileButtons() {
+        return <Flex gap="10px">
+            <Button colorScheme='blue'>
+                <Text>Login</Text>
+            </Button>
+            <Button colorScheme='blue'>
+                <Text>Signup</Text>
+            </Button>
         </Flex>
     }
 }
