@@ -21,6 +21,7 @@ import { ColorModeSwitcher } from "./ColorModeSwitcher"
 import { PageHeader } from "./scene/PageHeader"
 
 import { LoginPage } from "./scene/LoginPage";
+import { RegisterPage } from "./scene/RegisterPage";
 
 export class App extends Component<{}> {
   render() {
@@ -33,6 +34,7 @@ export class App extends Component<{}> {
     return <Router>
         <Routes>
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
           <Route path="/" element={this.home()} />
       </Routes>
     </Router>

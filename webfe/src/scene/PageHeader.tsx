@@ -3,6 +3,7 @@ import {
     Button,
     Heading,
     Flex,
+    Link,
     Text
   } from "@chakra-ui/react";
 
@@ -19,9 +20,14 @@ export class PageHeader extends Component<{}> {
 
     render() {
         return <Flex justify="space-between" padding={6} bg="yellow.500" color="white" align="center">
-            <Heading as="h1" size="lg" >
-                BeerDeals
-            </Heading>
+            <RouteLink to="/">
+                <Link>
+                    <Heading as="h1" size="lg" >
+                        BeerDeals
+                    </Heading>
+                </Link>
+            </RouteLink>
+            
             {this.profileButtons()}
             
 
@@ -35,9 +41,11 @@ export class PageHeader extends Component<{}> {
                     <Text>Login</Text>
                 </Button>
             </RouteLink>
-            <Button colorScheme='blue'>
-                <Text>Signup</Text>
-            </Button>
+            <RouteLink to="/register">
+                <Button colorScheme='blue'>
+                    <Text>Signup</Text>
+                </Button>
+            </RouteLink>
         </Flex>
     }
 }

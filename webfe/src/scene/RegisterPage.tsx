@@ -1,25 +1,25 @@
-import { Box, Button, Center, Flex, Heading, Input, InputGroup, InputRightElement, Link, Text } from "@chakra-ui/react";
+import { Box, Button, Center, Flex, Heading, Input, InputGroup, InputRightElement,  Text } from "@chakra-ui/react";
 import { Component } from "react"; 
 import { PageHeader } from "./PageHeader";
 
-import {
-    Link as RouteLink
-  } from "react-router-dom";
-
-type LoginPageState = {
+type RegisterPageState = {
     showPassword: Boolean
+    name: string
     email: string
     password: string
+    passwordRepeat: string
 }
 
-export class LoginPage extends Component<{}, LoginPageState> {
+export class RegisterPage extends Component<{}, RegisterPageState> {
 
     constructor(props: {}) {
         super(props);
-        this.state = {showPassword: false, email: "", password: ""}
+        this.state = {showPassword: false, name: "", email: "", password: "", passwordRepeat: ""}
         this.handlePasswordClick = this.handlePasswordClick.bind(this);
         this.emailChanged = this.emailChanged.bind(this);
         this.passwordChanged = this.passwordChanged.bind(this);
+        this.passwordRepeatChanged = this.passwordRepeatChanged.bind(this);
+        this.nameChanged = this.nameChanged.bind(this);
         this.login = this.login.bind(this);
     }
 
@@ -29,20 +29,13 @@ export class LoginPage extends Component<{}, LoginPageState> {
             <Center>
                 <Flex direction="column" textAlign={"center"}>
                     <Heading>
-                        Login
+                        Register
                     </Heading>
-                    <Text>Don't have an account? {this.signupLink()}</Text>
                     {this.form()}
                 </Flex>
             </Center>
             
         </Flex>
-    }
-
-    signupLink() {
-        return <RouteLink to="/register">
-            <Link color="blue.700">sign up</Link>
-        </RouteLink>
     }
 
     form() {
@@ -52,15 +45,13 @@ export class LoginPage extends Component<{}, LoginPageState> {
                 value={this.state.email}
                 onChange={this.emailChanged}
             />
+            {this.nameField()}
             {this.passwordField()}
+            {this.passwordRepeatField()}
             <Button colorScheme='blue' isDisabled={!this.canSubmit()} onClick={this.login}>
-                <Text>Login</Text>
+                <Text>Register</Text>
             </Button>
         </Flex>
-    }
-
-    canSubmit() {
-        return this.state.email.length > 0 && this.state.password.length > 0
     }
 
     passwordField() {
@@ -80,8 +71,33 @@ export class LoginPage extends Component<{}, LoginPageState> {
         </InputGroup>
     }
 
+    nameField() {
+        return <Input
+            value={this.state.name}
+            onChange={this.nameChanged}
+            placeholder='First name'
+        />
+    }
+
+    passwordRepeatField() {
+        return <Input 
+            placeholder='Confirm password' 
+            value={this.state.passwordRepeat}
+            type="password"
+            onChange={this.passwordRepeatChanged}
+        />
+    }
+
     emailChanged(event: React.FormEvent<HTMLInputElement>) {
         this.setState({ email: event.currentTarget.value })
+    }
+
+    passwordRepeatChanged(event: React.FormEvent<HTMLInputElement>) {
+        this.setState({ passwordRepeat: event.currentTarget.value })
+    }
+
+    nameChanged(event: React.FormEvent<HTMLInputElement>) {
+        this.setState({ name: event.currentTarget.value })
     }
 
     passwordChanged(event: React.FormEvent<HTMLInputElement>) {
@@ -91,6 +107,13 @@ export class LoginPage extends Component<{}, LoginPageState> {
     handlePasswordClick() {
         let p = this.state.showPassword;
         this.setState({showPassword: !p})
+    }
+
+    canSubmit() {
+        return this.state.email.length > 0 && 
+        this.state.password.length > 0 &&
+        this.state.passwordRepeat.length > 0 &&
+        this.state.name.length > 0
     }
 
     login() {
