@@ -1,38 +1,57 @@
-import * as React from "react"
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Link
+} from "react-router-dom";
+
 import {
   ChakraProvider,
   Box,
   Text,
-  Link,
   VStack,
   Code,
   Grid,
+  Flex,
   theme,
 } from "@chakra-ui/react"
+import { Component } from "react"; 
 import { ColorModeSwitcher } from "./ColorModeSwitcher"
 import { PageHeader } from "./scene/PageHeader"
 
-export const App = () => (
-  <ChakraProvider theme={theme}>
-    <PageHeader />
-    <Box textAlign="center" fontSize="xl">
-      <Grid minH="100vh" p={3}>
-        <ColorModeSwitcher justifySelf="flex-end" />
-        <VStack spacing={8}>
-          <Text>
-            Edit <Code fontSize="xl">src/App.tsx</Code> and save to reload.
-          </Text>
-          <Link
-            color="teal.500"
-            href="https://chakra-ui.com"
-            fontSize="2xl"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn Chakra
-          </Link>
-        </VStack>
-      </Grid>
-    </Box>
-  </ChakraProvider>
-)
+import { LoginPage } from "./scene/LoginPage";
+
+export class App extends Component<{}> {
+  render() {
+    return <ChakraProvider theme={theme}>
+      {this.router()}
+    </ChakraProvider>
+  }
+
+  router() {
+    return <Router>
+        <Routes>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/" element={this.home()} />
+      </Routes>
+    </Router>
+  }
+
+  home() {
+    return <Flex direction="column">
+      <PageHeader />
+      <Box textAlign="center" fontSize="xl">
+        <Grid minH="100vh" p={3}>
+          <ColorModeSwitcher justifySelf="flex-end" />
+          <VStack spacing={8}>
+            <Text>
+              Edit <Code fontSize="xl">src/App.tsx</Code> and save to reload.
+            </Text>
+          </VStack>
+        </Grid>
+      </Box>
+    </Flex>
+  }
+
+}

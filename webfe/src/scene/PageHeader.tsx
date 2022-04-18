@@ -6,6 +6,10 @@ import {
     Text
   } from "@chakra-ui/react";
 
+  import {
+    Link as RouteLink
+  } from "react-router-dom";
+
 import { Component } from "react"; 
 
 export class PageHeader extends Component<{}> {
@@ -26,9 +30,11 @@ export class PageHeader extends Component<{}> {
 
     profileButtons() {
         return <Flex gap="10px">
-            <Button colorScheme='blue'>
-                <Text>Login</Text>
-            </Button>
+            <RouteLink to="/login">
+                <Button colorScheme='blue'>
+                    <Text>Login</Text>
+                </Button>
+            </RouteLink>
             <Button colorScheme='blue'>
                 <Text>Signup</Text>
             </Button>
