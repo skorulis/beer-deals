@@ -4,6 +4,7 @@ service: rest-api
 
 custom:
   tableName: 'users-table-${self:provider.stage}'
+  venuesTableName: "venues-${self:provider.stage}"
   dynamodb:
     stages:
       - dev
@@ -36,6 +37,7 @@ provider:
         - { "Fn::GetAtt": ["UsersDynamoDBTable", "Arn" ] }
   environment:
     USERS_TABLE: ${self:custom.tableName}
+    VENUES_TABLE: ${self:custom.venuesTableName}
     user_pool_id: { Ref: UserPool }
     client_id: { Ref: UserClient }
  
@@ -86,6 +88,21 @@ resources:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
         TableName: ${self:custom.tableName}
+    VenuesDynamoDBTable:
+      Type: 'AWS::DynamoDB::Table'
+      Properties:
+        AttributeDefinitions:
+          -
+            AttributeName: place_id
+            AttributeType: S
+        KeySchema:
+          -
+            AttributeName: place_id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: ${self:custom.venuesTableName}
 
 plugins:
   - serverless-plugin-typescript
