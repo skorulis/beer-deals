@@ -3,3 +3,5 @@ api/node_modules
 api/.serverless
 api/.dynamodb
 webfe/.vscode
+Secrets.ts
+api/.build

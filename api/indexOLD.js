@@ -3,10 +3,19 @@ const bodyParser = require('body-parser');
 const express = require('express')
 const app = express()
 const AWS = require('aws-sdk');
- 
+//const api = require("./service/GoogleAPI");
+//import Secrets from './model/Secrets';
  
 const USERS_TABLE = process.env.USERS_TABLE;
 const IS_OFFLINE = process.env.IS_OFFLINE;
+
+let baseURL = "https://maps.googleapis.com/maps/api/";
+
+async function autocomplete(text) {
+  let url = `${this.baseURL}place/autocomplete/json?key=${Secrets.googleAPIKey}&input=${text}`
+  const response = await fetch(url);
+  return response.json();
+}
 
 let dynamoDb;
 if (IS_OFFLINE === 'true') {
@@ -24,7 +33,7 @@ if (IS_OFFLINE === 'true') {
 app.use(bodyParser.json({ strict: false }));
  
 app.get('/', function (req, res) {
-  res.send('Hello World V2')
+  res.send('Hello World OLD')
 })
  
 // Get User endpoint
@@ -77,5 +86,12 @@ app.post('/users', function (req, res) {
     res.json({ userId, name });
   });
 })
+
+app.get('/venue/autocomplete', async function (req, res) {
+  //let x = await autocomplete("Rose of Australia");
+  //console.log(x);
+
+  res.status(200).json({ message: "Something" });
+});
  
 module.exports.handler = serverless(app);

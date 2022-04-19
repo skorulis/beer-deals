@@ -40,41 +40,8 @@ provider:
     client_id: { Ref: UserClient }
  
 functions:
-  loginUser:
-    handler: user/login.handler
-    events:
-      - http:
-          path: user/login
-          method: post
-          cors: true
-
-  signupUser:
-    handler: user/signup.handler
-    events:
-      - http:
-          path: user/signup
-          method: post
-          cors: true
-
-  privateAPI:
-    handler: user/private.handler
-    events:
-      - http:
-          path: user/private
-          method: post
-          cors: true
-          authorizer:
-            name: PrivateAuthorizer
-            type: COGNITO_USER_POOLS
-            arn:
-              Fn::GetAtt:
-                - UserPool
-                - Arn
-            claims:
-              - email
-
   app:
-    handler: index.handler
+    handler: src/index.handler
     events:
       - http: ANY /
       - http: 'ANY {proxy+}'
@@ -121,5 +88,6 @@ resources:
         TableName: ${self:custom.tableName}
 
 plugins:
+  - serverless-plugin-typescript
   - serverless-dynamodb-local
   - serverless-offline #serverless-offline needs to be last in the list

@@ -2,8 +2,7 @@ import React from "react";
 import {
   BrowserRouter as Router,
   Route,
-  Routes,
-  Link
+  Routes
 } from "react-router-dom";
 
 import {
@@ -22,6 +21,7 @@ import { PageHeader } from "./scene/PageHeader"
 
 import { LoginPage } from "./scene/LoginPage";
 import { RegisterPage } from "./scene/RegisterPage";
+import { AddVenuePage } from "./scene/AddVenuePage";
 
 export class App extends Component<{}> {
   render() {
@@ -36,6 +36,7 @@ export class App extends Component<{}> {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/" element={this.home()} />
+          <Route path="/addvenue" element={<AddVenuePage />} />
       </Routes>
     </Router>
   }

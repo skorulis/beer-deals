@@ -20,7 +20,7 @@ export class RegisterPage extends Component<{}, RegisterPageState> {
         this.passwordChanged = this.passwordChanged.bind(this);
         this.passwordRepeatChanged = this.passwordRepeatChanged.bind(this);
         this.nameChanged = this.nameChanged.bind(this);
-        this.login = this.login.bind(this);
+        this.register = this.register.bind(this);
     }
 
     render() {
@@ -48,7 +48,7 @@ export class RegisterPage extends Component<{}, RegisterPageState> {
             {this.nameField()}
             {this.passwordField()}
             {this.passwordRepeatField()}
-            <Button colorScheme='blue' isDisabled={!this.canSubmit()} onClick={this.login}>
+            <Button colorScheme='blue' isDisabled={!this.canSubmit()} onClick={this.register}>
                 <Text>Register</Text>
             </Button>
         </Flex>
@@ -81,6 +81,7 @@ export class RegisterPage extends Component<{}, RegisterPageState> {
 
     passwordRepeatField() {
         return <Input 
+            isInvalid={this.hasPasswordMismatch()}
             placeholder='Confirm password' 
             value={this.state.passwordRepeat}
             type="password"
@@ -109,6 +110,13 @@ export class RegisterPage extends Component<{}, RegisterPageState> {
         this.setState({showPassword: !p})
     }
 
+    hasPasswordMismatch() {
+        let pw = this.state.password;
+        let rpw = this.state.passwordRepeat;
+        console.log(pw)
+        return pw.length > 0 && rpw.length > 0 && pw !== rpw;
+    }
+
     canSubmit() {
         return this.state.email.length > 0 && 
         this.state.password.length > 0 &&
@@ -116,7 +124,10 @@ export class RegisterPage extends Component<{}, RegisterPageState> {
         this.state.name.length > 0
     }
 
-    login() {
+    register() {
+        if (this.hasPasswordMismatch()) {
+            return;
+        }
         let email = this.state.email
         let password = this.state.password
         console.log(email)
