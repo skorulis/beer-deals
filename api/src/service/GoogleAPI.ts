@@ -13,8 +13,6 @@ export class GoogleAPI {
         console.log(url);
         const { data, status } = await axios.get(url);
         console.log(data)
-        //const response = await fetch(url);
-        //return response 
-        //return response.json();
+        return data;
     }
 }

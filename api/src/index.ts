@@ -10,10 +10,11 @@ app.get('/', function (req, res) {
 
 app.get('/venue/autocomplete', async function (req, res) {
     let api = new GoogleAPI();
-    let x = api.autocomplete("Rose of Australia");
-    console.log(x);
+    console.log(req)
+    let q = req.query["query"]
+    let result = await api.autocomplete(q);
   
-    res.status(200).json({ message: "Something else "  });
+    res.status(200).json(result);
   });
 
 module.exports.handler = serverless(app);
