@@ -5,3 +5,7 @@ export interface GooglePlacePrediction {
     place_id: string
     types: string[]
 }
+
+export interface GooglePlacePredictionList {
+    predictions: GooglePlacePrediction[]
+}

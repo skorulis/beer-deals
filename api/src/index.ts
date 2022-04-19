@@ -10,7 +10,6 @@ app.get('/', function (req, res) {
 
 app.get('/venue/autocomplete', async function (req, res) {
     let api = new GoogleAPI();
-    console.log(req)
     let q = req.query["query"]
     let result = await api.autocomplete(q);
   

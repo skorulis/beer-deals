@@ -1,11 +1,13 @@
-import { Button, Center, Text, Flex, Heading, Input } from "@chakra-ui/react";
+import { Button, Center, Text, Flex, Heading, Input, VStack } from "@chakra-ui/react";
 import { Component } from "react"; 
 import { PageHeader } from "./PageHeader";
 import { MainAPI } from "../service/MainAPI";
+import { GooglePlacePrediction } from "../model/GooglePlacePrediction";
 
 type AddVenuePageState = {
     query: string
     api: MainAPI
+    results: GooglePlacePrediction[]
 }
 
 export class AddVenuePage extends Component<{}, AddVenuePageState> {
@@ -15,7 +17,8 @@ export class AddVenuePage extends Component<{}, AddVenuePageState> {
         super(props);
         this.state = {
             query: "",
-            api: new MainAPI()
+            api: new MainAPI(),
+            results: []
         }
         this.search = this.search.bind(this);
         this.queryChanged = this.queryChanged.bind(this);
@@ -31,12 +34,23 @@ export class AddVenuePage extends Component<{}, AddVenuePageState> {
                         <Input value={this.state.query} placeholder="Venue name" onChange={this.queryChanged}></Input>
                         <Button onClick={this.search}><Text>Search</Text></Button>
                     </Flex>
+                    {this.results()}
                 </Flex>
                 
             </Center>
             
             
         </Flex>
+    }
+
+    results() {
+        return <VStack pt={8}>
+            {this.state.results.map(x => this.resultView(x)) }
+        </VStack>
+    }
+
+    resultView(result: GooglePlacePrediction) {
+        return <Text>{result.description}</Text>
     }
 
     queryChanged(event: React.FormEvent<HTMLInputElement>) {
@@ -46,6 +60,9 @@ export class AddVenuePage extends Component<{}, AddVenuePageState> {
     search() {
         let result = this.state.api.autocomplete(this.state.query)
         result.then(output => {
+            this.setState({
+                results: output.predictions
+            })
             console.log(output)
         })
     }
