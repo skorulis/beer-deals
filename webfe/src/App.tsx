@@ -17,7 +17,7 @@ import { RegisterPage } from "./scene/RegisterPage";
 import { AddVenuePage } from "./scene/AddVenuePage";
 import { HomePage } from "./scene/HomePage";
 import { VenuePage } from "./scene/VenuePage";
-import { PageHeader } from "./scene/PageHeader";
+import { AddDealPage } from "./scene/AddDealPage";
 
 export class App extends Component<{}> {
   render() {
@@ -36,15 +36,22 @@ export class App extends Component<{}> {
           <Route path="/" element={<HomePage />} />
           <Route path="/addvenue" element={<AddVenuePage />} />
           <Route path="/venue/:id" element={<VenuePageWrapper />} />
+          <Route path="/venue/:id/adddeal" element={<AddDealWrapper />} />
       </Routes>
     </Router>
   }
 
 }
 
+function AddDealWrapper() {
+  let { id } = useParams();
+
+  return (
+    <AddDealPage placeID={id as string} />
+  );
+}
+
 function VenuePageWrapper() {
-  // We can use the `useParams` hook here to access
-  // the dynamic pieces of the URL.
   let { id } = useParams();
 
   return (
