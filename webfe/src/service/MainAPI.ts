@@ -1,4 +1,5 @@
 import { GooglePlacePrediction, GooglePlacePredictionList } from "../model/GooglePlacePrediction";
+import { GooglePlaceDetails } from "../shared/GooglePlaceDetails";
 
 export class MainAPI {
 
@@ -27,6 +28,21 @@ export class MainAPI {
         }
         const response = await fetch(url, params)
         return response
+    }
+
+    async getVenues() {
+        let url = `${this.baseURL}venue`
+        const response = await fetch(url)
+        let parsed = await response.json()
+        return parsed as GooglePlaceDetails[]
+    }
+
+    async getVenue(id: string) {
+        let url = `${this.baseURL}venue/${id}`
+        const response = await fetch(url);
+        console.log(url)
+        let parsed = await response.json()
+        return parsed as GooglePlaceDetails
     }
     
 }

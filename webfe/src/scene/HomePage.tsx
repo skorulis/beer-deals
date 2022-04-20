@@ -1,11 +1,18 @@
 import { Box, Grid, Text, Flex, VStack } from "@chakra-ui/react";
 import { Component } from "react"; 
+import { MainAPI } from "../service/MainAPI";
+import { GooglePlaceDetails } from "../shared/GooglePlaceDetails";
 import { PageHeader } from "./PageHeader";
 import { VenueList } from "./VenueList";
 
-export class HomePage extends Component<{}> {
+interface HomePageState {
+    venues: GooglePlaceDetails[]
+}
+
+export class HomePage extends Component<{}, HomePageState> {
     constructor(props: {}) {
         super(props);
+        this.state = {venues: []}
     }
 
     render() {
@@ -14,10 +21,17 @@ export class HomePage extends Component<{}> {
         <Box textAlign="center" fontSize="xl">
             <Grid minH="100vh" p={3}>
             <VStack spacing={8}>
-                <VenueList venues={[]} />
+                <VenueList venues={this.state.venues} />
             </VStack>
             </Grid>
         </Box>
     </Flex>
+    }
+
+    componentDidMount() {
+        MainAPI.shared.getVenues().then(x => {
+            this.setState({venues: x})
+        })
+
     }
 }

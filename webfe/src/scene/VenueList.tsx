@@ -1,15 +1,28 @@
 import { Text, Flex } from "@chakra-ui/react";
 import { Component } from "react"; 
 import { Venue } from "../model/Venue";
+import { GooglePlaceDetails } from "../shared/GooglePlaceDetails";
 
-export class VenueList extends Component<{venues:Venue[]}> {
-    constructor(props: {venues: Venue[]}) {
+import {
+    Link as RouteLink
+  } from "react-router-dom";
+
+export class VenueList extends Component<{venues:GooglePlaceDetails[]}> {
+    constructor(props: {venues: GooglePlaceDetails[]}) {
         super(props);
     }
 
     render() {
         return <Flex direction="column">
-                <Text>A list of venues</Text>
+                {this.props.venues.map(x => this.row(x))}
         </Flex>
+    }
+
+    row(venue: GooglePlaceDetails) {
+        let link = `/venue/${venue.place_id}`
+        return <RouteLink to={link} key={venue.place_id}>
+            <Text>{venue.name}</Text>
+        </RouteLink>
+        
     }
 }

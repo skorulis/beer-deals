@@ -2,7 +2,10 @@ import * as serverless from "serverless-http"
 import * as express from 'express';
 import * as bodyParser from "body-parser";
 import { GoogleAPI } from "./service/GoogleAPI";
-import { AddVenueRequest } from "./model/AddVenueRequest";
+
+import { AddVenueRequest } from "./shared/AddVenueRequest" 
+import { Request } from "express"
+
 import * as AWS from "aws-sdk"
 
 let api = new GoogleAPI();
@@ -67,6 +70,28 @@ app.get('/venue', async function (req, res) {
   dynamoDb.scan(params, (error, result) => {
     console.log(error);
     res.json(result.Items);
+  });
+
+});
+
+app.get('/venue/:id', async function (req: Request<{id: string}>, res) {
+  const params = {
+    TableName: VENUES_TABLE,
+    Key: {
+      place_id: req.params.id,
+    }
+  }
+
+  dynamoDb.get(params, (error, result) => {
+    if (error) {
+      console.log(error);
+      res.status(400).json({ error: 'Error' });
+    }
+    if (result.Item) {
+      res.json(result.Item);
+    } else {
+      res.status(404).json({ error: "Venue not found" });
+    }
   });
 
 });

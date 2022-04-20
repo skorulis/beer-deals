@@ -1,5 +1,6 @@
 {
   "name": "api",
+  "packageManager": "yarn@3.0.1",
   "version": "1.0.0",
   "main": "index.js",
   "repository": "https://github.com/skorulis/beer-deals",

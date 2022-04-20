@@ -1,6 +1,5 @@
 import axios from 'axios';
-import { GooglePlaceDetails, GooglePlaceDetailsResponse } from '../model/GooglePlaceDetails';
-
+import { GooglePlaceDetails, GooglePlaceDetailsResponse} from "../shared/GooglePlaceDetails"
 import { Secrets } from "../model/Secrets";
 
 
@@ -18,10 +17,7 @@ export class GoogleAPI {
 
     async details(placeID: string): Promise<GooglePlaceDetails> {
         let url = `${this.baseURL}place/details/json?key=${Secrets.googleAPIKey}&place_id=${placeID}`;
-        console.log(url)
         const { data, status } = await axios.get<GooglePlaceDetailsResponse>(url)
-        console.log(status)
-        console.log(data)
         return data.result
     }
 
