@@ -3,8 +3,9 @@ app: deals-api
 service: rest-api
 
 custom:
-  tableName: 'users-table-${self:provider.stage}'
+  tableName: 'users-${self:provider.stage}'
   venuesTableName: "venues-${self:provider.stage}"
+  dealsTableName: "deals-${self:provider.stage}"
   dynamodb:
     stages:
       - dev
@@ -38,6 +39,7 @@ provider:
   environment:
     USERS_TABLE: ${self:custom.tableName}
     VENUES_TABLE: ${self:custom.venuesTableName}
+    DEALS_TABLE: ${self:custom.dealsTableName}
     user_pool_id: { Ref: UserPool }
     client_id: { Ref: UserClient }
  
@@ -103,6 +105,21 @@ resources:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
         TableName: ${self:custom.venuesTableName}
+    DealsDBTable:
+      Type: 'AWS::DynamoDB::Table'
+      Properties:
+        AttributeDefinitions:
+          -
+            AttributeName: dealID
+            AttributeType: S
+        KeySchema:
+          -
+            AttributeName: dealID
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: ${self:custom.dealsTableName}
 
 plugins:
   - serverless-plugin-typescript

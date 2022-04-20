@@ -3,6 +3,7 @@ import { Component } from "react";
 import { PageHeader } from "./PageHeader";
 import { MainAPI } from "../service/MainAPI";
 import { GooglePlacePrediction } from "../model/GooglePlacePrediction";
+import { VenueSearchRow } from "./VenueSearchRow";
 
 type AddVenuePageState = {
     query: string
@@ -45,12 +46,12 @@ export class AddVenuePage extends Component<{}, AddVenuePageState> {
 
     results() {
         return <VStack pt={8}>
-            {this.state.results.map(x => this.resultView(x)) }
+            {this.state.results.map(x => <VenueSearchRow venue={x} />) }
         </VStack>
     }
 
-    resultView(result: GooglePlacePrediction) {
-        return <Text>{result.description}</Text>
+    addVenue(venue: GooglePlacePrediction) {
+
     }
 
     queryChanged(event: React.FormEvent<HTMLInputElement>) {

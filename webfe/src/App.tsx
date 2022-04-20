@@ -1,4 +1,3 @@
-import React from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -7,21 +6,14 @@ import {
 
 import {
   ChakraProvider,
-  Box,
-  Text,
-  VStack,
-  Code,
-  Grid,
-  Flex,
   theme,
 } from "@chakra-ui/react"
 import { Component } from "react"; 
-import { ColorModeSwitcher } from "./ColorModeSwitcher"
-import { PageHeader } from "./scene/PageHeader"
 
 import { LoginPage } from "./scene/LoginPage";
 import { RegisterPage } from "./scene/RegisterPage";
 import { AddVenuePage } from "./scene/AddVenuePage";
+import { HomePage } from "./scene/HomePage";
 
 export class App extends Component<{}> {
   render() {
@@ -35,26 +27,10 @@ export class App extends Component<{}> {
         <Routes>
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
-          <Route path="/" element={this.home()} />
+          <Route path="/" element={<HomePage />} />
           <Route path="/addvenue" element={<AddVenuePage />} />
       </Routes>
     </Router>
-  }
-
-  home() {
-    return <Flex direction="column">
-      <PageHeader />
-      <Box textAlign="center" fontSize="xl">
-        <Grid minH="100vh" p={3}>
-          <ColorModeSwitcher justifySelf="flex-end" />
-          <VStack spacing={8}>
-            <Text>
-              Edit <Code fontSize="xl">src/App.tsx</Code> and save to reload.
-            </Text>
-          </VStack>
-        </Grid>
-      </Box>
-    </Flex>
   }
 
 }

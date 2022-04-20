@@ -46,6 +46,8 @@ app.post('/venue/add', async function (req, res) {
     TableName: VENUES_TABLE,
     Item: details
   };
+
+  console.log(params);
  
   dynamoDb.put(params, (error) => {
     if (error) {
@@ -55,6 +57,18 @@ app.post('/venue/add', async function (req, res) {
       res.json(details);
     }
   });
+});
+
+app.get('/venue', async function (req, res) {
+  const params = {
+    TableName: VENUES_TABLE
+  }
+
+  dynamoDb.scan(params, (error, result) => {
+    console.log(error);
+    res.json(result.Items);
+  });
+
 });
 
 app.post('/users', function (req, res) {
