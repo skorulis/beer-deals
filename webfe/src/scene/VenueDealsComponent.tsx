@@ -1,7 +1,7 @@
 import { Component } from "react"; 
 import { Box } from "@chakra-ui/react";
-import { DayOfWeek } from '../model/DayOfWeek';
-import { VenueDeals } from "../model/Deal";
+import { DayOfWeek } from '../shared/DayOfWeek';
+import { VenueDeals } from "../shared/Venue";
 import { SingleDealComponent } from "./SingleDealComponent";
 import { VenueHeader } from "./VenueHeader";
 

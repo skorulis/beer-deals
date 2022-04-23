@@ -1,5 +1,6 @@
 import { GooglePlacePrediction, GooglePlacePredictionList } from "../model/GooglePlacePrediction";
-import { GooglePlaceDetails } from "../shared/GooglePlaceDetails";
+import { Deal } from "../shared/Deal";
+import { Venue } from "../shared/Venue";
 
 export class MainAPI {
 
@@ -34,7 +35,7 @@ export class MainAPI {
         let url = `${this.baseURL}venue`
         const response = await fetch(url)
         let parsed = await response.json()
-        return parsed as GooglePlaceDetails[]
+        return parsed as Venue[]
     }
 
     async getVenue(id: string) {
@@ -42,7 +43,22 @@ export class MainAPI {
         const response = await fetch(url);
         console.log(url)
         let parsed = await response.json()
-        return parsed as GooglePlaceDetails
+        return parsed as Venue
+    }
+
+    async addDeal(placeID: string, deal: Deal) {
+        let url = `${this.baseURL}deal`
+        let body = {placeID, deal}
+        let params = {
+            method: "POST", 
+            body: JSON.stringify(body),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        }
+        const response = await fetch(url, params)
+        return response.json()
     }
     
 }

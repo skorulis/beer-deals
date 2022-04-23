@@ -95,12 +95,18 @@ resources:
       Properties:
         AttributeDefinitions:
           -
-            AttributeName: place_id
+            AttributeName: placeID
+            AttributeType: S
+          -
+            AttributeName: compoundID
             AttributeType: S
         KeySchema:
           -
-            AttributeName: place_id
+            AttributeName: placeID
             KeyType: HASH
+          -
+            AttributeName: compoundID
+            KeyType: RANGE
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
@@ -110,11 +116,11 @@ resources:
       Properties:
         AttributeDefinitions:
           -
-            AttributeName: dealID
+            AttributeName: id
             AttributeType: S
         KeySchema:
           -
-            AttributeName: dealID
+            AttributeName: id
             KeyType: HASH
         ProvisionedThroughput:
           ReadCapacityUnits: 1

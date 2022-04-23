@@ -1,6 +1,6 @@
 import { Text, Flex } from "@chakra-ui/react";
 import { Component } from "react"; 
-import { Deal } from '../model/Deal';
+import { Deal } from '../shared/Deal';
 import { DaysComponent } from "./DaysComponent";
 import { TimespanComponent } from "./TimespanComponent";
 

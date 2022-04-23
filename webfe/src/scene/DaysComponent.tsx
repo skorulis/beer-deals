@@ -1,5 +1,5 @@
 import { Component } from "react"; 
-import { DayOfWeek } from '../model/DayOfWeek';
+import { DayOfWeek } from '../shared/DayOfWeek';
 import { Box, Text, Flex } from "@chakra-ui/react";
 
 export class DaysComponent extends Component<{days:DayOfWeek[]}> {

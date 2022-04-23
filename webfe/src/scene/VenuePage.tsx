@@ -2,14 +2,14 @@ import { Button, Text, Flex } from "@chakra-ui/react";
 import { Component } from "react"; 
 import { PageHeader } from "./PageHeader";
 import { MainAPI } from "../service/MainAPI";
-import { GooglePlaceDetails } from "../shared/GooglePlaceDetails";
+import { Venue } from "../shared/Venue";
 
 import {
     Link as RouteLink
   } from "react-router-dom";
 
 interface VenuePageState {
-    venue?: GooglePlaceDetails
+    venue?: Venue
 }
 
 export class VenuePage extends Component<{placeID:string}, VenuePageState> {

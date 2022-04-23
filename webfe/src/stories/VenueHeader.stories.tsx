@@ -18,6 +18,9 @@ export const Venue1 = Template.bind({});
 
 Venue1.args = {
     venue: {
+        placeID: "ABC",
+        compoundID:"PLACE#ABC",
+        address: "Some place",
         name: "Rose",
         lat: 1,
         lng: 1,

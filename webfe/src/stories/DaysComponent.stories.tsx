@@ -2,7 +2,7 @@ import React from 'react';
 
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { DaysComponent } from '../scene/DaysComponent';
-import { DayOfWeek } from '../model/DayOfWeek';
+import { DayOfWeek } from '../shared/DayOfWeek';
 
 export default {
   /* 👇 The title prop is optional.

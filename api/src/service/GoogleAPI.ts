@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GooglePlaceDetails, GooglePlaceDetailsResponse} from "../shared/GooglePlaceDetails"
+import { GooglePlaceDetails, GooglePlaceDetailsResponse} from "../model/GooglePlaceDetails"
 import { Secrets } from "../model/Secrets";
 
 

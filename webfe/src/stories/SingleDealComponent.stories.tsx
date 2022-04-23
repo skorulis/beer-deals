@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { SingleDealComponent } from '../scene/SingleDealComponent';
-import { DayOfWeek } from '../model/DayOfWeek';
+import { DayOfWeek } from '../shared/DayOfWeek';
 
 export default {
   title: 'SingleDealComponent',

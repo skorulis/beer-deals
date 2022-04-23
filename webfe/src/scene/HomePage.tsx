@@ -1,12 +1,12 @@
 import { Box, Grid, Text, Flex, VStack } from "@chakra-ui/react";
 import { Component } from "react"; 
 import { MainAPI } from "../service/MainAPI";
-import { GooglePlaceDetails } from "../shared/GooglePlaceDetails";
+import { Venue } from "../shared/Venue";
 import { PageHeader } from "./PageHeader";
 import { VenueList } from "./VenueList";
 
 interface HomePageState {
-    venues: GooglePlaceDetails[]
+    venues: Venue[]
 }
 
 export class HomePage extends Component<{}, HomePageState> {

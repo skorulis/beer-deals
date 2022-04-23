@@ -1,7 +1,7 @@
 import { Button, Text, Flex } from "@chakra-ui/react";
 import { Component } from "react"; 
 import { GooglePlacePrediction } from "../model/GooglePlacePrediction";
-import { Venue } from "../model/Venue";
+import { Venue } from "../shared/Venue";
 import { MainAPI } from "../service/MainAPI";
 
 export class VenueSearchRow extends Component<{venue:GooglePlacePrediction}> {
