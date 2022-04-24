@@ -10,6 +10,7 @@ import { Request } from "express"
 
 import * as AWS from "aws-sdk"
 import { Venue } from "./shared/Venue";
+import { VenueDAO } from "./service/VenueDAO";
 
 let api = new GoogleAPI();
 
@@ -32,6 +33,8 @@ if (IS_OFFLINE === 'true') {
   } else {
     dynamoDb = new AWS.DynamoDB.DocumentClient();
   };
+
+let venueDAO = new VenueDAO(dynamoDb);
 
 app.get('/', function (req, res) {
     res.json({status: "OK"})
@@ -97,25 +100,13 @@ function getDeals(places: string[]) {
 }
 
 app.get('/venue/:id', async function (req: Request<{id: string}>, res) {
-  const params = {
-    TableName: VENUES_TABLE,
-    Key: {
-      place_id: req.params.id,
-    }
+  try {
+    let result = await venueDAO.loadFullVenue(req.params.id);
+    res.json(result);
+  } catch(e) {
+    console.log(e);
+    res.status(400).json({status: "ERROR", e});
   }
-
-  dynamoDb.get(params, (error, result) => {
-    if (error) {
-      console.log(error);
-      res.status(400).json({ error: 'Error' });
-    }
-    if (result.Item) {
-      res.json(result.Item);
-    } else {
-      res.status(404).json({ error: "Venue not found" });
-    }
-  });
-
 });
 
 
@@ -123,9 +114,11 @@ app.get('/venue/:id', async function (req: Request<{id: string}>, res) {
 app.post("/deal", function (req, res) {
   let b: AddDealRequest = req.body;
 
+  let dealID = crypto.randomUUID()
+
   let item = {
-    id: crypto.randomUUID(),
     placeID: b.placeID,
+    compoundID: `DEAL#${dealID}`,
     days: b.deal.days,
     text: b.deal.text,
     links: b.deal.link,
