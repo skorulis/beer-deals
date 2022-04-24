@@ -111,34 +111,15 @@ app.get('/venue/:id', async function (req: Request<{id: string}>, res) {
 
 
 
-app.post("/deal", function (req, res) {
+app.post("/deal", async function (req, res) {
   let b: AddDealRequest = req.body;
-
-  let dealID = crypto.randomUUID()
-
-  let item = {
-    placeID: b.placeID,
-    compoundID: `DEAL#${dealID}`,
-    days: b.deal.days,
-    text: b.deal.text,
-    links: b.deal.link,
-    timeStart: b.deal.timeStart,
-    timeEnd: b.deal.timeEnd
+  try {
+    let result = await venueDAO.addDeal(b.placeID, b.deal);
+    res.json(result)
+  } catch(e) {
+    console.log(e);
+    res.status(400).json({status: "ERROR", e});
   }
-
-  const params = {
-    TableName: DEALS_TABLE,
-    Item: item,
-  };
-
-  dynamoDb.put(params, (error) => {
-    if (error) {
-      console.log(error);
-      return res.status(400).json({ error: 'Could not create deal' });
-    }
-    res.json(item);
-  });
-
 });
 
 module.exports.handler = serverless(app);

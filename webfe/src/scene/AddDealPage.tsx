@@ -108,8 +108,6 @@ export class AddDealPage extends Component<{placeID:string}, AddDealPageState> {
         let days = this.state.days.map(x => x - 1).sort();
         let timeStart = parseInt(this.state.startHour) * 60 + parseInt(this.state.startMinute);
         let timeEnd = parseInt(this.state.endHour) * 60 + parseInt(this.state.endMinute);
-        console.log(days);
-        console.log("add ")
         let deal: Deal = {
             text: this.state.description,
             days: days,

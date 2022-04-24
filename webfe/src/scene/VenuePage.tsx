@@ -3,6 +3,7 @@ import { Component } from "react";
 import { PageHeader } from "./PageHeader";
 import { MainAPI } from "../service/MainAPI";
 import { Venue } from "../shared/Venue";
+import { Deal } from "../shared/Deal";
 
 import {
     Link as RouteLink
@@ -10,12 +11,13 @@ import {
 
 interface VenuePageState {
     venue?: Venue
+    deals: Deal[]
 }
 
 export class VenuePage extends Component<{placeID:string}, VenuePageState> {
     constructor(props: {placeID:string}) {
         super(props);
-        this.state = {venue: undefined}
+        this.state = {venue: undefined, deals: []}
     }
 
     render() {
@@ -44,9 +46,8 @@ export class VenuePage extends Component<{placeID:string}, VenuePageState> {
 
     componentDidMount() {
         MainAPI.shared.getVenue(this.props.placeID).then(x => {
-            this.setState({venue: x})
+            this.setState({venue: x.venue, deals: x.deals})
         })
-
     }
 
 }

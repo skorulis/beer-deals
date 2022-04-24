@@ -1,4 +1,5 @@
 import * as AWS from "aws-sdk"
+import * as crypto from "crypto"
 import { Deal } from "../shared/Deal";
 import { VenueDeals } from "../shared/Venue"
 import { Venue } from "../shared/Venue"
@@ -28,6 +29,7 @@ export class VenueDAO {
           if (!result.Items || result.Items.length == 0) {
               throw new Error("Venue not found")
           }
+          console.log(result);
           let venue: any
           let deals: Deal[] = []
 
@@ -40,6 +42,29 @@ export class VenueDAO {
           }
           
           return { venue, deals }
+    }
+
+    async addDeal(placeID: string, deal: Deal): Promise<Deal> {
+        let dealID = crypto.randomUUID()
+
+        let item = {
+            placeID: placeID,
+            compoundID: `DEAL#${dealID}`,
+            days: deal.days,
+            text: deal.text,
+            links: deal.link,
+            timeStart: deal.timeStart,
+            timeEnd: deal.timeEnd
+        }
+
+        const params = {
+            TableName: VENUES_TABLE,
+            Item: item,
+        };
+
+        let result = await this.dynamoDB.put(params).promise();
+        console.log(result);
+        return item;
     }
 
 }
