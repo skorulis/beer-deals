@@ -1,4 +1,5 @@
 import { GooglePlacePrediction, GooglePlacePredictionList } from "../model/GooglePlacePrediction";
+import { AddDealRequest } from "../shared/AddDealRequest";
 import { Deal } from "../shared/Deal";
 import { Venue } from "../shared/Venue";
 import { VenueDeals } from "../shared/Venue";
@@ -47,9 +48,8 @@ export class MainAPI {
         return parsed as VenueDeals
     }
 
-    async addDeal(placeID: string, deal: Deal) {
+    async addDeal(body: AddDealRequest) {
         let url = `${this.baseURL}deal`
-        let body = {placeID, deal}
         let params = {
             method: "POST", 
             body: JSON.stringify(body),

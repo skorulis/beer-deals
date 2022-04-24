@@ -114,7 +114,7 @@ app.get('/venue/:id', async function (req: Request<{id: string}>, res) {
 app.post("/deal", async function (req, res) {
   let b: AddDealRequest = req.body;
   try {
-    let result = await venueDAO.addDeal(b.placeID, b.deal);
+    let result = await venueDAO.addDeal(b.placeID, b.days, b.text, b.timeStart, b.timeEnd, b.link);
     res.json(result)
   } catch(e) {
     console.log(e);

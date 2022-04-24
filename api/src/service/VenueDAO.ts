@@ -3,6 +3,7 @@ import * as crypto from "crypto"
 import { Deal } from "../shared/Deal";
 import { VenueDeals } from "../shared/Venue"
 import { Venue } from "../shared/Venue"
+import { DayOfWeek } from "../shared/DayOfWeek";
 
 const VENUES_TABLE = process.env.VENUES_TABLE!;
 
@@ -44,17 +45,17 @@ export class VenueDAO {
           return { venue, deals }
     }
 
-    async addDeal(placeID: string, deal: Deal): Promise<Deal> {
+    async addDeal(placeID: string, days: DayOfWeek[], text: string, timeStart: number, timeEnd: number, link?: string): Promise<Deal> {
         let dealID = crypto.randomUUID()
 
         let item = {
             placeID: placeID,
             compoundID: `DEAL#${dealID}`,
-            days: deal.days,
-            text: deal.text,
-            links: deal.link,
-            timeStart: deal.timeStart,
-            timeEnd: deal.timeEnd
+            days: days,
+            text: text,
+            link: link,
+            timeStart: timeStart,
+            timeEnd: timeEnd
         }
 
         const params = {

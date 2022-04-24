@@ -1,4 +1,4 @@
-import { Button, Text, Flex } from "@chakra-ui/react";
+import { Button, Heading, Text, Flex } from "@chakra-ui/react";
 import { Component } from "react"; 
 import { PageHeader } from "./PageHeader";
 import { MainAPI } from "../service/MainAPI";
@@ -8,6 +8,7 @@ import { Deal } from "../shared/Deal";
 import {
     Link as RouteLink
   } from "react-router-dom";
+import { SingleDealComponent } from "./SingleDealComponent";
 
 interface VenuePageState {
     venue?: Venue
@@ -33,8 +34,9 @@ export class VenuePage extends Component<{placeID:string}, VenuePageState> {
             return undefined
         }
         let addURL = `/venue/${this.props.placeID}/adddeal`
-        return <Flex direction="column">
-            <Text>{venue.name}</Text>
+        return <Flex direction="column" padding={4}>
+            <Heading>{venue.name}</Heading>
+            {this.dealList()}
             <RouteLink to={addURL}>
                 <Button colorScheme="blue">
                     <Text>Add Deal</Text>
@@ -42,6 +44,12 @@ export class VenuePage extends Component<{placeID:string}, VenuePageState> {
             </RouteLink>
             
         </Flex>
+    }
+
+    dealList() {
+        return this.state.deals.map(x => {
+            return <SingleDealComponent key={x.compoundID} deal={x} />
+        })
     }
 
     componentDidMount() {

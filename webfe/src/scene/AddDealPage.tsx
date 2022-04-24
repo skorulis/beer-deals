@@ -9,6 +9,7 @@ import { PageHeader } from "./PageHeader";
 import { DayOfWeek } from "../shared/DayOfWeek";
 import { Deal } from "../shared/Deal"
 import { MainAPI } from "../service/MainAPI";
+import { AddDealRequest } from "../shared/AddDealRequest";
 
 interface AddDealPageState {
     description: string
@@ -108,14 +109,15 @@ export class AddDealPage extends Component<{placeID:string}, AddDealPageState> {
         let days = this.state.days.map(x => x - 1).sort();
         let timeStart = parseInt(this.state.startHour) * 60 + parseInt(this.state.startMinute);
         let timeEnd = parseInt(this.state.endHour) * 60 + parseInt(this.state.endMinute);
-        let deal: Deal = {
+        let body: AddDealRequest = {
+            placeID: this.props.placeID,
             text: this.state.description,
             days: days,
             timeStart: timeStart,
             timeEnd: timeEnd
-        } 
+        }
 
-        MainAPI.shared.addDeal(this.props.placeID, deal).then(x => {
+        MainAPI.shared.addDeal(body).then(x => {
             console.log(x);
         })
     }

@@ -1,27 +1,8 @@
-I need to start by rebuilding the add venue thing
+I need to show the deals for a venue
 
-PK is always placeID
-SK is either PLACE#placeID
-or DEAL#dealID
-
-
-I should probably create domain models rather than using google stuff
-
-Thinking I use venue + deal as PK and SK
-
-SK must be unique
-
-
-* I need an add deal page with all the information 
-* I need to add some deals next to the places
-	- Should deals be separate from places. Yes 
 
 https://www.freecodecamp.org/news/aws-cognito-authentication-with-serverless-and-nodejs/
 
-
-
-
-* Can I hook up graphQL here for the login?
 
 * Decide where I'm going to host everything
 
