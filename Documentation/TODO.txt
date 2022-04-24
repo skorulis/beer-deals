@@ -1,4 +1,8 @@
-I need to show the deals for a venue
+What's next
+	- I need to find out the location of a user to help with searches
+	- UI needs to be much better (Lower priority)
+	- I could add some real deals
+
 
 
 https://www.freecodecamp.org/news/aws-cognito-authentication-with-serverless-and-nodejs/

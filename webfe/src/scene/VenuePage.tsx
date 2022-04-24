@@ -34,9 +34,11 @@ export class VenuePage extends Component<{placeID:string}, VenuePageState> {
             return undefined
         }
         let addURL = `/venue/${this.props.placeID}/adddeal`
-        return <Flex direction="column" padding={4}>
+        return <Flex direction="column" padding={4} gap={4}>
             <Heading>{venue.name}</Heading>
+            <Flex direction="column" gap={2}>
             {this.dealList()}
+            </Flex>
             <RouteLink to={addURL}>
                 <Button colorScheme="blue">
                     <Text>Add Deal</Text>

@@ -18,13 +18,16 @@ import { AddVenuePage } from "./scene/AddVenuePage";
 import { HomePage } from "./scene/HomePage";
 import { VenuePage } from "./scene/VenuePage";
 import { AddDealPage } from "./scene/AddDealPage";
+import { MainProvider } from "./service/MainProvider";
 
 export class App extends Component<{}> {
   render() {
     return <ChakraProvider theme={theme}>
-      <Flex direction="column">
-        {this.router()}
-      </Flex>
+      <MainProvider>
+        <Flex direction="column">
+          {this.router()}
+        </Flex>
+      </MainProvider>
     </ChakraProvider>
   }
 

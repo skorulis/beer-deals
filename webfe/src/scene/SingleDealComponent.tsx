@@ -10,10 +10,11 @@ export class SingleDealComponent extends Component<{deal:Deal}> {
     }
 
     render() {
-        return <Flex direction="column">
+        return <Flex direction="column" boxShadow='base' padding={2}>
+            <Text>{this.props.deal.text}</Text>
             <TimespanComponent start={this.props.deal.timeStart} end={this.props.deal.timeEnd} />
             <DaysComponent days={this.props.deal.days} />
-            <Text>{this.props.deal.text}</Text>
+            
         </Flex>
     }
 }
