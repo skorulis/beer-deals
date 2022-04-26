@@ -43,7 +43,10 @@ app.get('/', function (req, res) {
 app.get('/venue/autocomplete', async function (req, res) {
     
     let q = req.query["query"] as string
-    let result = await api.autocomplete(q);
+    let lat = req.query["lat"] as string
+    let lng = req.query["lng"] as string
+    console.log(req.query)
+    let result = await api.autocomplete(q, lat, lng);
   
     res.status(200).json(result);
   });

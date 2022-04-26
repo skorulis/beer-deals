@@ -4,6 +4,7 @@ import { PageHeader } from "./PageHeader";
 import { MainAPI } from "../service/MainAPI";
 import { GooglePlacePrediction } from "../model/GooglePlacePrediction";
 import { VenueSearchRow } from "./VenueSearchRow";
+import MainContext from "../service/MainContext";
 
 type AddVenuePageState = {
     query: string
@@ -12,7 +13,7 @@ type AddVenuePageState = {
 }
 
 export class AddVenuePage extends Component<{}, AddVenuePageState> {
-
+    static contextType = MainContext;
 
     constructor(props: {}) {
         super(props);
@@ -46,12 +47,8 @@ export class AddVenuePage extends Component<{}, AddVenuePageState> {
 
     results() {
         return <VStack pt={8}>
-            {this.state.results.map(x => <VenueSearchRow venue={x} />) }
+            {this.state.results.map(x => <VenueSearchRow key={x.place_id} venue={x} />) }
         </VStack>
-    }
-
-    addVenue(venue: GooglePlacePrediction) {
-
     }
 
     queryChanged(event: React.FormEvent<HTMLInputElement>) {
@@ -59,7 +56,9 @@ export class AddVenuePage extends Component<{}, AddVenuePageState> {
     }
 
     search() {
-        let result = this.state.api.autocomplete(this.state.query)
+        let loc = this.context.location;
+        console.log(loc)
+        let result = this.state.api.autocomplete(this.state.query, this.context.location)
         result.then(output => {
             this.setState({
                 results: output.predictions

@@ -11,6 +11,8 @@ import { Deal } from "../shared/Deal"
 import { MainAPI } from "../service/MainAPI";
 import { AddDealRequest } from "../shared/AddDealRequest";
 
+import { createBrowserHistory } from 'history';
+
 interface AddDealPageState {
     description: string
     days: DayOfWeek[]
@@ -119,6 +121,7 @@ export class AddDealPage extends Component<{placeID:string}, AddDealPageState> {
 
         MainAPI.shared.addDeal(body).then(x => {
             console.log(x);
+
         })
     }
 

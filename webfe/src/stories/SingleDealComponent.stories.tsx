@@ -13,8 +13,8 @@ export const Example1 = Template.bind({});
 
 Example1.args = {
   deal: {
-    //placeID: "123",
     compoundID: "ABC",
+    created: new Date(),
     days: [1,2],
     text: "12pm-4pm Tuesday and Wednesday - $18 250g Rump With your choice of two sides and sauce",
     timeStart: 100,

@@ -8,8 +8,13 @@ export class GoogleAPI {
 
     readonly baseURL = "https://maps.googleapis.com/maps/api/";
 
-    async autocomplete(text: string): Promise<any> {
-        let url = `${this.baseURL}place/autocomplete/json?key=${Secrets.googleAPIKey}&input=${text}`;
+    async autocomplete(text: string, lat?: string, lng?: string): Promise<any> {
+        let types = "bar|cafe|meal_takeaway|restaurant|"
+        let url = `${this.baseURL}place/autocomplete/json?key=${Secrets.googleAPIKey}&input=${text}&types=${types}`;
+        if (lat && lng) {
+            url += `&location=${lat}%2C${lng}`
+        }
+        console.log(url)
         const { data, status } = await axios.get(url);
         console.log(data)
         return data;

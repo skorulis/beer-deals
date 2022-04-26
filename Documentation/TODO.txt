@@ -1,3 +1,10 @@
+- After I add a deal I should go back to the venue page
+- Deals need a date
+
+- I need a central place to store some data like stores in iOS
+- Now that I have context I need something to get the location
+	- For now the main app can do it, later I'll move it out
+
 What's next
 	- I need to find out the location of a user to help with searches
 	- UI needs to be much better (Lower priority)

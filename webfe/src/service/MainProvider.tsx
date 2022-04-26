@@ -13,4 +13,11 @@ export class MainProvider extends Component<{children: JSX.Element}, IMainContex
             {this.props.children}
         </MainContext.Provider>
     }
+
+    componentDidMount() {
+        navigator.geolocation.getCurrentPosition(position => {
+            this.setState({location: position.coords})
+            console.log(position.coords)
+        })
+    }
 }

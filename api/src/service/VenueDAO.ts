@@ -50,6 +50,7 @@ export class VenueDAO {
 
         let item = {
             placeID: placeID,
+            created: new Date(),
             compoundID: `DEAL#${dealID}`,
             days: days,
             text: text,

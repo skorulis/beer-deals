@@ -43,7 +43,7 @@ export class DaysComponent extends Component<{days:DayOfWeek[]}> {
     letterDay(day: DayOfWeek, enabled: Boolean) {
         let letter = this.getWeekDays()[day].charAt(0);
         let color = enabled ? "yellow.300" : "gray"
-        return <Box padding={1}>
+        return <Box padding={1} key={day}>
                 <Text color={color}>{letter}</Text>
             </Box>
     }

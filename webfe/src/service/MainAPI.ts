@@ -10,8 +10,11 @@ export class MainAPI {
 
     public static readonly shared = new MainAPI() 
 
-    async autocomplete(text: string): Promise<GooglePlacePredictionList> {
+    async autocomplete(text: string, location?: GeolocationCoordinates): Promise<GooglePlacePredictionList> {
         let url = `${this.baseURL}venue/autocomplete?query=${text}`
+        if (location) {
+            url += `&lat=${location.latitude}&lng=${location.longitude}`
+        }
         console.log(url)
         const response = await fetch(url);
         let parsed = await response.json()

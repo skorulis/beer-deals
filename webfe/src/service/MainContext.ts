@@ -1,7 +1,7 @@
 import React, { createContext } from 'react';
 
 export interface IMainContext {
-    location?: string
+    location?: GeolocationCoordinates
 }
 
 
