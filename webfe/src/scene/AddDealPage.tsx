@@ -11,7 +11,9 @@ import { Deal } from "../shared/Deal"
 import { MainAPI } from "../service/MainAPI";
 import { AddDealRequest } from "../shared/AddDealRequest";
 
-import { createBrowserHistory } from 'history';
+
+import { useNavigate, NavigateFunction } from "react-router-dom";
+
 
 interface AddDealPageState {
     description: string
@@ -22,8 +24,13 @@ interface AddDealPageState {
     endMinute: string
 }
 
-export class AddDealPage extends Component<{placeID:string}, AddDealPageState> {
-    constructor(props: {placeID:string}) {
+export default function AddDealPageHOC(props: {placeID: string}) {
+    const navigation = useNavigate()
+    return <AddDealPage placeID={props.placeID} navigation={navigation} />
+}
+
+export class AddDealPage extends Component<{placeID:string, navigation: NavigateFunction}, AddDealPageState> {
+    constructor(props: {placeID:string, navigation: NavigateFunction}) {
         super(props);
         this.state = {description: "", days: [], startHour: "00", startMinute: "00", endHour: "24", endMinute: "00"}
         this.descriptionChanged = this.descriptionChanged.bind(this);
@@ -121,7 +128,7 @@ export class AddDealPage extends Component<{placeID:string}, AddDealPageState> {
 
         MainAPI.shared.addDeal(body).then(x => {
             console.log(x);
-
+            this.props.navigation(`/venue/${this.props.placeID}`)
         })
     }
 

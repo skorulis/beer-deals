@@ -19,6 +19,7 @@ import { HomePage } from "./scene/HomePage";
 import { VenuePage } from "./scene/VenuePage";
 import { AddDealPage } from "./scene/AddDealPage";
 import { MainProvider } from "./service/MainProvider";
+import AddDealPageHOC from "./scene/AddDealPage";
 
 export class App extends Component<{}> {
   render() {
@@ -50,7 +51,7 @@ function AddDealWrapper() {
   let { id } = useParams();
 
   return (
-    <AddDealPage placeID={id as string} />
+    <AddDealPageHOC placeID={id as string} />
   );
 }
 
