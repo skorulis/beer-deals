@@ -127,7 +127,6 @@ export class AddDealPage extends Component<{placeID:string, navigation: Navigate
         }
 
         MainAPI.shared.addDeal(body).then(x => {
-            console.log(x);
             this.props.navigation(`/venue/${this.props.placeID}`)
         })
     }
