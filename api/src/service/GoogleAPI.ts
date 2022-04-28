@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { GooglePlaceDetails, GooglePlaceDetailsResponse} from "../model/GooglePlaceDetails"
-import { Secrets } from "../model/Secrets";
 
 
+const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY;
 
 export class GoogleAPI {
 
@@ -10,7 +10,7 @@ export class GoogleAPI {
 
     async autocomplete(text: string, lat?: string, lng?: string): Promise<any> {
         let types = "bar|cafe|meal_takeaway|restaurant|"
-        let url = `${this.baseURL}place/autocomplete/json?key=${Secrets.googleAPIKey}&input=${text}&types=${types}`;
+        let url = `${this.baseURL}place/autocomplete/json?key=${GOOGLE_API_KEY}&input=${text}&types=${types}`;
         if (lat && lng) {
             url += `&location=${lat}%2C${lng}`
         }
@@ -21,7 +21,7 @@ export class GoogleAPI {
     }
 
     async details(placeID: string): Promise<GooglePlaceDetails> {
-        let url = `${this.baseURL}place/details/json?key=${Secrets.googleAPIKey}&place_id=${placeID}`;
+        let url = `${this.baseURL}place/details/json?key=${GOOGLE_API_KEY}&place_id=${placeID}`;
         const { data, status } = await axios.get<GooglePlaceDetailsResponse>(url)
         return data.result
     }

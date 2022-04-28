@@ -38,6 +38,7 @@ provider:
   environment:
     USERS_TABLE: ${self:custom.tableName}
     VENUES_TABLE: ${self:custom.venuesTableName}
+    GOOGLE_API_KEY: ${param:googleAPIKey}
     user_pool_id: { Ref: UserPool }
     client_id: { Ref: UserClient }
  
