@@ -1,7 +1,6 @@
 import * as serverless from "serverless-http"
 import * as express from 'express';
 import * as bodyParser from "body-parser";
-import * as crypto from "crypto"
 import { GoogleAPI } from "./service/GoogleAPI";
 
 import { AddVenueRequest } from "./shared/AddVenueRequest" 
@@ -16,7 +15,6 @@ let api = new GoogleAPI();
 
 const VENUES_TABLE = process.env.VENUES_TABLE;
 const USERS_TABLE = process.env.USERS_TABLE;
-const DEALS_TABLE = process.env.DEALS_TABLE;
 const IS_OFFLINE = process.env.IS_OFFLINE;
 
 const app = express();
@@ -90,17 +88,6 @@ app.get('/venue', async function (req, res) {
   });
 
 });
-
-function getDeals(places: string[]) {
-  const params = {
-    TableName: DEALS_TABLE,
-    Key: {
-      //placeID: req.params.id,
-    }
-  }
-
-  dynamoDb.get(params)
-}
 
 app.get('/venue/:id', async function (req: Request<{id: string}>, res) {
   try {
