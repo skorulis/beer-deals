@@ -5,16 +5,17 @@ import { GoogleAPI } from "./service/GoogleAPI";
 
 import { AddVenueRequest } from "./shared/AddVenueRequest" 
 import { AddDealRequest } from "./shared/AddDealRequest"
+import { AddReportRequest } from "./shared/AddReportRequest"
 import { Request } from "express"
 
 import * as AWS from "aws-sdk"
 import { Venue } from "./shared/Venue";
 import { VenueDAO } from "./service/VenueDAO";
+import { ReportDAO } from "./service/ReportDAO"
 
 let api = new GoogleAPI();
 
 const VENUES_TABLE = process.env.VENUES_TABLE;
-const USERS_TABLE = process.env.USERS_TABLE;
 const IS_OFFLINE = process.env.IS_OFFLINE;
 
 const app = express();
@@ -33,6 +34,7 @@ if (IS_OFFLINE === 'true') {
   };
 
 let venueDAO = new VenueDAO(dynamoDb);
+let reportDAO = new ReportDAO(dynamoDb);
 
 app.get('/', function (req, res) {
     res.json({status: "OK"})
@@ -104,6 +106,17 @@ app.post("/deal", async function (req, res) {
   let b: AddDealRequest = req.body;
   try {
     let result = await venueDAO.addDeal(b.placeID, b.days, b.text, b.timeStart, b.timeEnd, b.link);
+    res.json(result)
+  } catch(e) {
+    console.log(e);
+    res.status(400).json({status: "ERROR", e});
+  }
+});
+
+app.post("/report", async function (req, res) {
+  let r: AddReportRequest = req.body
+  try {
+    let result = await reportDAO.add(r.placeID, "ADMIN", r.reason)
     res.json(result)
   } catch(e) {
     console.log(e);

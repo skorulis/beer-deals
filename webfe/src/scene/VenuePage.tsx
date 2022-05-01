@@ -50,7 +50,7 @@ export class VenuePage extends Component<{placeID:string}, VenuePageState> {
 
     dealList() {
         return this.state.deals.map(x => {
-            return <SingleDealComponent key={x.compoundID} deal={x} />
+            return <SingleDealComponent key={x.compoundID} placeID={this.props.placeID} deal={x} />
         })
     }
 

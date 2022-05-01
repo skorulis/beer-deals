@@ -13,6 +13,7 @@ const Template: ComponentStory<typeof SingleDealComponent> = (args) => <SingleDe
 export const Example1 = Template.bind({});
 
 Example1.args = {
+  placeID: "TEST",
   deal: {
     status: DealStatus.new,
     compoundID: "ABC",

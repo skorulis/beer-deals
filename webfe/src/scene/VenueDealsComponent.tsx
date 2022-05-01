@@ -5,8 +5,8 @@ import { VenueDeals } from "../shared/Venue";
 import { SingleDealComponent } from "./SingleDealComponent";
 import { VenueHeader } from "./VenueHeader";
 
-export class VenueDealsComponent extends Component<{deals:VenueDeals}> {
-    constructor(props: {deals:VenueDeals}) {
+export class VenueDealsComponent extends Component<{placeID: string, deals:VenueDeals}> {
+    constructor(props: {placeID: string, deals:VenueDeals}) {
         super(props);
     }
 
@@ -20,7 +20,7 @@ export class VenueDealsComponent extends Component<{deals:VenueDeals}> {
     dealList() {
         let dealList = []
         for (let deal of this.props.deals.deals) {
-            dealList.push(<SingleDealComponent deal={deal} />)
+            dealList.push(<SingleDealComponent placeID={this.props.placeID} deal={deal} />)
         }
         return dealList
     }

@@ -5,6 +5,7 @@ service: rest-api
 custom:
   tableName: 'users-${self:provider.stage}'
   venuesTableName: "venues-${self:provider.stage}"
+  reportsTableName: "reports-${self:provider.stage}"
   dynamodb:
     stages:
       - dev
@@ -38,6 +39,7 @@ provider:
   environment:
     USERS_TABLE: ${self:custom.tableName}
     VENUES_TABLE: ${self:custom.venuesTableName}
+    REPORTS_TABLE: ${self:custom.reportsTableName}
     GOOGLE_API_KEY: ${param:googleAPIKey}
     user_pool_id: { Ref: UserPool }
     client_id: { Ref: UserClient }
@@ -89,6 +91,21 @@ resources:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
         TableName: ${self:custom.tableName}
+    ReportsDynamoDBTable:
+      Type: 'AWS::DynamoDB::Table'
+      Properties:
+        AttributeDefinitions:
+          -
+            AttributeName: placeID
+            AttributeType: S
+        KeySchema:
+          -
+            AttributeName: placeID
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: ${self:custom.reportsTableName}
     VenuesDynamoDBTable:
       Type: 'AWS::DynamoDB::Table'
       Properties:
