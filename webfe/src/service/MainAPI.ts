@@ -36,11 +36,11 @@ export class MainAPI {
         return response
     }
 
-    async getVenues() {
+    async getVenues(): Promise<VenueDeals[]> {
         let url = `${this.baseURL}venue`
         const response = await fetch(url)
         let parsed = await response.json()
-        return parsed as Venue[]
+        return parsed as VenueDeals[]
     }
 
     async getVenue(id: string): Promise<VenueDeals> {

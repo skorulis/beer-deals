@@ -10,7 +10,7 @@ export class GoogleAPI {
 
     async autocomplete(text: string, lat?: string, lng?: string): Promise<any> {
         let types = "bar|cafe|meal_takeaway|restaurant|"
-        let url = `${this.baseURL}place/autocomplete/json?key=${GOOGLE_API_KEY}&input=${text}&types=${types}`;
+        let url = `${this.baseURL}place/autocomplete/json?key=${GOOGLE_API_KEY}&input=${text}&types=${types}&components=country:au`;
         if (lat && lng) {
             url += `&location=${lat}%2C${lng}`
         }

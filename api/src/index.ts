@@ -78,15 +78,14 @@ app.post('/venue/add', async function (req, res) {
 });
 
 app.get('/venue', async function (req, res) {
-  const params = {
-    TableName: VENUES_TABLE
+  try {
+    let result = await venueDAO.homeVenues()
+    res.json(result);
+  } catch(e) {
+    console.log(e);
+    res.status(400).json({status: "ERROR", e});
   }
-
-  dynamoDb.scan(params, (error, result) => {
-    console.log(error);
-    res.json(result.Items);
-  });
-
+  
 });
 
 app.get('/venue/:id', async function (req: Request<{id: string}>, res) {

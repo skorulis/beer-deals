@@ -1,6 +1,7 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { SingleDealComponent } from '../scene/SingleDealComponent';
 import { DayOfWeek } from '../shared/DayOfWeek';
+import { DealStatus } from '../shared/Deal';
 
 export default {
   title: 'SingleDealComponent',
@@ -13,6 +14,7 @@ export const Example1 = Template.bind({});
 
 Example1.args = {
   deal: {
+    status: DealStatus.new,
     compoundID: "ABC",
     created: new Date(),
     days: [1,2],

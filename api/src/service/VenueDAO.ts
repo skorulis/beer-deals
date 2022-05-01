@@ -1,6 +1,6 @@
 import * as AWS from "aws-sdk"
 import * as crypto from "crypto"
-import { Deal } from "../shared/Deal";
+import { Deal, DealStatus } from "../shared/Deal";
 import { VenueDeals } from "../shared/Venue"
 import { Venue } from "../shared/Venue"
 import { DayOfWeek } from "../shared/DayOfWeek";
@@ -27,28 +27,18 @@ export class VenueDAO {
             }
           }
           let result = await this.dynamoDB.query(params).promise();
+          
           if (!result.Items || result.Items.length == 0) {
               throw new Error("Venue not found")
           }
-          console.log(result);
-          let venue: any
-          let deals: Deal[] = []
-
-          for (let item of result.Items) {
-              if (item.compoundID.startsWith("VENUE#")) {
-                venue = item as Venue;
-              } else {
-                deals.push(item as Deal)
-              }
-          }
-          
-          return { venue, deals }
+          return this.combineDeals(result.Items)[0]
     }
 
     async addDeal(placeID: string, days: DayOfWeek[], text: string, timeStart: number, timeEnd: number, link?: string): Promise<Deal> {
         let dealID = crypto.randomUUID()
 
         let item = {
+            status: DealStatus.new,
             placeID: placeID,
             created: new Date(),
             compoundID: `DEAL#${dealID}`,
@@ -67,6 +57,39 @@ export class VenueDAO {
         let result = await this.dynamoDB.put(params).promise();
         console.log(result);
         return item;
+    }
+
+    async homeVenues(): Promise<VenueDeals[]> {
+        const params: AWS.DynamoDB.DocumentClient.QueryInput = {
+            TableName: VENUES_TABLE
+        }
+        
+        let result = await this.dynamoDB.scan(params).promise();
+        if (!result.Items || result.Items.length == 0) {
+            throw new Error("No venues")
+        }
+        return this.combineDeals(result.Items)
+    }
+
+    combineDeals(items?: any): VenueDeals[] {
+        if (!items || items.length == 0) {
+            return []
+        }
+        let venues: Venue[] = []
+        let deals: {} = {}
+
+        for (let item of items) {
+            if (item.compoundID.startsWith("VENUE#")) {
+              venues.push(item as Venue)
+            } else {
+                let array = deals[item.placeID] || []
+                array.push(item as Deal)
+                deals[item.placeID] = array
+            }
+        }
+        return venues.map(x => {
+            return {venue: x, deals: deals[x.placeID] || []}
+        })
     }
 
 }

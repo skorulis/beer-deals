@@ -29,8 +29,9 @@ export class HomePage extends Component<{}, HomePageState> {
     }
 
     componentDidMount() {
-        MainAPI.shared.getVenues().then(x => {
-            this.setState({venues: x})
+        MainAPI.shared.getVenues().then(response => {
+            let venues = response.map(x => x.venue)
+            this.setState({venues: venues})
         })
 
     }
