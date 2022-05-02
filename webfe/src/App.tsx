@@ -20,6 +20,7 @@ import { VenuePage } from "./scene/VenuePage";
 import { AddDealPage } from "./scene/AddDealPage";
 import { MainProvider } from "./service/MainProvider";
 import AddDealPageHOC from "./scene/AddDealPage";
+import { ReportListPage } from "./scene/report/ReportListPage";
 
 export class App extends Component<{}> {
   render() {
@@ -41,6 +42,7 @@ export class App extends Component<{}> {
           <Route path="/addvenue" element={<AddVenuePage />} />
           <Route path="/venue/:id" element={<VenuePageWrapper />} />
           <Route path="/venue/:id/adddeal" element={<AddDealWrapper />} />
+          <Route path="/reports" element={<ReportListPage />} />
       </Routes>
     </Router>
   }

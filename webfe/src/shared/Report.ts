@@ -4,16 +4,13 @@ export enum ReportStatus {
     agreed = "agreed"
 }
 
-export interface ReportEntry {
-    userID: string
-    reportID: string
-    reason: string
-    status: ReportStatus
-}
-
 export interface Report {
     placeID: string
-    entries: ReportEntry[]
+    userID: string
+    dealID: string
+    reportID: string
+    reason: string
+    reportStatus: ReportStatus
 }
 
 

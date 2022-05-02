@@ -96,11 +96,11 @@ resources:
       Properties:
         AttributeDefinitions:
           -
-            AttributeName: placeID
+            AttributeName: reportID
             AttributeType: S
         KeySchema:
           -
-            AttributeName: placeID
+            AttributeName: reportID
             KeyType: HASH
         ProvisionedThroughput:
           ReadCapacityUnits: 1

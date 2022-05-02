@@ -5,7 +5,7 @@ import { GoogleAPI } from "./service/GoogleAPI";
 
 import { AddVenueRequest } from "./shared/AddVenueRequest" 
 import { AddDealRequest } from "./shared/AddDealRequest"
-import { AddReportRequest } from "./shared/AddReportRequest"
+import { ActionReportRequest, AddReportRequest } from "./shared/AddReportRequest"
 import { Request } from "express"
 
 import * as AWS from "aws-sdk"
@@ -113,10 +113,32 @@ app.post("/deal", async function (req, res) {
   }
 });
 
+app.get("/report", async function (req, res) {
+  try {
+    let result = await reportDAO.openReports()
+    res.json(result)
+  } catch(e) {
+    console.log(e);
+    res.status(400).json({status: "ERROR", e});
+  }
+
+});
+
 app.post("/report", async function (req, res) {
   let r: AddReportRequest = req.body
   try {
-    let result = await reportDAO.add(r.placeID, "ADMIN", r.reason)
+    let result = await reportDAO.add(r.placeID, "ADMIN", r.dealID, r.reason)
+    res.json(result)
+  } catch(e) {
+    console.log(e);
+    res.status(400).json({status: "ERROR", e});
+  }
+});
+
+app.post("/report/action", async function (req, res) {
+  let r: ActionReportRequest = req.body
+  try {
+    let result = await reportDAO.set(r.reportID, r.status);
     res.json(result)
   } catch(e) {
     console.log(e);

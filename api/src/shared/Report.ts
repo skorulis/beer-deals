@@ -4,9 +4,13 @@ export enum ReportStatus {
     agreed = "agreed"
 }
 
-export interface ReportEntry {
+export interface Report {
+    placeID: string
     userID: string
+    dealID: string
     reportID: string
     reason: string
-    status: ReportStatus
+    reportStatus: ReportStatus
 }
+
+

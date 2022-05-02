@@ -1,7 +1,8 @@
 import { GooglePlacePrediction, GooglePlacePredictionList } from "../model/GooglePlacePrediction";
 import { AddDealRequest } from "../shared/AddDealRequest";
-import { AddReportRequest } from "../shared/AddReportRequest";
+import { ActionReportRequest, AddReportRequest } from "../shared/AddReportRequest";
 import { Deal } from "../shared/Deal";
+import { Report } from "../shared/Report";
 import { Venue } from "../shared/Venue";
 import { VenueDeals } from "../shared/Venue";
 
@@ -68,6 +69,18 @@ export class MainAPI {
 
     async addReport(body: AddReportRequest) {
         let url = `${this.baseURL}report`
+        return this.post(url, body)
+    }
+
+    async getReports(): Promise<Report[]> {
+        let url = `${this.baseURL}report`
+        const response = await fetch(url);
+        let parsed = await response.json()
+        return parsed as Report[]
+    }
+
+    async actionReport(body: ActionReportRequest) {
+        let url = `${this.baseURL}report/action`
         return this.post(url, body)
     }
 

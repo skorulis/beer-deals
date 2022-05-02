@@ -24,6 +24,7 @@ export class SingleDealComponent extends Component<{placeID: string, deal:Deal}>
     async postReport() {
         let body: AddReportRequest = {
             placeID: this.props.placeID,
+            dealID: this.props.deal.compoundID,
             reason: "Because I can"
         }
         let result = await MainAPI.shared.addReport(body)
