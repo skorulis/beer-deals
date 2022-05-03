@@ -3,7 +3,7 @@ app: deals-api
 service: rest-api
 
 custom:
-  s3Bucket: dealsWebfeBucket-${self:provider.stage}
+  s3Bucket: deals-webfe-bucket-${self:provider.stage}
   tableName: 'users-${self:provider.stage}'
   venuesTableName: "venues-${self:provider.stage}"
   reportsTableName: "reports-${self:provider.stage}"
