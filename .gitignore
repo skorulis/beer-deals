@@ -5,3 +5,4 @@ api/.dynamodb
 webfe/.vscode
 Secrets.ts
 api/.build
+webfe/build
