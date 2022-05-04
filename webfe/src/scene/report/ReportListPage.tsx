@@ -56,7 +56,7 @@ export class ReportListPage extends Component<{}, ReportListPageState> {
         }
         let deal = matchingDeals[0]
 
-        return <VStack>
+        return <VStack key={report.reportID}>
             <Text key={report.placeID} >{place.venue.name}</Text>
             <ReportCell venue={place.venue} deal={deal} report={report} />
         </VStack>

@@ -50,7 +50,9 @@ functions:
     handler: src/index.handler
     events:
       - http: ANY /
+        cors: true
       - http: 'ANY {proxy+}'
+        cors: true
 
 
 resources:

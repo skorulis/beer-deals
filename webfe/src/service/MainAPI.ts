@@ -8,12 +8,18 @@ import { VenueDeals } from "../shared/Venue";
 
 export class MainAPI {
 
-    readonly baseURL = "http://localhost:3000/"
+    baseURL(): string {
+        if (process.env.NODE_ENV === "development") {
+            return "http://localhost:3000/"
+        }
+        
+        return "https://3vn7clr33g.execute-api.us-east-1.amazonaws.com/dev/"
+    }
 
     public static readonly shared = new MainAPI() 
 
     async autocomplete(text: string, location?: GeolocationCoordinates): Promise<GooglePlacePredictionList> {
-        let url = `${this.baseURL}venue/autocomplete?query=${text}`
+        let url = `${this.baseURL()}venue/autocomplete?query=${text}`
         if (location) {
             url += `&lat=${location.latitude}&lng=${location.longitude}`
         }
@@ -24,7 +30,7 @@ export class MainAPI {
     }
 
     async addVenue(place: GooglePlacePrediction) {
-        let url = `${this.baseURL}venue/add`
+        let url = `${this.baseURL()}venue/add`
         let body = {placeID: place.place_id}
         let params = {
             method: "POST", 
@@ -39,14 +45,14 @@ export class MainAPI {
     }
 
     async getVenues(): Promise<VenueDeals[]> {
-        let url = `${this.baseURL}venue`
+        let url = `${this.baseURL()}venue`
         const response = await fetch(url)
         let parsed = await response.json()
         return parsed as VenueDeals[]
     }
 
     async getVenue(id: string): Promise<VenueDeals> {
-        let url = `${this.baseURL}venue/${id}`
+        let url = `${this.baseURL()}venue/${id}`
         const response = await fetch(url);
         console.log(url)
         let parsed = await response.json()
@@ -54,7 +60,7 @@ export class MainAPI {
     }
 
     async addDeal(body: AddDealRequest) {
-        let url = `${this.baseURL}deal`
+        let url = `${this.baseURL()}deal`
         let params = {
             method: "POST", 
             body: JSON.stringify(body),
@@ -68,19 +74,19 @@ export class MainAPI {
     }
 
     async addReport(body: AddReportRequest) {
-        let url = `${this.baseURL}report`
+        let url = `${this.baseURL()}report`
         return this.post(url, body)
     }
 
     async getReports(): Promise<Report[]> {
-        let url = `${this.baseURL}report`
+        let url = `${this.baseURL()}report`
         const response = await fetch(url);
         let parsed = await response.json()
         return parsed as Report[]
     }
 
     async actionReport(body: ActionReportRequest) {
-        let url = `${this.baseURL}report/action`
+        let url = `${this.baseURL()}report/action`
         return this.post(url, body)
     }
 
