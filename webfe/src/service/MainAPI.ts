@@ -1,9 +1,7 @@
 import { GooglePlacePrediction, GooglePlacePredictionList } from "../model/GooglePlacePrediction";
 import { AddDealRequest } from "../shared/AddDealRequest";
 import { ActionReportRequest, AddReportRequest } from "../shared/AddReportRequest";
-import { Deal } from "../shared/Deal";
 import { Report } from "../shared/Report";
-import { Venue } from "../shared/Venue";
 import { VenueDeals } from "../shared/Venue";
 
 export class MainAPI {

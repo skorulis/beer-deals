@@ -42,8 +42,8 @@ provider:
     VENUES_TABLE: ${self:custom.venuesTableName}
     REPORTS_TABLE: ${self:custom.reportsTableName}
     GOOGLE_API_KEY: ${param:googleAPIKey}
-    user_pool_id: { Ref: UserPool }
-    client_id: { Ref: UserClient }
+    USER_POOL_ID: { Ref: UserPool }
+    CLIENT_ID: { Ref: UserClient }
  
 functions:
   app:

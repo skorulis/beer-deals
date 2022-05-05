@@ -12,11 +12,14 @@ import * as AWS from "aws-sdk"
 import { Venue } from "./shared/Venue";
 import { VenueDAO } from "./service/VenueDAO";
 import { ReportDAO } from "./service/ReportDAO"
+import { RegisterRequest } from "./shared/AuthRequests";
 
 let api = new GoogleAPI();
+const cognito = new AWS.CognitoIdentityServiceProvider()
 
 const VENUES_TABLE = process.env.VENUES_TABLE;
 const IS_OFFLINE = process.env.IS_OFFLINE;
+const USER_POOL_ID = process.env.USER_POOL_ID;
 
 const app = express();
 app.use(bodyParser.json({ strict: false }));
@@ -144,6 +147,38 @@ app.post("/report/action", async function (req, res) {
     console.log(e);
     res.status(400).json({status: "ERROR", e});
   }
+});
+
+app.post("/auth/register", async function (req: Request<RegisterRequest>, res) {
+  const params: AWS.CognitoIdentityServiceProvider.AdminCreateUserRequest = {
+    UserPoolId: USER_POOL_ID!,
+    Username: req.body.email,
+    UserAttributes: [{
+      Name: 'email',
+      Value: req.body.email
+    },
+    {
+      Name: 'email_verified',
+      Value: 'true'
+    }
+  ],
+  MessageAction: 'SUPPRESS'
+  }
+  const response = await cognito.adminCreateUser(params).promise();
+  if (!response.User) {
+    res.status(400).json({status: "ERROR", message: "Could not create user"});
+    return 
+  }
+
+  const paramsForSetPass = {
+    Password: req.body.password,
+    UserPoolId: USER_POOL_ID!,
+    Username: req.body.email,
+    Permanent: true
+  };
+  await cognito.adminSetUserPassword(paramsForSetPass).promise()
+
+  res.json({status: "OK", message: `Created user ${req.body.email}`})
 });
 
 module.exports.handler = serverless(app);
