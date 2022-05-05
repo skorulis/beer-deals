@@ -12,7 +12,7 @@ import * as AWS from "aws-sdk"
 import { Venue } from "./shared/Venue";
 import { VenueDAO } from "./service/VenueDAO";
 import { ReportDAO } from "./service/ReportDAO"
-import { RegisterRequest } from "./shared/AuthRequests";
+import { LoginRequest, RegisterRequest } from "./shared/AuthRequests";
 
 let api = new GoogleAPI();
 const cognito = new AWS.CognitoIdentityServiceProvider()
@@ -20,6 +20,7 @@ const cognito = new AWS.CognitoIdentityServiceProvider()
 const VENUES_TABLE = process.env.VENUES_TABLE;
 const IS_OFFLINE = process.env.IS_OFFLINE;
 const USER_POOL_ID = process.env.USER_POOL_ID;
+const CLIENT_ID = process.env.CLIENT_ID;
 
 const app = express();
 app.use(bodyParser.json({ strict: false }));
@@ -164,12 +165,15 @@ app.post("/auth/register", async function (req: Request<RegisterRequest>, res) {
   ],
   MessageAction: 'SUPPRESS'
   }
+  let temp: any
+
   try {
     const response = await cognito.adminCreateUser(params).promise();
     if (!response.User) {
       res.status(400).json({status: "ERROR", message: "Could not create user"});
       return 
     }
+    temp = response
   } catch(e) {
     console.log(e);
     res.status(400).json({status: "ERROR", e});
@@ -185,7 +189,28 @@ app.post("/auth/register", async function (req: Request<RegisterRequest>, res) {
   };
   await cognito.adminSetUserPassword(paramsForSetPass).promise()
 
-  res.json({status: "OK", message: `Created user ${req.body.email}`})
+  res.json({status: "OK", message: `Created user ${req.body.email}`, user: temp})
+});
+
+app.post("/auth/login", async function (req: Request<LoginRequest>, res) {
+  const params = {
+    AuthFlow: "ADMIN_NO_SRP_AUTH",
+    UserPoolId: USER_POOL_ID!,
+    ClientId: CLIENT_ID!,
+    AuthParameters: {
+      USERNAME: req.body.email,
+      PASSWORD: req.body.password
+    }
+  }
+  try {
+    const response = await cognito.adminInitiateAuth(params).promise();
+    res.json({status: "OK", token: response.AuthenticationResult?.IdToken, all: response})
+  } catch(e) {
+    console.log(e);
+    res.status(400).json({status: "ERROR", e});
+    return;
+  }
+
 });
 
 module.exports.handler = serverless(app);
