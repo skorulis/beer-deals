@@ -174,22 +174,34 @@ app.post("/auth/register", async function (req: Request<RegisterRequest>, res) {
       return 
     }
     temp = response
+
+    const paramsForSetPass = {
+      Password: req.body.password,
+      UserPoolId: USER_POOL_ID!,
+      Username: req.body.email,
+      Permanent: true
+    };
+    await cognito.adminSetUserPassword(paramsForSetPass).promise()
+
+    const loginParams = {
+      AuthFlow: "ADMIN_NO_SRP_AUTH",
+      UserPoolId: USER_POOL_ID!,
+      ClientId: CLIENT_ID!,
+      AuthParameters: {
+        USERNAME: req.body.email,
+        PASSWORD: req.body.password
+      }
+    }
+    const loginResponse = await cognito.adminInitiateAuth(loginParams).promise();
+    
+    res.json({status: "OK", message: `Created user ${req.body.email}`, user: temp, token: loginResponse.AuthenticationResult?.IdToken})
+
   } catch(e) {
     console.log(e);
     res.status(400).json({status: "ERROR", e});
     return;
   }
   
-
-  const paramsForSetPass = {
-    Password: req.body.password,
-    UserPoolId: USER_POOL_ID!,
-    Username: req.body.email,
-    Permanent: true
-  };
-  await cognito.adminSetUserPassword(paramsForSetPass).promise()
-
-  res.json({status: "OK", message: `Created user ${req.body.email}`, user: temp})
 });
 
 app.post("/auth/login", async function (req: Request<LoginRequest>, res) {
