@@ -164,11 +164,18 @@ app.post("/auth/register", async function (req: Request<RegisterRequest>, res) {
   ],
   MessageAction: 'SUPPRESS'
   }
-  const response = await cognito.adminCreateUser(params).promise();
-  if (!response.User) {
-    res.status(400).json({status: "ERROR", message: "Could not create user"});
-    return 
+  try {
+    const response = await cognito.adminCreateUser(params).promise();
+    if (!response.User) {
+      res.status(400).json({status: "ERROR", message: "Could not create user"});
+      return 
+    }
+  } catch(e) {
+    console.log(e);
+    res.status(400).json({status: "ERROR", e});
+    return;
   }
+  
 
   const paramsForSetPass = {
     Password: req.body.password,
