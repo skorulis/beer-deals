@@ -1,5 +1,4 @@
 import {
-    Box,
     Button,
     Heading,
     Flex,
@@ -11,9 +10,13 @@ import {
     Link as RouteLink
   } from "react-router-dom";
 
-import { Component } from "react"; 
+import { Component, Context } from "react"; 
+import { AuthContext } from "../service/AuthProvider"
 
 export class PageHeader extends Component<{}> {
+
+    static contextType = AuthContext
+
     constructor(props: {}) {
         super(props);
     }
@@ -35,17 +38,29 @@ export class PageHeader extends Component<{}> {
     }
 
     profileButtons() {
-        return <Flex gap="10px">
-            <RouteLink to="/login">
-                <Button colorScheme='blue'>
-                    <Text>Login</Text>
-                </Button>
-            </RouteLink>
-            <RouteLink to="/register">
-                <Button colorScheme='blue'>
-                    <Text>Signup</Text>
-                </Button>
-            </RouteLink>
-        </Flex>
+        let token = this.context.token
+        
+        if (token) {
+            return <Flex gap="10px">
+                <RouteLink to="/profile">
+                    <Button colorScheme='blue'>
+                        <Text>Profile</Text>
+                    </Button>
+                </RouteLink>
+            </Flex>
+        } else {
+            return <Flex gap="10px">
+                <RouteLink to="/login">
+                    <Button colorScheme='blue'>
+                        <Text>Login</Text>
+                    </Button>
+                </RouteLink>
+                <RouteLink to="/register">
+                    <Button colorScheme='blue'>
+                        <Text>Signup</Text>
+                    </Button>
+                </RouteLink>
+            </Flex>
+        }
     }
 }

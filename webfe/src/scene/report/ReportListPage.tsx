@@ -2,7 +2,7 @@ import { Button, Center, Text, Flex, Heading, VStack, HStack } from "@chakra-ui/
 import { Component } from "react"; 
 import { PageHeader } from "../PageHeader";
 import { MainAPI } from "../../service/MainAPI";
-import MainContext from "../../service/MainContext";
+import { MainContext } from "../../service/MainProvider"
 import { Report } from "../../shared/Report";
 import { VenueDeals } from "../../shared/Venue";
 import { ReportCell } from "./ReportCell";

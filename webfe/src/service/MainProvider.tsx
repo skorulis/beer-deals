@@ -1,11 +1,24 @@
-import React, { useState, FC, createContext, Component } from 'react';
+import {createContext, Component } from 'react';
+import { AuthStore } from './AuthStore';
 
-import MainContext, { IMainContext } from "./MainContext";
+export interface IMainContext {
+    location?: GeolocationCoordinates
+    authStore: AuthStore
+}
+
+const defaultState = {
+    location: undefined,
+    authStore: new AuthStore()
+}
+
+export const MainContext = createContext<IMainContext>(defaultState);
 
 export class MainProvider extends Component<{children: JSX.Element}, IMainContext> {
     constructor(props: {children: JSX.Element}) {
         super(props)
-        this.state = {}
+        this.state = {
+            authStore: new AuthStore()
+        }
     }
 
     render() {

@@ -4,7 +4,7 @@ import { PageHeader } from "./PageHeader";
 import { MainAPI } from "../service/MainAPI";
 import { GooglePlacePrediction } from "../model/GooglePlacePrediction";
 import { VenueSearchRow } from "./VenueSearchRow";
-import MainContext from "../service/MainContext";
+import { MainContext } from "../service/MainProvider"
 
 
 type AddVenuePageState = {

@@ -7,6 +7,9 @@ import {
   } from "react-router-dom";
 import { MainAPI } from "../service/MainAPI";
 
+import { MainContext } from "../service/MainProvider"
+import { AuthContext } from "../service/AuthProvider";
+
 type LoginPageState = {
     showPassword: Boolean
     email: string
@@ -14,6 +17,8 @@ type LoginPageState = {
 }
 
 export class LoginPage extends Component<{}, LoginPageState> {
+
+    static contextType = AuthContext;
 
     constructor(props: {}) {
         super(props);
@@ -99,5 +104,8 @@ export class LoginPage extends Component<{}, LoginPageState> {
         let password = this.state.password
         let result = await MainAPI.shared.login(email, password)
         console.log(result)
+        this.context.token = result.token;
+        
+        //this.context.authStore.store(result.token)
     }
 }

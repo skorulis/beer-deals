@@ -17,18 +17,20 @@ import { RegisterPage } from "./scene/RegisterPage";
 import { AddVenuePage } from "./scene/AddVenuePage";
 import { HomePage } from "./scene/HomePage";
 import { VenuePage } from "./scene/VenuePage";
-import { AddDealPage } from "./scene/AddDealPage";
 import { MainProvider } from "./service/MainProvider";
 import AddDealPageHOC from "./scene/AddDealPage";
 import { ReportListPage } from "./scene/report/ReportListPage";
+import { AuthProvider } from "./service/AuthProvider";
 
 export class App extends Component<{}> {
   render() {
     return <ChakraProvider theme={theme}>
       <MainProvider>
-        <Flex direction="column">
-          {this.router()}
-        </Flex>
+        <AuthProvider>
+          <Flex direction="column">
+            {this.router()}
+          </Flex>
+        </AuthProvider>
       </MainProvider>
     </ChakraProvider>
   }

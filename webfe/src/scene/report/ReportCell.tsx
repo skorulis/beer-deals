@@ -1,7 +1,7 @@
 import { Button, Center, Text, Flex, Heading, VStack, HStack } from "@chakra-ui/react";
 import { Component } from "react"; 
 
-import MainContext from "../../service/MainContext";
+import { MainContext } from "../../service/MainProvider"
 import { Report, ReportStatus } from "../../shared/Report";
 import { SingleDealComponent } from "../SingleDealComponent";
 import {Deal} from "../../shared/Deal"
