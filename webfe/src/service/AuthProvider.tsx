@@ -1,22 +1,34 @@
 import {createContext, Component } from 'react';
-import { AuthStore } from './AuthStore';
 
 export interface IAuthContext {
+    readonly token?: string
+    setToken(token?: string): void
+}
+
+class AuthStore implements IAuthContext {
+
     token?: string
+
+    constructor() {
+        this.token = localStorage.getItem("authKey") || undefined
+    }
+
+    setToken(token?: string) {
+        this.token = token
+        if (token) {
+            localStorage.setItem("authKey", token);
+        } else {
+            localStorage.removeItem("authKey");
+        }
+    }
 }
 
-const defaultState = {
-    
-}
-
-export const AuthContext = createContext<IAuthContext>(defaultState);
+export const AuthContext = createContext<IAuthContext>(new AuthStore());
 
 export class AuthProvider extends Component<{children: JSX.Element}, IAuthContext> {
     constructor(props: {children: JSX.Element}) {
         super(props)
-        this.state = {
-            token: undefined
-        }
+        this.state = new AuthStore()
     }
 
     render() {

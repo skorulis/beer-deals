@@ -107,10 +107,8 @@ export class LoginPage extends Component<{navigation: NavigateFunction}, LoginPa
         let email = this.state.email
         let password = this.state.password
         let result = await MainAPI.shared.login(email, password)
-        console.log(result)
-        this.context.token = result.token;
+        this.context.setToken(result.token);
         
         this.props.navigation("/")
-        //this.context.authStore.store(result.token)
     }
 }
