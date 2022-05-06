@@ -1,4 +1,5 @@
 import {createContext, Component } from 'react';
+import { MainAPI } from './MainAPI';
 
 export interface IAuthContext {
     readonly token?: string
@@ -15,8 +16,9 @@ class AuthStore implements IAuthContext {
 
     setToken(token?: string) {
         this.token = token
+        MainAPI.shared.token = token
         if (token) {
-            localStorage.setItem("authKey", token);
+            localStorage.setItem("authKey", token);    
         } else {
             localStorage.removeItem("authKey");
         }

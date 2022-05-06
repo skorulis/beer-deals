@@ -2,6 +2,9 @@ import { Box, Button, Center, Flex, Heading, Input, InputGroup, InputRightElemen
 import { Component } from "react"; 
 import { PageHeader } from "./PageHeader";
 import { MainAPI } from "../service/MainAPI"
+import { AuthContext } from "../service/AuthProvider";
+
+import { useNavigate, NavigateFunction } from "react-router-dom";
 
 type RegisterPageState = {
     showPassword: Boolean
@@ -11,9 +14,16 @@ type RegisterPageState = {
     passwordRepeat: string
 }
 
-export class RegisterPage extends Component<{}, RegisterPageState> {
+export function RegisterPageHOC() {
+    const navigation = useNavigate()
+    return <RegisterPage navigation={navigation} />
+}
 
-    constructor(props: {}) {
+export class RegisterPage extends Component<{navigation: NavigateFunction}, RegisterPageState> {
+
+    static contextType = AuthContext;
+
+    constructor(props: {navigation: NavigateFunction}) {
         super(props);
         this.state = {showPassword: false, name: "", email: "", password: "", passwordRepeat: ""}
         this.handlePasswordClick = this.handlePasswordClick.bind(this);
@@ -132,5 +142,8 @@ export class RegisterPage extends Component<{}, RegisterPageState> {
         let password = this.state.password
         let result = await MainAPI.shared.register(email, password)
         console.log(result)
+
+        this.context.setToken(result.token);
+        this.props.navigation("/");
     }
 }

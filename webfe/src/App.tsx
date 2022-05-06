@@ -13,7 +13,7 @@ import {
 import { Component } from "react"; 
 
 import LoginPageHOC from "./scene/LoginPage";
-import { RegisterPage } from "./scene/RegisterPage";
+import { RegisterPageHOC } from "./scene/RegisterPage";
 import { AddVenuePage } from "./scene/AddVenuePage";
 import { HomePage } from "./scene/HomePage";
 import { VenuePage } from "./scene/VenuePage";
@@ -21,6 +21,7 @@ import { MainProvider } from "./service/MainProvider";
 import AddDealPageHOC from "./scene/AddDealPage";
 import { ReportListPage } from "./scene/report/ReportListPage";
 import { AuthProvider } from "./service/AuthProvider";
+import ProfilePageHOC from "./scene/profile/ProfilePage";
 
 export class App extends Component<{}> {
   render() {
@@ -39,12 +40,13 @@ export class App extends Component<{}> {
     return <Router>
         <Routes>
           <Route path="/login" element={<LoginPageHOC />} />
-          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/register" element={<RegisterPageHOC />} />
           <Route path="/" element={<HomePage />} />
           <Route path="/addvenue" element={<AddVenuePage />} />
           <Route path="/venue/:id" element={<VenuePageWrapper />} />
           <Route path="/venue/:id/adddeal" element={<AddDealWrapper />} />
           <Route path="/reports" element={<ReportListPage />} />
+          <Route path="/profile" element={<ProfilePageHOC />} />
       </Routes>
     </Router>
   }

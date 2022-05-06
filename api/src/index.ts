@@ -8,14 +8,11 @@ import { AddDealRequest } from "./shared/AddDealRequest"
 import { ActionReportRequest, AddReportRequest } from "./shared/AddReportRequest"
 import { Request } from "express"
 
-import { Venue } from "./shared/Venue";
 import { VenueDAO } from "./service/VenueDAO";
 import { ReportDAO } from "./service/ReportDAO"
 import { createDB } from "./util";
 
 let api = new GoogleAPI();
-
-const VENUES_TABLE = process.env.VENUES_TABLE;
 
 const app = express();
 app.use(bodyParser.json({ strict: false }));
@@ -43,29 +40,12 @@ app.get('/venue/autocomplete', async function (req, res) {
 app.post('/venue/add', async function (req, res) {
   let b: AddVenueRequest = req.body;
   let details = await api.details(b.placeID);
-
-  let venue: Venue = {
-    placeID: details.place_id,
-    compoundID: `VENUE#${details.place_id}`,
-    address: details.formatted_address,
-    name: details.name,
-    lat: details.geometry.location.lat,
-    lng: details.geometry.location.lng,
+  try {
+    await venueDAO.add(details);
+    res.json(details);
+  } catch(error) {
+    res.status(400).json({ error});
   }
-
-  const params = {
-    TableName: VENUES_TABLE,
-    Item: venue
-  };
-
-  dynamoDb.put(params, (error) => {
-    if (error) {
-      console.log(error);
-      res.status(400).json({ error: 'Could not create venue' });
-    } else {
-      res.json(details);
-    }
-  });
 });
 
 app.get('/venue', async function (req, res) {
@@ -88,8 +68,6 @@ app.get('/venue/:id', async function (req: Request<{id: string}>, res) {
     res.status(400).json({status: "ERROR", e});
   }
 });
-
-
 
 app.post("/deal", async function (req, res) {
   let b: AddDealRequest = req.body;

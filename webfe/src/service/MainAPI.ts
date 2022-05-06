@@ -4,8 +4,11 @@ import { ActionReportRequest, AddReportRequest } from "../shared/AddReportReques
 import { Report } from "../shared/Report";
 import { VenueDeals } from "../shared/Venue";
 import { LoginRequest, RegisterRequest } from "../shared/AuthRequests";
+import { AuthResponse } from "../shared/AuthResponse";
 
 export class MainAPI {
+
+    token?: string
 
     baseURL(): string {
         if (process.env.NODE_ENV === "development") {
@@ -89,19 +92,19 @@ export class MainAPI {
         return this.post(url, body)
     }
 
-    async login(email: string, password: string) {
+    async login(email: string, password: string): Promise<AuthResponse> {
         let url = `${this.baseURL()}auth/login`
         let body: LoginRequest = {email, password}
         return this.post(url, body)
     }
 
-    async register(email: string, password: string) {
+    async register(email: string, password: string): Promise<AuthResponse> {
         let url = `${this.baseURL()}auth/register`
         let body: RegisterRequest = {email, password}
         return this.post(url, body)
     }
 
-    async post(url: string, body: any) {
+    async post<ResponseType>(url: string, body: any): Promise<ResponseType> {
         let params = {
             method: "POST", 
             body: JSON.stringify(body),
@@ -111,7 +114,7 @@ export class MainAPI {
             }
         }
         const response = await fetch(url, params)
-        return response.json()
+        return await response.json() as ResponseType
     }
     
 }

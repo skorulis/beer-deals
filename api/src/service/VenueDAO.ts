@@ -4,6 +4,7 @@ import { Deal, DealStatus } from "../shared/Deal";
 import { VenueDeals } from "../shared/Venue"
 import { Venue } from "../shared/Venue"
 import { DayOfWeek } from "../shared/DayOfWeek";
+import { GooglePlaceDetails } from "../model/GooglePlaceDetails";
 
 const VENUES_TABLE = process.env.VENUES_TABLE!;
 
@@ -13,6 +14,25 @@ export class VenueDAO {
 
     constructor(dynamoDB: AWS.DynamoDB.DocumentClient) {
         this.dynamoDB = dynamoDB
+    }
+
+    async add(details: GooglePlaceDetails) {
+        let venue: Venue = {
+            placeID: details.place_id,
+            compoundID: `VENUE#${details.place_id}`,
+            address: details.formatted_address,
+            name: details.name,
+            lat: details.geometry.location.lat,
+            lng: details.geometry.location.lng,
+          }
+        
+          const params = {
+            TableName: VENUES_TABLE,
+            Item: venue
+          };
+
+          await this.dynamoDB.put(params).promise();
+          return details;
     }
 
     async loadFullVenue(id: string): Promise<VenueDeals> {
