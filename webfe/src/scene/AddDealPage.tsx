@@ -1,13 +1,8 @@
 import { Button, Checkbox, CheckboxGroup, Input, Heading, Stack, Text, Textarea, Flex } from "@chakra-ui/react";
 import { Component } from "react"; 
-import { Venue } from "../shared/Venue";
 
-import {
-    Link as RouteLink
-  } from "react-router-dom";
 import { PageHeader } from "./PageHeader";
 import { DayOfWeek } from "../shared/DayOfWeek";
-import { Deal } from "../shared/Deal"
 import { MainAPI } from "../service/MainAPI";
 import { AddDealRequest } from "../shared/AddDealRequest";
 

@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react"
 import { Component } from "react"; 
 
-import { LoginPage } from "./scene/LoginPage";
+import LoginPageHOC from "./scene/LoginPage";
 import { RegisterPage } from "./scene/RegisterPage";
 import { AddVenuePage } from "./scene/AddVenuePage";
 import { HomePage } from "./scene/HomePage";
@@ -38,7 +38,7 @@ export class App extends Component<{}> {
   router() {
     return <Router>
         <Routes>
-          <Route path="/login" element={<LoginPage />} />
+          <Route path="/login" element={<LoginPageHOC />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/" element={<HomePage />} />
           <Route path="/addvenue" element={<AddVenuePage />} />

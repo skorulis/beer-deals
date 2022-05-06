@@ -1,4 +1,4 @@
-import { Box, Button, Center, Flex, Heading, Input, InputGroup, InputRightElement, Link, Text } from "@chakra-ui/react";
+import { Button, Center, Flex, Heading, Input, InputGroup, InputRightElement, Link, Text } from "@chakra-ui/react";
 import { Component } from "react"; 
 import { PageHeader } from "./PageHeader";
 
@@ -6,9 +6,8 @@ import {
     Link as RouteLink
   } from "react-router-dom";
 import { MainAPI } from "../service/MainAPI";
-
-import { MainContext } from "../service/MainProvider"
 import { AuthContext } from "../service/AuthProvider";
+import { useNavigate, NavigateFunction } from "react-router-dom";
 
 type LoginPageState = {
     showPassword: Boolean
@@ -16,11 +15,16 @@ type LoginPageState = {
     password: string
 }
 
-export class LoginPage extends Component<{}, LoginPageState> {
+export default function LoginPageHOC() {
+    const navigation = useNavigate()
+    return <LoginPage navigation={navigation} />
+}
+
+export class LoginPage extends Component<{navigation: NavigateFunction}, LoginPageState> {
 
     static contextType = AuthContext;
 
-    constructor(props: {}) {
+    constructor(props: {navigation: NavigateFunction}) {
         super(props);
         this.state = {showPassword: false, email: "", password: ""}
         this.handlePasswordClick = this.handlePasswordClick.bind(this);
@@ -106,6 +110,7 @@ export class LoginPage extends Component<{}, LoginPageState> {
         console.log(result)
         this.context.token = result.token;
         
+        this.props.navigation("/")
         //this.context.authStore.store(result.token)
     }
 }

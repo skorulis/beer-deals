@@ -11,11 +11,9 @@ import {
   } from "react-router-dom";
 
 import { Component, Context } from "react"; 
-import { AuthContext } from "../service/AuthProvider"
+import { AuthContext, IAuthContext } from "../service/AuthProvider"
 
 export class PageHeader extends Component<{}> {
-
-    static contextType = AuthContext
 
     constructor(props: {}) {
         super(props);
@@ -30,16 +28,15 @@ export class PageHeader extends Component<{}> {
                     </Heading>
                 </Link>
             </RouteLink>
-            
-            {this.profileButtons()}
-            
-
+            <AuthContext.Consumer>
+                {value =>  this.profileButtons(value) }
+            </AuthContext.Consumer>
         </Flex>
     }
 
-    profileButtons() {
-        let token = this.context.token
-        
+    profileButtons(context: IAuthContext) {
+        let token = context.token
+        console.log(token);
         if (token) {
             return <Flex gap="10px">
                 <RouteLink to="/profile">
