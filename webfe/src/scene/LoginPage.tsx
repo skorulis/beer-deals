@@ -5,6 +5,7 @@ import { PageHeader } from "./PageHeader";
 import {
     Link as RouteLink
   } from "react-router-dom";
+import { MainAPI } from "../service/MainAPI";
 
 type LoginPageState = {
     showPassword: Boolean
@@ -93,9 +94,10 @@ export class LoginPage extends Component<{}, LoginPageState> {
         this.setState({showPassword: !p})
     }
 
-    login() {
+    async login() {
         let email = this.state.email
         let password = this.state.password
-        console.log(email)
+        let result = await MainAPI.shared.login(email, password)
+        console.log(result)
     }
 }

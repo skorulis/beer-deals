@@ -14,7 +14,7 @@ export function sendResponse(statusCode, body) {
     return response
 }
 
-export function createDB() {
+export function createDB(): AWS.DynamoDB.DocumentClient {
     if (IS_OFFLINE === 'true') {
         return new AWS.DynamoDB.DocumentClient({
             region: 'localhost',

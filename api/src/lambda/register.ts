@@ -9,9 +9,7 @@ const IS_OFFLINE = process.env.IS_OFFLINE;
 const USER_POOL_ID = process.env.USER_POOL_ID;
 const CLIENT_ID = process.env.CLIENT_ID;
 
-let dynamoDB = createDB()
-
-let userDAO = new UserDAO(dynamoDB);
+let userDAO = new UserDAO(createDB());
 
 module.exports.handler = async (event) => {
     const body = JSON.parse(event.body) as RegisterRequest

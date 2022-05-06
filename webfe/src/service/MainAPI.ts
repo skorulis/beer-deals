@@ -3,6 +3,7 @@ import { AddDealRequest } from "../shared/AddDealRequest";
 import { ActionReportRequest, AddReportRequest } from "../shared/AddReportRequest";
 import { Report } from "../shared/Report";
 import { VenueDeals } from "../shared/Venue";
+import { LoginRequest, RegisterRequest } from "../shared/AuthRequests";
 
 export class MainAPI {
 
@@ -85,6 +86,18 @@ export class MainAPI {
 
     async actionReport(body: ActionReportRequest) {
         let url = `${this.baseURL()}report/action`
+        return this.post(url, body)
+    }
+
+    async login(email: string, password: string) {
+        let url = `${this.baseURL()}auth/login`
+        let body: LoginRequest = {email, password}
+        return this.post(url, body)
+    }
+
+    async register(email: string, password: string) {
+        let url = `${this.baseURL()}auth/register`
+        let body: RegisterRequest = {email, password}
         return this.post(url, body)
     }
 

@@ -53,6 +53,13 @@ functions:
           path: auth/register
           method: post
           cors: true
+  login:
+    handler: src/lambda/login.handler
+    events:
+      - http:
+          path: auth/login
+          method: post
+          cors: true
 
   profile:
     handler: src/lambda/profile.handler

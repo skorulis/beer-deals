@@ -1,6 +1,7 @@
 import { Box, Button, Center, Flex, Heading, Input, InputGroup, InputRightElement,  Text } from "@chakra-ui/react";
 import { Component } from "react"; 
 import { PageHeader } from "./PageHeader";
+import { MainAPI } from "../service/MainAPI"
 
 type RegisterPageState = {
     showPassword: Boolean
@@ -113,7 +114,6 @@ export class RegisterPage extends Component<{}, RegisterPageState> {
     hasPasswordMismatch() {
         let pw = this.state.password;
         let rpw = this.state.passwordRepeat;
-        console.log(pw)
         return pw.length > 0 && rpw.length > 0 && pw !== rpw;
     }
 
@@ -124,12 +124,13 @@ export class RegisterPage extends Component<{}, RegisterPageState> {
         this.state.name.length > 0
     }
 
-    register() {
+    async register() {
         if (this.hasPasswordMismatch()) {
             return;
         }
         let email = this.state.email
         let password = this.state.password
-        console.log(email)
+        let result = await MainAPI.shared.register(email, password)
+        console.log(result)
     }
 }

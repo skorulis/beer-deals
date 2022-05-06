@@ -8,34 +8,19 @@ import { AddDealRequest } from "./shared/AddDealRequest"
 import { ActionReportRequest, AddReportRequest } from "./shared/AddReportRequest"
 import { Request } from "express"
 
-import * as AWS from "aws-sdk"
 import { Venue } from "./shared/Venue";
 import { VenueDAO } from "./service/VenueDAO";
 import { ReportDAO } from "./service/ReportDAO"
-import { LoginRequest, RegisterRequest } from "./shared/AuthRequests";
+import { createDB } from "./util";
 
 let api = new GoogleAPI();
-const cognito = new AWS.CognitoIdentityServiceProvider()
 
 const VENUES_TABLE = process.env.VENUES_TABLE;
-const IS_OFFLINE = process.env.IS_OFFLINE;
-const USER_POOL_ID = process.env.USER_POOL_ID;
-const CLIENT_ID = process.env.CLIENT_ID;
 
 const app = express();
 app.use(bodyParser.json({ strict: false }));
 
-let dynamoDb;
-if (IS_OFFLINE === 'true') {
-    dynamoDb = new AWS.DynamoDB.DocumentClient({
-      region: 'localhost',
-      endpoint: 'http://localhost:8000',
-      accessKeyId: 'DEFAULT_ACCESS_KEY',  // needed if you don't have aws credentials at all in env
-      secretAccessKey: 'DEFAULT_SECRET' // needed if you don't have aws credentials at all in env
-    })
-  } else {
-    dynamoDb = new AWS.DynamoDB.DocumentClient();
-  };
+let dynamoDb = createDB()
 
 let venueDAO = new VenueDAO(dynamoDb);
 let reportDAO = new ReportDAO(dynamoDb);
@@ -148,81 +133,6 @@ app.post("/report/action", async function (req, res) {
     console.log(e);
     res.status(400).json({status: "ERROR", e});
   }
-});
-
-app.post("/auth/register", async function (req: Request<RegisterRequest>, res) {
-  const params: AWS.CognitoIdentityServiceProvider.AdminCreateUserRequest = {
-    UserPoolId: USER_POOL_ID!,
-    Username: req.body.email,
-    UserAttributes: [{
-      Name: 'email',
-      Value: req.body.email
-    },
-    {
-      Name: 'email_verified',
-      Value: 'true'
-    }
-  ],
-  MessageAction: 'SUPPRESS'
-  }
-  let temp: any
-
-  try {
-    const response = await cognito.adminCreateUser(params).promise();
-    if (!response.User) {
-      res.status(400).json({status: "ERROR", message: "Could not create user"});
-      return 
-    }
-    temp = response
-
-    const paramsForSetPass = {
-      Password: req.body.password,
-      UserPoolId: USER_POOL_ID!,
-      Username: req.body.email,
-      Permanent: true
-    };
-    await cognito.adminSetUserPassword(paramsForSetPass).promise()
-
-    const loginParams = {
-      AuthFlow: "ADMIN_NO_SRP_AUTH",
-      UserPoolId: USER_POOL_ID!,
-      ClientId: CLIENT_ID!,
-      AuthParameters: {
-        USERNAME: req.body.email,
-        PASSWORD: req.body.password
-      }
-    }
-    const loginResponse = await cognito.adminInitiateAuth(loginParams).promise();
-    
-    res.json({status: "OK", message: `Created user ${req.body.email}`, user: temp, token: loginResponse.AuthenticationResult?.IdToken})
-
-  } catch(e) {
-    console.log(e);
-    res.status(400).json({status: "ERROR", e});
-    return;
-  }
-  
-});
-
-app.post("/auth/login", async function (req: Request<LoginRequest>, res) {
-  const params = {
-    AuthFlow: "ADMIN_NO_SRP_AUTH",
-    UserPoolId: USER_POOL_ID!,
-    ClientId: CLIENT_ID!,
-    AuthParameters: {
-      USERNAME: req.body.email,
-      PASSWORD: req.body.password
-    }
-  }
-  try {
-    const response = await cognito.adminInitiateAuth(params).promise();
-    res.json({status: "OK", token: response.AuthenticationResult?.IdToken, all: response})
-  } catch(e) {
-    console.log(e);
-    res.status(400).json({status: "ERROR", e});
-    return;
-  }
-
 });
 
 module.exports.handler = serverless(app);
