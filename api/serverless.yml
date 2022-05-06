@@ -4,7 +4,7 @@ service: rest-api
 
 custom:
   s3Bucket: deals-webfe-bucket-${self:provider.stage}
-  tableName: 'users-${self:provider.stage}'
+  usersTableName: 'users-${self:provider.stage}'
   venuesTableName: "venues-${self:provider.stage}"
   reportsTableName: "reports-${self:provider.stage}"
   dynamodb:
@@ -38,7 +38,7 @@ provider:
       Resource:
         - { "Fn::GetAtt": ["UsersDynamoDBTable", "Arn" ] }
   environment:
-    USERS_TABLE: ${self:custom.tableName}
+    USERS_TABLE: ${self:custom.usersTableName}
     VENUES_TABLE: ${self:custom.venuesTableName}
     REPORTS_TABLE: ${self:custom.reportsTableName}
     GOOGLE_API_KEY: ${param:googleAPIKey}
@@ -46,8 +46,16 @@ provider:
     CLIENT_ID: { Ref: UserClient }
  
 functions:
+  register:
+    handler: src/lambda/register.handler
+    events:
+      - http:
+          path: auth/register
+          method: post
+          cors: true
+
   profile:
-    handler: src/profile.handler
+    handler: src/lambda/profile.handler
     events:
       - http:
           path: user/profile
@@ -101,16 +109,16 @@ resources:
       Properties:
         AttributeDefinitions:
           -
-            AttributeName: userId
+            AttributeName: userID
             AttributeType: S
         KeySchema:
           -
-            AttributeName: userId
+            AttributeName: userID
             KeyType: HASH
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
-        TableName: ${self:custom.tableName}
+        TableName: ${self:custom.usersTableName}
     ReportsDynamoDBTable:
       Type: 'AWS::DynamoDB::Table'
       Properties:
