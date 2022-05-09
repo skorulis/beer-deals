@@ -1,8 +1,15 @@
 import { sendResponse } from "../util";
+import { ProfileModel } from "../shared/ProfileModel"
 
 module.exports.handler = async (event) => {
-    console.log("HSHSHSHSHHSH")
     let auth = event.requestContext.authorizer.claims
-    return sendResponse(200, {profile: "Here", event})
+
+    console.log(event)
+
+    let profile: ProfileModel = {
+        name: "Someone",
+        email: "Email"
+    }
+    return sendResponse(200, profile)
 
 }

@@ -12,6 +12,7 @@ class AuthStore implements IAuthContext {
 
     constructor() {
         this.token = localStorage.getItem("authKey") || undefined
+        MainAPI.shared.token = this.token
     }
 
     setToken(token?: string) {

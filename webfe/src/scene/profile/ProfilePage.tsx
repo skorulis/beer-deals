@@ -1,8 +1,10 @@
-import { Box, Flex, Heading, Button } from "@chakra-ui/react";
+import { Box, Flex, Heading, Button, Text } from "@chakra-ui/react";
 import { Component, Context } from "react"; 
 import { PageHeader } from "../PageHeader";
 import { AuthContext } from "../../service/AuthProvider"
 import { useNavigate, NavigateFunction } from "react-router-dom";
+import { MainAPI } from "../../service/MainAPI";
+import { ProfileModel } from "../../shared/ProfileModel";
 
 export default function ProfilePageHOC() {
     const navigation = useNavigate()
@@ -11,12 +13,13 @@ export default function ProfilePageHOC() {
 
 
 
-export class ProfilePage extends Component<{navigation: NavigateFunction}, {}> {
+export class ProfilePage extends Component<{navigation: NavigateFunction}, {profile?: ProfileModel}> {
 
     static contextType = AuthContext
 
     constructor(props: {navigation: NavigateFunction}) {
         super(props);
+        this.state = {}
         this.logout = this.logout.bind(this);
     }
 
@@ -26,8 +29,16 @@ export class ProfilePage extends Component<{navigation: NavigateFunction}, {}> {
             <Box textAlign="center" fontSize="xl">
                 <Heading>Profile</Heading>
                 <Button onClick={this.logout}>Logout</Button>
+                {this.maybeDetails()}
             </Box>
         </Flex>
+    }
+
+    maybeDetails() {
+        console.log(this.state)
+        if (this.state.profile) {
+            return  <Text>{this.state.profile.name}</Text>
+        }
     }
 
     logout() {
@@ -35,7 +46,11 @@ export class ProfilePage extends Component<{navigation: NavigateFunction}, {}> {
         this.props.navigation("/")
     }
 
-    componentDidMount() {
-        
+    async componentDidMount() {
+        let result = await MainAPI.shared.getProfile()
+        console.log(result)
+        this.setState({
+            profile: result
+        })
     }
 }

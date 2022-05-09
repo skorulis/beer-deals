@@ -5,6 +5,7 @@ import { Report } from "../shared/Report";
 import { VenueDeals } from "../shared/Venue";
 import { LoginRequest, RegisterRequest } from "../shared/AuthRequests";
 import { AuthResponse } from "../shared/AuthResponse";
+import { ProfileModel } from "../shared/ProfileModel";
 
 export class MainAPI {
 
@@ -104,17 +105,48 @@ export class MainAPI {
         return this.post(url, body)
     }
 
+    async getProfile(): Promise<ProfileModel> {
+        let url = `${this.baseURL()}user/profile`
+        return this.get(url)
+    } 
+
+    async get<ResponseType>(url: string): Promise<ResponseType> {
+        let headers:{[key: string]: string} = {
+            'Accept': 'application/json',
+        }
+
+        if (this.token) {
+            headers["Authorization"] = `Bearer ${this.token}`;
+        }
+
+        let params = {
+            method: "GET",
+            headers: headers
+        }
+        
+
+        const response = await fetch(url, params);
+        return await response.json() as ResponseType
+    }
+
     async post<ResponseType>(url: string, body: any): Promise<ResponseType> {
+        let headers:{[key: string]: string} = {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+        if (this.token) {
+            headers["Authorization"] = `Bearer ${this.token}`;
+        }
+
         let params = {
             method: "POST", 
             body: JSON.stringify(body),
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
+            headers: headers
         }
         const response = await fetch(url, params)
         return await response.json() as ResponseType
     }
+
+
     
 }
