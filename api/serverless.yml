@@ -234,4 +234,4 @@ resources:
 plugins:
   - serverless-plugin-typescript
   - serverless-dynamodb-local
-  - serverless-offline #serverless-offline needs to be last in the list
+  - serverless-offline

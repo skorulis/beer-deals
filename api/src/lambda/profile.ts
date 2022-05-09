@@ -1,15 +1,25 @@
-import { sendResponse } from "../util";
+import { sendResponse, createDB } from "../util";
 import { ProfileModel } from "../shared/ProfileModel"
+import { extractAuth } from "../middleware/authMiddleware"
+import { UserDAO } from "../service/UserDAO"
+
+let userDAO = new UserDAO(createDB());
 
 module.exports.handler = async (event) => {
-    let auth = event.requestContext.authorizer.claims
+    try {
+        let auth = extractAuth(event);
+        let user = await userDAO.find(auth.userID);
 
-    console.log(event)
+        console.log(auth);
 
-    let profile: ProfileModel = {
-        name: "Someone",
-        email: "Email"
+        let profile: ProfileModel = {
+            name: "Someone",
+            email: user.email
+        }
+        return sendResponse(200, profile)
+    } catch(e) {
+        console.log(e);
+        return sendResponse(400, {status: "ERROR", e})
     }
-    return sendResponse(200, profile)
-
+    
 }

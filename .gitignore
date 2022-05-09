@@ -6,3 +6,4 @@ webfe/.vscode
 Secrets.ts
 api/.build
 webfe/build
+api/.yarn
