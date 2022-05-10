@@ -16,7 +16,7 @@ export class VenueDAO {
         this.dynamoDB = dynamoDB
     }
 
-    async add(details: GooglePlaceDetails) {
+    async add(details: GooglePlaceDetails): Promise<Venue> {
         let venue: Venue = {
             placeID: details.place_id,
             compoundID: `VENUE#${details.place_id}`,
@@ -32,7 +32,7 @@ export class VenueDAO {
           };
 
           await this.dynamoDB.put(params).promise();
-          return details;
+          return venue;
     }
 
     async loadFullVenue(id: string): Promise<VenueDeals> {

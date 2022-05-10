@@ -3,7 +3,7 @@ import { Component, KeyboardEventHandler } from "react";
 import { PageHeader } from "./PageHeader";
 import { MainAPI } from "../service/MainAPI";
 import { GooglePlacePrediction } from "../model/GooglePlacePrediction";
-import { VenueSearchRow } from "./VenueSearchRow";
+import { VenueSearchRowHOC } from "./VenueSearchRow";
 import { MainContext } from "../service/MainProvider"
 
 
@@ -49,7 +49,7 @@ export class AddVenuePage extends Component<{}, AddVenuePageState> {
 
     results() {
         return <VStack pt={8}>
-            {this.state.results.map(x => <VenueSearchRow key={x.place_id} venue={x} />) }
+            {this.state.results.map(x => <VenueSearchRowHOC key={x.place_id} venue={x} />) }
         </VStack>
     }
 

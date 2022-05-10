@@ -6,6 +6,7 @@ import { VenueDeals } from "../shared/Venue";
 import { LoginRequest, RegisterRequest } from "../shared/AuthRequests";
 import { AuthResponse } from "../shared/AuthResponse";
 import { ProfileModel } from "../shared/ProfileModel";
+import { Venue } from "../shared/Venue"
 
 export class MainAPI {
 
@@ -32,19 +33,10 @@ export class MainAPI {
         return parsed as GooglePlacePredictionList
     }
 
-    async addVenue(place: GooglePlacePrediction) {
+    async addVenue(place: GooglePlacePrediction): Promise<Venue> {
         let url = `${this.baseURL()}venue/add`
         let body = {placeID: place.place_id}
-        let params = {
-            method: "POST", 
-            body: JSON.stringify(body),
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
-        }
-        const response = await fetch(url, params)
-        return response
+        return this.post(url, body)
     }
 
     async getVenues(): Promise<VenueDeals[]> {

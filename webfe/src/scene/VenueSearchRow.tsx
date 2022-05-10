@@ -3,9 +3,15 @@ import { Component } from "react";
 import { GooglePlacePrediction } from "../model/GooglePlacePrediction";
 import { Venue } from "../shared/Venue";
 import { MainAPI } from "../service/MainAPI";
+import { useNavigate, NavigateFunction } from "react-router-dom";
 
-export class VenueSearchRow extends Component<{venue:GooglePlacePrediction}> {
-    constructor(props: {venue:GooglePlacePrediction}) {
+export function VenueSearchRowHOC(props: {venue:GooglePlacePrediction}) {
+    const navigation = useNavigate()
+    return <VenueSearchRow venue={props.venue} navigation={navigation} />
+}
+
+export class VenueSearchRow extends Component<{venue:GooglePlacePrediction, navigation: NavigateFunction}> {
+    constructor(props: {venue:GooglePlacePrediction, navigation: NavigateFunction}) {
         super(props);
         this.addVenue = this.addVenue.bind(this);
     }
@@ -17,9 +23,8 @@ export class VenueSearchRow extends Component<{venue:GooglePlacePrediction}> {
         </Flex>
     }
 
-    addVenue() {
-        MainAPI.shared.addVenue(this.props.venue).then(output =>
-            console.log(output)
-        )
+    async addVenue() {
+        let result = await MainAPI.shared.addVenue(this.props.venue)
+        this.props.navigation(`/venue/${result.placeID}`)
     }
 }

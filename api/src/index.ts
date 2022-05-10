@@ -41,8 +41,8 @@ app.post('/venue/add', async function (req, res) {
   let b: AddVenueRequest = req.body;
   let details = await api.details(b.placeID);
   try {
-    await venueDAO.add(details);
-    res.json(details);
+    let venue = await venueDAO.add(details);
+    res.json(venue);
   } catch(error) {
     res.status(400).json({ error});
   }
