@@ -6,7 +6,6 @@ import { DayOfWeek } from "../shared/DayOfWeek";
 import { MainAPI } from "../service/MainAPI";
 import { AddDealRequest } from "../shared/AddDealRequest";
 
-
 import { useNavigate, NavigateFunction } from "react-router-dom";
 
 

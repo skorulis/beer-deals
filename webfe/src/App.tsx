@@ -22,6 +22,9 @@ import AddDealPageHOC from "./scene/AddDealPage";
 import { ReportListPage } from "./scene/report/ReportListPage";
 import { AuthProvider } from "./service/AuthProvider";
 import ProfilePageHOC from "./scene/profile/ProfilePage";
+import { MainAPI } from "./service/MainAPI";
+
+import { PrivateRoute, ProtectedRoute } from "./scene/common/PrivateRoute"
 
 export class App extends Component<{}> {
   render() {
@@ -42,13 +45,22 @@ export class App extends Component<{}> {
           <Route path="/login" element={<LoginPageHOC />} />
           <Route path="/register" element={<RegisterPageHOC />} />
           <Route path="/" element={<HomePage />} />
-          <Route path="/addvenue" element={<AddVenuePage />} />
+          <Route path="/addvenue" element={
+            <ProtectedRoute isLoggedIn={this.isAuthenticated()}>
+              <AddVenuePage />    
+            </ProtectedRoute>
+          } 
+          />
           <Route path="/venue/:id" element={<VenuePageWrapper />} />
           <Route path="/venue/:id/adddeal" element={<AddDealWrapper />} />
           <Route path="/reports" element={<ReportListPage />} />
           <Route path="/profile" element={<ProfilePageHOC />} />
       </Routes>
     </Router>
+  }
+
+  isAuthenticated(): Boolean {
+    return MainAPI.shared.token != undefined
   }
 
 }
