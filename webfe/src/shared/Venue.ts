@@ -4,7 +4,7 @@ export interface Venue {
     placeID: string
     address: string
     compoundID: string
-    image?: string
+    imageURL?: string
     name: string
     lat: number
     lng: number

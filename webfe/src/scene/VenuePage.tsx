@@ -1,4 +1,4 @@
-import { Button, Heading, Text, Flex } from "@chakra-ui/react";
+import { Button, Heading, Text, Flex, Image, HStack } from "@chakra-ui/react";
 import { Component } from "react"; 
 import { PageHeader } from "./PageHeader";
 import { MainAPI } from "../service/MainAPI";
@@ -35,7 +35,11 @@ export class VenuePage extends Component<{placeID:string}, VenuePageState> {
         }
         let addURL = `/venue/${this.props.placeID}/adddeal`
         return <Flex direction="column" padding={4} gap={4}>
-            <Heading>{venue.name}</Heading>
+            <HStack>
+                {this.maybeImage()}
+                <Heading>{venue.name}</Heading>
+            </HStack>
+            
             <Flex direction="column" gap={2}>
             {this.dealList()}
             </Flex>
@@ -58,6 +62,12 @@ export class VenuePage extends Component<{placeID:string}, VenuePageState> {
         MainAPI.shared.getVenue(this.props.placeID).then(x => {
             this.setState({venue: x.venue, deals: x.deals})
         })
+    }
+
+    maybeImage() {
+        if (this.state.venue && this.state.venue.imageURL) {
+            return <Image src={this.state.venue.imageURL} borderRadius='full' boxSize='150px' />
+        }
     }
 
 }

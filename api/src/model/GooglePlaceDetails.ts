@@ -13,6 +13,13 @@ export interface GooglePlaceDetails {
     geometry: GooglePlaceGeometry
     website?: string
     opening_hours: GooglePlaceHours
+    photos: GooglePlacePhoto[]
+}
+
+export interface GooglePlacePhoto {
+    photo_reference: string
+    height: number
+    width: number
 }
 
 export interface GooglePlaceGeometry {

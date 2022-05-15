@@ -16,7 +16,7 @@ export class VenueDAO {
         this.dynamoDB = dynamoDB
     }
 
-    async add(details: GooglePlaceDetails): Promise<Venue> {
+    async add(details: GooglePlaceDetails, photoURL?: string): Promise<Venue> {
         let venue: Venue = {
             placeID: details.place_id,
             compoundID: `VENUE#${details.place_id}`,
@@ -24,6 +24,7 @@ export class VenueDAO {
             name: details.name,
             lat: details.geometry.location.lat,
             lng: details.geometry.location.lng,
+            imageURL: photoURL
           }
         
           const params = {

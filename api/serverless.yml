@@ -4,6 +4,7 @@ service: rest-api
 
 custom:
   s3Bucket: deals-webfe-bucket-${self:provider.stage}
+  imageBucket: deals-webfe-bucket-${self:provider.stage}
   usersTableName: 'users-${self:provider.stage}'
   venuesTableName: "venues-${self:provider.stage}"
   reportsTableName: "reports-${self:provider.stage}"
@@ -21,6 +22,11 @@ provider:
   name: aws
   stage: dev
   iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - s3:PutObject
+        - s3:PutObjectAcl
+      Resource: "arn:aws:s3:::${self:custom.imageBucket}/*"
     - Effect: Allow
       Action:
         - cognito-idp:AdminInitiateAuth
@@ -44,6 +50,7 @@ provider:
     GOOGLE_API_KEY: ${param:googleAPIKey}
     USER_POOL_ID: { Ref: UserPool }
     CLIENT_ID: { Ref: UserClient }
+    IMAGE_BUCKET: ${self:custom.imageBucket}
  
 functions:
   register:
@@ -58,6 +65,14 @@ functions:
     events:
       - http:
           path: auth/login
+          method: post
+          cors: true
+
+  addVenue:
+    handler: src/lambda/addVenue.handler
+    events:
+      - http:
+          path: venue/add
           method: post
           cors: true
 

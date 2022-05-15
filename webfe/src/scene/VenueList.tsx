@@ -1,6 +1,7 @@
-import { Text, Flex } from "@chakra-ui/react";
+import { Text, Flex, VStack, Image } from "@chakra-ui/react";
 import { Component } from "react"; 
 import { Venue } from "../shared/Venue";
+
 
 import {
     Link as RouteLink
@@ -20,8 +21,17 @@ export class VenueList extends Component<{venues:Venue[]}> {
     row(venue: Venue) {
         let link = `/venue/${venue.placeID}`
         return <RouteLink to={link} key={venue.placeID}>
-            <Text>{venue.name}</Text>
+            <VStack>
+                {this.maybeImage(venue)}
+                <Text>{venue.name}</Text>
+            </VStack>
+            
         </RouteLink>
-        
+    }
+
+    maybeImage(venue: Venue) {
+        if (venue.imageURL) {
+            return <Image src={venue.imageURL} borderRadius='full' boxSize='150px' />
+        }
     }
 }

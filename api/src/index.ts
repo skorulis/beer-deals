@@ -3,7 +3,6 @@ import * as express from 'express';
 import * as bodyParser from "body-parser";
 import { GoogleAPI } from "./service/GoogleAPI";
 
-import { AddVenueRequest } from "./shared/AddVenueRequest" 
 import { AddDealRequest } from "./shared/AddDealRequest"
 import { ActionReportRequest, AddReportRequest } from "./shared/AddReportRequest"
 import { Request } from "express"
@@ -36,17 +35,6 @@ app.get('/venue/autocomplete', async function (req, res) {
   
     res.status(200).json(result);
   });
-
-app.post('/venue/add', async function (req, res) {
-  let b: AddVenueRequest = req.body;
-  let details = await api.details(b.placeID);
-  try {
-    let venue = await venueDAO.add(details);
-    res.json(venue);
-  } catch(error) {
-    res.status(400).json({ error});
-  }
-});
 
 app.get('/venue', async function (req, res) {
   try {
@@ -113,11 +101,16 @@ app.post("/report/action", async function (req, res) {
   }
 });
 
-module.exports.handler = serverless(app);
-
-/* Uncomment to test as a standard server
-const port = 3100;
-app.listen(port, () => {
-  console.log(`Listening on  ${port}.`);
+app.get("/test/:photoID", async function (req: Request<{photoID: string}>, res: express.Response) {
+  try {
+    let output = await api.getPhoto(req.params.photoID)
+    console.log(output.byteLength)
+    res.setHeader('Content-Type', "image/jpeg")
+    res.write(output)
+    res.send()
+  } catch(e) {
+    res.status(400).json({status: "ERROR", e});
+  }
 });
-*/
+
+module.exports.handler = serverless(app);

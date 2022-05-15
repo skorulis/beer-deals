@@ -1,17 +1,17 @@
-import { Route, PathRouteProps, Navigate } from 'react-router-dom';
+import { Route, PathRouteProps, Navigate, Outlet } from 'react-router-dom';
 
 
 import { useEffect, Component } from 'react';
 
-export class ProtectedRoute extends Component<{isLoggedIn: Boolean, children: JSX.Element}> {
+export class ProtectedRoute extends Component<{isLoggedIn: Boolean}> {
 
-  constructor(props: {isLoggedIn: Boolean, children: JSX.Element}) {
+  constructor(props: {isLoggedIn: Boolean}) {
     super(props);
   }
 
   render() {
     if (this.props.isLoggedIn) {
-      return this.props.children
+      return <Outlet />
     } else {
       return <Navigate to="/" replace />
     } 

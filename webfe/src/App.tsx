@@ -45,12 +45,9 @@ export class App extends Component<{}> {
           <Route path="/login" element={<LoginPageHOC />} />
           <Route path="/register" element={<RegisterPageHOC />} />
           <Route path="/" element={<HomePage />} />
-          <Route path="/addvenue" element={
-            <ProtectedRoute isLoggedIn={this.isAuthenticated()}>
-              <AddVenuePage />    
-            </ProtectedRoute>
-          } 
-          />
+          <Route element={<ProtectedRoute isLoggedIn={this.isAuthenticated()} />} >
+            <Route path="/addvenue" element={<AddVenuePage />} />  
+          </Route>
           <Route path="/venue/:id" element={<VenuePageWrapper />} />
           <Route path="/venue/:id/adddeal" element={<AddDealWrapper />} />
           <Route path="/reports" element={<ReportListPage />} />
