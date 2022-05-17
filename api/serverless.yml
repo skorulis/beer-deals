@@ -76,6 +76,14 @@ functions:
           method: post
           cors: true
 
+  addDeal:
+    handler: src/lambda/addDeal.handler
+    events:
+      - http:
+          path: deal
+          method: post
+          cors: true
+
   profile:
     handler: src/lambda/profile.handler
     events:

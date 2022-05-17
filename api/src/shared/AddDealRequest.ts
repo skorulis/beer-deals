@@ -1,4 +1,3 @@
-import { Deal } from "./Deal";
 import { DayOfWeek } from "./DayOfWeek";
 
 export interface AddDealRequest {

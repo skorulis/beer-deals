@@ -24,7 +24,11 @@ export class VenueDAO {
             name: details.name,
             lat: details.geometry.location.lat,
             lng: details.geometry.location.lng,
-            imageURL: photoURL
+            imageURL: photoURL,
+            website: details.website,
+            rating: details.rating,
+            priceLevel: details.price_level,
+            types: details.types
           }
         
           const params = {
