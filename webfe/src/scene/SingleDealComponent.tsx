@@ -1,6 +1,6 @@
-import { Text, Flex, Button } from "@chakra-ui/react";
+import { Text, Flex, Button, HStack } from "@chakra-ui/react";
 import { Component } from "react"; 
-import { Deal } from '../shared/Deal';
+import { Deal } from '../shared/deal/Deal';
 import { DaysComponent } from "./DaysComponent";
 import { TimespanComponent } from "./TimespanComponent";
 import { MainAPI } from "../service/MainAPI";
@@ -10,6 +10,7 @@ export class SingleDealComponent extends Component<{placeID: string, deal:Deal}>
     constructor(props: {placeID: string, deal: Deal}) {
         super(props);
         this.postReport = this.postReport.bind(this);
+        this.delete = this.delete.bind(this);
     }
 
     render() {
@@ -17,8 +18,16 @@ export class SingleDealComponent extends Component<{placeID: string, deal:Deal}>
             <Text>{this.props.deal.text}</Text>
             <TimespanComponent start={this.props.deal.timeStart} end={this.props.deal.timeEnd} />
             <DaysComponent days={this.props.deal.days} />
-            <Button onClick={this.postReport}>Report</Button>
+            <HStack>
+                <Button onClick={this.postReport}>Report</Button>
+                <Button onClick={this.delete} colorScheme="red" >Delete</Button>
+            </HStack>
         </Flex>
+    }
+
+    async delete() {
+        await MainAPI.shared.deleteDeal(this.props.placeID, this.props.deal.compoundID)
+        window.location.reload()
     }
 
     async postReport() {
@@ -28,6 +37,5 @@ export class SingleDealComponent extends Component<{placeID: string, deal:Deal}>
             reason: "Because I can"
         }
         let result = await MainAPI.shared.addReport(body)
-        console.log(result)
     }
 }

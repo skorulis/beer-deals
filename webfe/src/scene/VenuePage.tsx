@@ -3,7 +3,7 @@ import { Component } from "react";
 import { PageHeader } from "./PageHeader";
 import { MainAPI } from "../service/MainAPI";
 import { Venue } from "../shared/Venue";
-import { Deal } from "../shared/Deal";
+import { Deal } from "../shared/deal/Deal";
 
 import {
     Link as RouteLink

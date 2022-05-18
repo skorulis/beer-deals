@@ -1,5 +1,4 @@
-import { Deal } from "./Deal";
-import { DayOfWeek } from "./DayOfWeek";
+import { DayOfWeek } from "../DayOfWeek";
 
 export interface AddDealRequest {
     placeID: string

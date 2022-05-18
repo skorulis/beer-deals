@@ -83,6 +83,13 @@ functions:
           path: deal
           method: post
           cors: true
+  deleteDeal:
+    handler: src/lambda/deleteDeal.handler
+    events:
+      - http:
+          path: deal
+          method: delete
+          cors: true
 
   profile:
     handler: src/lambda/profile.handler

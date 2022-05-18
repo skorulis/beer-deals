@@ -1,6 +1,6 @@
 import * as AWS from "aws-sdk"
 import * as crypto from "crypto"
-import { Deal, DealStatus } from "../shared/Deal";
+import { Deal, DealStatus } from "../shared/deal/Deal";
 import { VenueDeals } from "../shared/Venue"
 import { Venue } from "../shared/Venue"
 import { DayOfWeek } from "../shared/DayOfWeek";
@@ -94,6 +94,17 @@ export class VenueDAO {
             throw new Error("No venues")
         }
         return this.combineDeals(result.Items)
+    }
+
+    async deleteDeal(placeID: string, dealID: string) {
+        const params: AWS.DynamoDB.DocumentClient.DeleteItemInput = {
+            TableName: VENUES_TABLE,
+            Key: {
+                placeID: placeID,
+                compoundID: dealID
+            }
+        }
+        await this.dynamoDB.delete(params).promise()
     }
 
     combineDeals(items?: any): VenueDeals[] {

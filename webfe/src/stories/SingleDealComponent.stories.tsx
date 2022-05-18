@@ -1,7 +1,6 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { SingleDealComponent } from '../scene/SingleDealComponent';
-import { DayOfWeek } from '../shared/DayOfWeek';
-import { DealStatus } from '../shared/Deal';
+import { DealStatus } from '../shared/deal/Deal';
 
 export default {
   title: 'SingleDealComponent',

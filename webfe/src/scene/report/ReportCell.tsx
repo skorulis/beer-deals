@@ -4,7 +4,7 @@ import { Component } from "react";
 import { MainContext } from "../../service/MainProvider"
 import { Report, ReportStatus } from "../../shared/Report";
 import { SingleDealComponent } from "../SingleDealComponent";
-import {Deal} from "../../shared/Deal"
+import {Deal} from "../../shared/deal/Deal"
 import { Venue } from "../../shared/Venue"
 import { MainAPI } from "../../service/MainAPI";
 import { ActionReportRequest } from "../../shared/AddReportRequest"
@@ -58,10 +58,7 @@ export class ReportCell extends Component<ReportCellProps, ReportCellState> {
             status: status
 
         }
-        console.log("BODY ")
-        console.log(body)
         let result = await MainAPI.shared.actionReport(body)
-        console.log(result);
     }
 
 }

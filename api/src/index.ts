@@ -3,7 +3,7 @@ import * as express from 'express';
 import * as bodyParser from "body-parser";
 import { GoogleAPI } from "./service/GoogleAPI";
 
-import { AddDealRequest } from "./shared/AddDealRequest"
+import { AddDealRequest } from "./shared/deal/AddDealRequest"
 import { ActionReportRequest, AddReportRequest } from "./shared/AddReportRequest"
 import { Request } from "express"
 

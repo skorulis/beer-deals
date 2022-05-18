@@ -36,7 +36,6 @@ export class PageHeader extends Component<{}> {
 
     profileButtons(context: IAuthContext) {
         let token = context.token
-        console.log(token);
         if (token) {
             return <Flex gap="10px">
                 <RouteLink to="/profile">

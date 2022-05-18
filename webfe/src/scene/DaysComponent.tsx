@@ -69,7 +69,6 @@ export class DaysComponent extends Component<{days:DayOfWeek[]}> {
 
     isRunningDays() {
         let gap = this.maxDay() - this.minDay();
-        console.log(gap);
         return gap == (this.props.days.length - 1);
     }
 

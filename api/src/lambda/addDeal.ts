@@ -1,10 +1,8 @@
 import { sendResponse, createDB } from "../util";
-import { ProfileModel } from "../shared/ProfileModel"
-import { extractAuth } from "../middleware/authMiddleware"
 import { UserDAO } from "../service/UserDAO"
 import { VenueDAO } from "../service/VenueDAO"
-import { AddDealRequest } from "../shared/AddDealRequest"
-import { Deal } from "../shared/Deal";
+import { AddDealRequest } from "../shared/deal/AddDealRequest"
+import { Deal } from "../shared/deal/Deal";
 
 let dynamoDb = createDB()
 let userDAO = new UserDAO(dynamoDb);

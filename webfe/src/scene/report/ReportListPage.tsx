@@ -46,7 +46,6 @@ export class ReportListPage extends Component<{}, ReportListPageState> {
 
     singleReport(report: Report) {
         let place = this.state.venues[report.placeID]
-        console.log(place)
         if (!place) {
             return undefined
         }

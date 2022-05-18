@@ -24,6 +24,7 @@ Venue1.args = {
         name: "Rose",
         lat: 1,
         lng: 1,
-        suburb: "Erskineville"
+        suburb: "Erskineville",
+        types: ["bar"]
     }
 };

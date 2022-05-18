@@ -1,12 +1,12 @@
 import { GooglePlacePrediction, GooglePlacePredictionList } from "../model/GooglePlacePrediction";
-import { AddDealRequest } from "../shared/AddDealRequest";
+import { AddDealRequest } from "../shared/deal/AddDealRequest";
 import { ActionReportRequest, AddReportRequest } from "../shared/AddReportRequest";
 import { Report } from "../shared/Report";
-import { VenueDeals } from "../shared/Venue";
 import { LoginRequest, RegisterRequest } from "../shared/AuthRequests";
 import { AuthResponse } from "../shared/AuthResponse";
 import { ProfileModel } from "../shared/ProfileModel";
-import { Venue } from "../shared/Venue"
+import { Venue, VenueDeals} from "../shared/Venue"
+import { DeleteDealRequest } from "../shared/deal/DeleteDealRequest";
 
 export class MainAPI {
 
@@ -27,7 +27,6 @@ export class MainAPI {
         if (location) {
             url += `&lat=${location.latitude}&lng=${location.longitude}`
         }
-        console.log(url)
         const response = await fetch(url);
         let parsed = await response.json()
         return parsed as GooglePlacePredictionList
@@ -49,23 +48,21 @@ export class MainAPI {
     async getVenue(id: string): Promise<VenueDeals> {
         let url = `${this.baseURL()}venue/${id}`
         const response = await fetch(url);
-        console.log(url)
         let parsed = await response.json()
         return parsed as VenueDeals
     }
 
     async addDeal(body: AddDealRequest) {
         let url = `${this.baseURL()}deal`
-        let params = {
-            method: "POST", 
-            body: JSON.stringify(body),
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
+        return this.post(url, body)
+    }
+
+    async deleteDeal(placeID: string, dealID: string) {
+        let url = `${this.baseURL()}deal`
+        let body: DeleteDealRequest = {
+            placeID, dealID
         }
-        const response = await fetch(url, params)
-        return response.json()
+        return this.delete(url, body)
     }
 
     async addReport(body: AddReportRequest) {
@@ -122,17 +119,30 @@ export class MainAPI {
     }
 
     async post<ResponseType>(url: string, body: any): Promise<ResponseType> {
+        return this.request(url, "POST", body)
+    }
+
+    async delete<ResponseType>(url: string, body: any): Promise<ResponseType> {
+        return this.request(url, "DELETE", body)
+    }
+
+    async request<ResponseType>(url: string, method: string, body?: any): Promise<ResponseType> {
         let headers:{[key: string]: string} = {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            'Accept': 'application/json'
         }
         if (this.token) {
             headers["Authorization"] = `Bearer ${this.token}`;
         }
 
+        let bodyData: string | undefined = undefined
+        if (body) {
+            bodyData = JSON.stringify(body)
+            headers['Content-Type'] = 'application/json'
+        }
+
         let params = {
-            method: "POST", 
-            body: JSON.stringify(body),
+            method: method, 
+            body: bodyData,
             headers: headers
         }
         const response = await fetch(url, params)

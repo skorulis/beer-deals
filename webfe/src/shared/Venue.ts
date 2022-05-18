@@ -1,4 +1,4 @@
-import { Deal } from "./Deal"
+import { Deal } from "./deal/Deal"
 
 export interface Venue {
     placeID: string
@@ -9,6 +9,10 @@ export interface Venue {
     lat: number
     lng: number
     suburb?: string
+    website?: string
+    rating?: number
+    priceLevel?: number
+    types: string[]
 }
 
 export interface VenueDeals {

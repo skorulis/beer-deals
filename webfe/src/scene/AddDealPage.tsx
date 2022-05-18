@@ -4,7 +4,7 @@ import { Component } from "react";
 import { PageHeader } from "./PageHeader";
 import { DayOfWeek } from "../shared/DayOfWeek";
 import { MainAPI } from "../service/MainAPI";
-import { AddDealRequest } from "../shared/AddDealRequest";
+import { AddDealRequest } from "../shared/deal/AddDealRequest";
 
 import { useNavigate, NavigateFunction } from "react-router-dom";
 

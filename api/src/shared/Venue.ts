@@ -1,4 +1,4 @@
-import { Deal } from "./Deal"
+import { Deal } from "./deal/Deal"
 
 export interface Venue {
     placeID: string

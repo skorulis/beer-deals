@@ -141,7 +141,6 @@ export class RegisterPage extends Component<{navigation: NavigateFunction}, Regi
         let email = this.state.email
         let password = this.state.password
         let result = await MainAPI.shared.register(email, password)
-        console.log(result)
 
         this.context.setToken(result.token);
         this.props.navigation("/");
