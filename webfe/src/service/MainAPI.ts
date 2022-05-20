@@ -17,7 +17,7 @@ export class MainAPI {
             return "http://localhost:3000/"
         }
         
-        return "https://3vn7clr33g.execute-api.us-east-1.amazonaws.com/dev/"
+        return "https://ibi3m1x46i.execute-api.us-east-1.amazonaws.com/dev/"
     }
 
     public static readonly shared = new MainAPI() 
