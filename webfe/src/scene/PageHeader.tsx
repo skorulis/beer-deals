@@ -10,7 +10,7 @@ import {
     Link as RouteLink
   } from "react-router-dom";
 
-import { Component, Context } from "react"; 
+import { Component } from "react"; 
 import { AuthContext, IAuthContext } from "../service/AuthProvider"
 
 export class PageHeader extends Component<{}> {
@@ -35,7 +35,7 @@ export class PageHeader extends Component<{}> {
     }
 
     profileButtons(context: IAuthContext) {
-        let token = context.token
+        let token = context.auth
         if (token) {
             return <Flex gap="10px">
                 <RouteLink to="/profile">

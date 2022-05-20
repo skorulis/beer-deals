@@ -2,6 +2,7 @@ import { LoginRequest } from "../shared/AuthRequests"
 import { createDB, sendResponse } from "../util";
 import * as AWS from "aws-sdk"
 import { UserDAO } from "../service/UserDAO";
+import { AuthResponse } from "../shared/AuthResponse";
 
 const cognito = new AWS.CognitoIdentityServiceProvider()
 
@@ -26,12 +27,12 @@ module.exports.handler = async (event) => {
     }
 }
 
-async function loginOffline(email: string) {
+async function loginOffline(email: string): Promise<AuthResponse> {
     let user = await userDAO.find(email)
-    return {user, token: email};
+    return {role: "admin", token: email, extra: user};
 }
 
-async function loginCognito(email: string, password: string) {
+async function loginCognito(email: string, password: string): Promise<AuthResponse> {
     const params = {
         AuthFlow: "ADMIN_NO_SRP_AUTH",
         UserPoolId: USER_POOL_ID!,
@@ -43,5 +44,10 @@ async function loginCognito(email: string, password: string) {
       }
 
     const response = await cognito.adminInitiateAuth(params).promise();
-    return {status: "OK", token: response.AuthenticationResult?.IdToken, all: response}
+    let auth: AuthResponse = {
+        token: (response.AuthenticationResult?.IdToken)!, 
+        role: "admin",
+        extra: response
+    }
+    return auth
 }

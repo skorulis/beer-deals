@@ -2,6 +2,7 @@ import { createDB, sendResponse } from "../util";
 import { RegisterRequest } from "../shared/AuthRequests";
 import * as AWS from "aws-sdk"
 import { UserDAO } from "../service/UserDAO";
+import { AuthResponse } from "../shared/AuthResponse";
 
 const cognito = new AWS.CognitoIdentityServiceProvider()
 
@@ -27,13 +28,18 @@ module.exports.handler = async (event) => {
 
 }
 
-async function registerOffline(email: string, password: string) {
+async function registerOffline(email: string, password: string): Promise<AuthResponse> {
     let result = await userDAO.create(email, email)
+    let auth: AuthResponse = {
+        token: email,
+        role: "admin",
+        extra: result
+    }
 
-    return {status: "OK", message: `Created user ${email}`, token: email, result}
+    return auth
 }
 
-async function registerCognito(email, password) {
+async function registerCognito(email, password): Promise<AuthResponse> {
     const params: AWS.CognitoIdentityServiceProvider.AdminCreateUserRequest = {
         UserPoolId: USER_POOL_ID!,
         Username: email,
@@ -72,6 +78,7 @@ async function registerCognito(email, password) {
         }
     }
     const loginResponse = await cognito.adminInitiateAuth(loginParams).promise();
-    return {status: "OK", message: `Created user ${email}`, user: response, token: loginResponse.AuthenticationResult?.IdToken}
+    let token = loginResponse.AuthenticationResult?.IdToken!
+    return {extra: response, token: token, role: "admin"}
 
 }

@@ -1,28 +1,52 @@
 import {createContext, Component } from 'react';
+import { AuthResponse } from '../shared/AuthResponse';
 import { MainAPI } from './MainAPI';
 
 export interface IAuthContext {
-    readonly token?: string
-    setToken(token?: string): void
+    readonly auth?: AuthResponse
+    setToken(token?: AuthResponse): void
 }
 
 class AuthStore implements IAuthContext {
 
-    token?: string
+    auth?: AuthResponse
 
     constructor() {
-        this.token = localStorage.getItem("authKey") || undefined
-        MainAPI.shared.token = this.token
+        let authString = localStorage.getItem("authKey") || undefined
+        console.log("Auth")
+        console.log(authString)
+        try {
+            if (authString) {
+                this.auth = JSON.parse(authString)
+            }
+        } catch(e) {
+            console.log(e)
+        }
+        
+        MainAPI.shared.token = this.auth?.token
     }
 
-    setToken(token?: string) {
-        this.token = token
-        MainAPI.shared.token = token
-        if (token) {
-            localStorage.setItem("authKey", token);    
+    setToken(auth?: AuthResponse) {
+        console.log("Set auth");
+        console.log(auth);
+        this.auth = auth
+        MainAPI.shared.token = auth?.token
+        if (auth) {
+            localStorage.setItem("authKey", JSON.stringify(auth));    
         } else {
             localStorage.removeItem("authKey");
         }
+    }
+
+    isLoggedIn(): Boolean {
+        return !!this.auth
+    }
+
+    isAdmin(): Boolean {
+        if (!this.auth) {
+            return false
+        }
+        return this.auth.role == "admin"
     }
 }
 

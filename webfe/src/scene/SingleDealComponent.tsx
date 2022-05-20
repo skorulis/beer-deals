@@ -5,6 +5,7 @@ import { DaysComponent } from "./DaysComponent";
 import { TimespanComponent } from "./TimespanComponent";
 import { MainAPI } from "../service/MainAPI";
 import { AddReportRequest } from "../shared/AddReportRequest";
+import { AuthContext } from "../service/AuthProvider";
 
 export class SingleDealComponent extends Component<{placeID: string, deal:Deal}> {
     constructor(props: {placeID: string, deal: Deal}) {
@@ -13,16 +14,30 @@ export class SingleDealComponent extends Component<{placeID: string, deal:Deal}>
         this.delete = this.delete.bind(this);
     }
 
+    static contextType = AuthContext;
+
     render() {
         return <Flex direction="column" boxShadow='base' padding={2}>
             <Text>{this.props.deal.text}</Text>
             <TimespanComponent start={this.props.deal.timeStart} end={this.props.deal.timeEnd} />
             <DaysComponent days={this.props.deal.days} />
-            <HStack>
-                <Button onClick={this.postReport}>Report</Button>
-                <Button onClick={this.delete} colorScheme="red" >Delete</Button>
-            </HStack>
+            {this.maybeActionButtons()}
         </Flex>
+    }
+
+    maybeActionButtons() {
+        if (this.context.isLoggedIn()) {
+            return <HStack>
+                <Button onClick={this.postReport}>Report</Button>
+                {this.maybeDeleteButton()}
+            </HStack>
+        }
+    }
+
+    maybeDeleteButton() {
+        if (this.context.isAdmin()) {
+            return <Button onClick={this.delete} colorScheme="red" >Delete</Button>
+        }
     }
 
     async delete() {
