@@ -1,5 +1,13 @@
 const axios = require("axios")
 
+if (process.argv.length < 3) {
+    console.log("Usage: node script/seed.js URL")
+    process.exit(1);
+}
+
+const baseURL =  process.argv[2];
+console.log(`Seeding: ${baseURL}`)
+
 let placeIDs = [
     "ChIJc8e4urevEmsRNZI3b7P2UxA", // Dicks balmain
     "ChIJQ5rh58-xEmsRs4MUruAWEuk", // The Alex
@@ -9,7 +17,7 @@ let placeIDs = [
 ]
 
 async function addVenue(id) {
-    let url = 'http://localhost:3000/venue/add'
+    let url = `${baseURL}/venue/add`
     let body = {placeID: id}
     try {
         const { data, status } = await axios.post(url, body);
@@ -20,7 +28,7 @@ async function addVenue(id) {
 }
 
 async function addDeal(placeID, days, text, link, timeStartString, timeEndString) {
-    let url = 'http://localhost:3000/deal'
+    let url = `${baseURL}/deal`
     let timeStart = toMinutes(timeStartString)
     let timeEnd = toMinutes(timeEndString)
     let body = {
@@ -37,7 +45,7 @@ async function addDeal(placeID, days, text, link, timeStartString, timeEndString
 
 async function doAll() {
     for(let place of placeIDs) {
-        //await addVenue(place)
+        await addVenue(place)
     }
 
     // The camelia
