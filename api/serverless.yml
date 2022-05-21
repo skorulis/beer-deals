@@ -80,6 +80,13 @@ functions:
           path: /auth/login
           method: post
 
+  homeVenues:
+    handler: src/lambda/venue/home.handler
+    events:
+      - httpApi:
+          path: /venue
+          method: get
+
   addVenue:
     handler: src/lambda/addVenue.handler
     events:

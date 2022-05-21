@@ -16,18 +16,6 @@ let dynamoDb = createDB()
 let venueDAO = new VenueDAO(dynamoDb);
 let reportDAO = new ReportDAO(dynamoDb);
 
-
-app.get('/venue', async function (req, res) {
-  try {
-    let result = await venueDAO.homeVenues()
-    res.json(result);
-  } catch(e) {
-    console.log(e);
-    res.status(400).json({status: "ERROR", e});
-  }
-  
-});
-
 app.get('/venue/:id', async function (req: Request<{id: string}>, res) {
   try {
     let result = await venueDAO.loadFullVenue(req.params.id);
