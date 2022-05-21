@@ -22,6 +22,7 @@ provider:
   name: aws
   stage: dev
   httpApi:
+    platform: '2.0'
     cors: true
   iamRoleStatements:
     - Effect: Allow
@@ -66,42 +67,41 @@ functions:
     handler: src/lambda/register.handler
     events:
       - httpApi:
-          path: auth/register
+          path: /auth/register
           method: post
   login:
     handler: src/lambda/login.handler
     events:
       - httpApi:
-          path: auth/login
+          path: /auth/login
           method: post
 
   addVenue:
     handler: src/lambda/addVenue.handler
     events:
       - httpApi:
-          path: venue/add
+          path: /venue/add
           method: post
 
   addDeal:
     handler: src/lambda/addDeal.handler
     events:
       - httpApi:
-          path: deal
+          path: /deal
           method: post
   deleteDeal:
     handler: src/lambda/deleteDeal.handler
     events:
       - httpApi:
-          path: deal
+          path: /deal
           method: delete
 
   profile:
     handler: src/lambda/profile.handler
     events:
       - http:
-          path: user/profile
+          path: /user/profile
           method: get
-          cors: true
           authorizer:
             name: PrivateAuthorizer
             type: COGNITO_USER_POOLS
