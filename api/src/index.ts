@@ -1,17 +1,12 @@
 import * as serverless from "serverless-http"
 import * as express from 'express';
 import * as bodyParser from "body-parser";
-import { GoogleAPI } from "./service/GoogleAPI";
-
-import { AddDealRequest } from "./shared/deal/AddDealRequest"
 import { ActionReportRequest, AddReportRequest } from "./shared/AddReportRequest"
 import { Request } from "express"
 
 import { VenueDAO } from "./service/VenueDAO";
 import { ReportDAO } from "./service/ReportDAO"
 import { createDB } from "./util";
-
-let api = new GoogleAPI();
 
 const app = express();
 app.use(bodyParser.json({ strict: false }));
@@ -21,16 +16,6 @@ let dynamoDb = createDB()
 let venueDAO = new VenueDAO(dynamoDb);
 let reportDAO = new ReportDAO(dynamoDb);
 
-app.get('/venue/autocomplete', async function (req, res) {
-    
-    let q = req.query["query"] as string
-    let lat = req.query["lat"] as string
-    let lng = req.query["lng"] as string
-    console.log(req.query)
-    let result = await api.autocomplete(q, lat, lng);
-  
-    res.status(200).json(result);
-  });
 
 app.get('/venue', async function (req, res) {
   try {
@@ -86,16 +71,5 @@ app.post("/report/action", async function (req, res) {
   }
 });
 
-app.get("/test/:photoID", async function (req: Request<{photoID: string}>, res: express.Response) {
-  try {
-    let output = await api.getPhoto(req.params.photoID)
-    console.log(output.byteLength)
-    res.setHeader('Content-Type', "image/jpeg")
-    res.write(output)
-    res.send()
-  } catch(e) {
-    res.status(400).json({status: "ERROR", e});
-  }
-});
 
 module.exports.handler = serverless(app);

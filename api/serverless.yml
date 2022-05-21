@@ -86,6 +86,13 @@ functions:
       - httpApi:
           path: /venue/add
           method: post
+    
+  venueAutocomplete:
+    handler: src/lambda/venue/autocomplete.handler
+    events:
+      - httpApi:
+          path: /venue/autocomplete
+          method: get
 
   addDeal:
     handler: src/lambda/addDeal.handler
