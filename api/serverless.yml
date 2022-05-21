@@ -22,8 +22,8 @@ provider:
   name: aws
   stage: dev
   httpApi:
-    platform: '2.0'
     cors: true
+    payload: '2.0'
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -58,11 +58,15 @@ provider:
 functions:
   health:
     handler: src/lambda/health.handler
+    url:
+      cors:
+        allowedOrigins:
+          - *
     events:
       - httpApi:
           path: /
           method: get
-
+          
   register:
     handler: src/lambda/register.handler
     events:
