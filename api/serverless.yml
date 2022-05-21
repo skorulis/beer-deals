@@ -56,6 +56,7 @@ provider:
     IMAGE_BUCKET: ${self:custom.imageBucket}
  
 functions:
+# Util
   health:
     handler: src/lambda/health.handler
     url:
@@ -66,7 +67,8 @@ functions:
       - httpApi:
           path: /
           method: get
-          
+# Auth
+
   register:
     handler: src/lambda/register.handler
     events:
@@ -80,6 +82,17 @@ functions:
           path: /auth/login
           method: post
 # Venues
+  details:
+    handler: src/lambda/venue/details.handler
+    events:
+      - httpApi:
+          path: /venue/{id}
+          method: get
+          request: 
+          parameters: 
+             paths: 
+               id: true
+
   homeVenues:
     handler: src/lambda/venue/home.handler
     events:
@@ -150,13 +163,6 @@ functions:
                 - Arn
             claims:
               - email
-    
-  app:
-    handler: src/index.handler
-    events:
-      - http: ANY /
-      - http: 'ANY {proxy+}'
-
 
 resources:
   Resources:
