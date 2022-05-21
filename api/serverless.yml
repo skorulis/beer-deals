@@ -21,6 +21,8 @@ custom:
 provider:
   name: aws
   stage: dev
+  httpApi:
+    cors: true
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -53,43 +55,45 @@ provider:
     IMAGE_BUCKET: ${self:custom.imageBucket}
  
 functions:
+  health:
+    handler: src/lambda/health.handler
+    events:
+      - httpApi:
+          path: /
+          method: get
+
   register:
     handler: src/lambda/register.handler
     events:
-      - http:
+      - httpApi:
           path: auth/register
           method: post
-          cors: true
   login:
     handler: src/lambda/login.handler
     events:
-      - http:
+      - httpApi:
           path: auth/login
           method: post
-          cors: true
 
   addVenue:
     handler: src/lambda/addVenue.handler
     events:
-      - http:
+      - httpApi:
           path: venue/add
           method: post
-          cors: true
 
   addDeal:
     handler: src/lambda/addDeal.handler
     events:
-      - http:
+      - httpApi:
           path: deal
           method: post
-          cors: true
   deleteDeal:
     handler: src/lambda/deleteDeal.handler
     events:
-      - http:
+      - httpApi:
           path: deal
           method: delete
-          cors: true
 
   profile:
     handler: src/lambda/profile.handler
@@ -112,9 +116,7 @@ functions:
     handler: src/index.handler
     events:
       - http: ANY /
-        cors: true
       - http: 'ANY {proxy+}'
-        cors: true
 
 
 resources:

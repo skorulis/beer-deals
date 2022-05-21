@@ -1,6 +1,4 @@
 import { sendResponse, createDB } from "../util";
-import { ProfileModel } from "../shared/ProfileModel"
-import { extractAuth } from "../middleware/authMiddleware"
 import { UserDAO } from "../service/UserDAO"
 import { VenueDAO } from "../service/VenueDAO"
 import { DeleteDealRequest } from "../shared/deal/DeleteDealRequest";

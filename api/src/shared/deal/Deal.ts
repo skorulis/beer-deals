@@ -1,4 +1,4 @@
-import { DayOfWeek } from "./DayOfWeek"
+import { DayOfWeek } from "../DayOfWeek"
 
 export enum DealStatus {
     new = "new", // Needs verification

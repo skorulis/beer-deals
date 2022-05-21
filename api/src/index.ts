@@ -21,10 +21,6 @@ let dynamoDb = createDB()
 let venueDAO = new VenueDAO(dynamoDb);
 let reportDAO = new ReportDAO(dynamoDb);
 
-app.get('/', function (req, res) {
-    res.json({status: "OK"})
-})
-
 app.get('/venue/autocomplete', async function (req, res) {
     
     let q = req.query["query"] as string

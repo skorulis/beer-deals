@@ -24,7 +24,7 @@ export class PageHeader extends Component<{}> {
             <RouteLink to="/">
                 <Link>
                     <Heading as="h1" size="lg" >
-                        BeerDeals
+                        MegaDeals
                     </Heading>
                 </Link>
             </RouteLink>
