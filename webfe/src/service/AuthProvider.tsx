@@ -13,8 +13,6 @@ class AuthStore implements IAuthContext {
 
     constructor() {
         let authString = localStorage.getItem("authKey") || undefined
-        console.log("Auth")
-        console.log(authString)
         try {
             if (authString) {
                 this.auth = JSON.parse(authString)

@@ -79,7 +79,7 @@ functions:
       - httpApi:
           path: /auth/login
           method: post
-
+# Venues
   homeVenues:
     handler: src/lambda/venue/home.handler
     events:
@@ -100,7 +100,7 @@ functions:
       - httpApi:
           path: /venue/autocomplete
           method: get
-
+# Deals
   addDeal:
     handler: src/lambda/addDeal.handler
     events:
@@ -113,6 +113,27 @@ functions:
       - httpApi:
           path: /deal
           method: delete
+# Report
+  openReports:
+    handler: src/lambda/report/openReports.handler
+    events:
+      - httpApi:
+          path: /report
+          method: get
+
+  createReport:
+    handler: src/lambda/report/create.handler
+    events:
+      - httpApi:
+          path: /report
+          method: post
+  actionReport:
+    handler: src/lambda/report/action.handler
+    events:
+      - httpApi:
+          path: /report/action
+          method: post
+# Profile
 
   profile:
     handler: src/lambda/profile.handler
