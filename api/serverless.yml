@@ -61,7 +61,7 @@ functions:
     url:
       cors:
         allowedOrigins:
-          - *
+          - '*'
     events:
       - httpApi:
           path: /
