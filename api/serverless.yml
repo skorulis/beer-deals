@@ -88,10 +88,6 @@ functions:
       - httpApi:
           path: /venue/{id}
           method: get
-          request: 
-          parameters: 
-             paths: 
-               id: true
 
   homeVenues:
     handler: src/lambda/venue/home.handler
