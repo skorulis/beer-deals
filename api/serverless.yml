@@ -10,7 +10,7 @@ custom:
   reportsTableName: "reports-${self:provider.stage}"
   customDomain:
     domainName: api.localdeals.click
-    basePath: 'test'
+    basePath: ''
     stage: ${self:provider.stage}
     createRoute53Record: true
     certificateName: localdeals.click
@@ -30,6 +30,7 @@ provider:
   httpApi:
     cors: true
     payload: '2.0'
+    disableDefaultEndpoint: true
   iamRoleStatements:
     - Effect: Allow
       Action:
