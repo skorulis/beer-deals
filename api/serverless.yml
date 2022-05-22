@@ -8,7 +8,12 @@ custom:
   usersTableName: 'users-${self:provider.stage}'
   venuesTableName: "venues-${self:provider.stage}"
   reportsTableName: "reports-${self:provider.stage}"
-  
+  customDomain:
+    domainName: api.localdeals.click
+    basePath: ''
+    stage: ${self:provider.stage}
+    createRoute53Record: true
+    certificateName: localdeals.click
   dynamodb:
     stages:
       - dev
@@ -307,5 +312,6 @@ resources:
 
 plugins:
   - serverless-plugin-typescript
+  - serverless-domain-manager
   - serverless-dynamodb-local
   - serverless-offline #Must be last
