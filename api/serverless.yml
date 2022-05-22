@@ -10,7 +10,7 @@ custom:
   reportsTableName: "reports-${self:provider.stage}"
   customDomain:
     domainName: api.localdeals.click
-    basePath: 'dev'
+    basePath: 'test'
     stage: ${self:provider.stage}
     createRoute53Record: true
     certificateName: localdeals.click
