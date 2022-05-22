@@ -307,6 +307,5 @@ resources:
 
 plugins:
   - serverless-plugin-typescript
-  - serverless-domain-manager
   - serverless-dynamodb-local
   - serverless-offline #Must be last
