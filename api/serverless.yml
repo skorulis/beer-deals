@@ -13,6 +13,7 @@ custom:
     basePath: ''
     stage: ${self:provider.stage}
     createRoute53Record: true
+    certificateName: localdeals.click
   dynamodb:
     stages:
       - dev
