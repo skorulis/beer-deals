@@ -151,21 +151,21 @@ functions:
           method: post
 # Profile
 
-  profile:
-    handler: src/lambda/profile.handler
-    events:
-      - http:
-          path: /user/profile
-          method: get
-          authorizer:
-            name: PrivateAuthorizer
-            type: COGNITO_USER_POOLS
-            arn:
-              Fn::GetAtt:
-                - UserPool
-                - Arn
-            claims:
-              - email
+#  profile:
+#    handler: src/lambda/profile.handler
+#    events:
+#      - hthtp:
+#          path: /user/profile
+#          method: get
+#          authorizer:
+#            name: PrivateAuthorizer
+#            type: COGNITO_USER_POOLS
+#            arn:
+#              Fn::GetAtt:
+#                - UserPool
+#                - Arn
+#            claims:
+#              - email
 
 resources:
   Resources:
