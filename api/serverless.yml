@@ -9,11 +9,15 @@ custom:
   venuesTableName: "venues-${self:provider.stage}"
   reportsTableName: "reports-${self:provider.stage}"
   customDomain:
+    apiType: http
+    endpointType: 'regional'
     domainName: api.localdeals.click
     basePath: ''
     stage: ${self:provider.stage}
     createRoute53Record: true
     certificateName: localdeals.click
+    hostedZoneId: Z0469388W1EMMXNGL2FB
+    autoDomain: true
   dynamodb:
     stages:
       - dev
@@ -27,6 +31,7 @@ custom:
 provider:
   name: aws
   stage: dev
+  region: us-east-1
   httpApi:
     cors: true
     payload: '2.0'

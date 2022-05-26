@@ -1,5 +1,61 @@
-- After I add a deal I should go back to the venue page
-- Deals need a date
+Waiting on domain registration 
+
+"provider.iamRoleStatements" -> "provider.iam.role.statements"
+
+
+
+
+d36tt3mth46fib.cloudfront.net
+https://d8tgumoi4tn1g.cloudfront.net/Aap_uEAuS5n0Fl_eZzZL-ZM2w1RoeG8m538KDeS94mJdNAivHQqiC59rITWTDJWqZITbkp9JpyuMFm8PdNsIJA78SM7FCU8A9XuuSt1w-KFW0DxMh7PCcQIID7PVcd6qqTZQKR17VVKucI4XkBUUwmqP-rZ2MRauyjilelyzhV4dRfHvwEVf
+
+
+Only allow adding venues for logged in users
+
+Define Auth response types
+Do the same for registration
+Test with actual responses
+
+Thinking I bring back the user DB
+For offline I store all the data there and use that. Won't even do auth
+For online I store the user ID and email for later use. 
+Offline just uses the email as a token
+Should mean the client all works the same
+
+https://d8tgumoi4tn1g.cloudfront.net/
+
+
+d8tgumoi4tn1g.cloudfront.net
+https://3vn7clr33g.execute-api.us-east-1.amazonaws.com/dev
+
+
+* Passwords need to be validated before creating the user
+
+* Handle errors
+
+* I need to load multiple deals / places based on ID.
+	- I think I should just load multiple venues
+
+* Should report be on it's own page.
+	- Should I have defaults
+
+- I'm reporting things. Next is to get the list of reports
+	- I might end up creating a table with all the places that have open reports
+
+* How does serverless / dynamoDB lock the database?
+	- Optimistic locking using .update and a version number
+
+* Some of the deals I've added are garbage I need to remove them.
+	- But first they need to be reported
+	- Each user can only report once.
+	
+	
+* I should store and display the type of place. (Bar, restaurant)
+
+
+
+
+
+
 
 - I need a central place to store some data like stores in iOS
 - Now that I have context I need something to get the location
@@ -9,7 +65,6 @@ What's next
 	- I need to find out the location of a user to help with searches
 	- UI needs to be much better (Lower priority)
 	- I could add some real deals
-
 
 
 https://www.freecodecamp.org/news/aws-cognito-authentication-with-serverless-and-nodejs/
