@@ -65,13 +65,11 @@ export class AddVenuePage extends Component<{}, AddVenuePageState> {
 
     search() {
         let loc = this.context.location;
-        console.log(loc)
         let result = this.state.api.autocomplete(this.state.query, this.context.location)
         result.then(output => {
             this.setState({
                 results: output.predictions
             })
-            console.log(output)
         })
     }
 }

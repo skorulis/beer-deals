@@ -1,4 +1,4 @@
-import { Button, Center, Flex, Heading, Input, InputGroup, InputRightElement, Link, Text } from "@chakra-ui/react";
+import { Alert, AlertIcon, Box, Button, Center, Flex, Heading, Input, InputGroup, InputRightElement, Link, Spacer, Text } from "@chakra-ui/react";
 import { Component } from "react"; 
 import { PageHeader } from "./PageHeader";
 
@@ -8,11 +8,13 @@ import {
 import { MainAPI } from "../service/MainAPI";
 import { AuthContext } from "../service/AuthProvider";
 import { useNavigate, NavigateFunction } from "react-router-dom";
+import { BaseError } from "../shared/Error"
 
 type LoginPageState = {
     showPassword: Boolean
     email: string
     password: string
+    error?: BaseError
 }
 
 export default function LoginPageHOC() {
@@ -44,9 +46,20 @@ export class LoginPage extends Component<{navigation: NavigateFunction}, LoginPa
                     <Text>Don't have an account? {this.signupLink()}</Text>
                     {this.form()}
                 </Flex>
+                
             </Center>
             
         </Flex>
+    }
+
+    maybeError() {
+        if (!this.state.error) {
+            return
+        }
+        return <Alert status='error'>
+            <AlertIcon />
+                {this.state.error.message}
+        </Alert>
     }
 
     signupLink() {
@@ -66,6 +79,7 @@ export class LoginPage extends Component<{navigation: NavigateFunction}, LoginPa
             <Button colorScheme='blue' isDisabled={!this.canSubmit()} onClick={this.login}>
                 <Text>Login</Text>
             </Button>
+            {this.maybeError()}
         </Flex>
     }
 
@@ -91,11 +105,11 @@ export class LoginPage extends Component<{navigation: NavigateFunction}, LoginPa
     }
 
     emailChanged(event: React.FormEvent<HTMLInputElement>) {
-        this.setState({ email: event.currentTarget.value })
+        this.setState({ email: event.currentTarget.value, error: undefined})
     }
 
     passwordChanged(event: React.FormEvent<HTMLInputElement>) {
-        this.setState({ password: event.currentTarget.value })
+        this.setState({ password: event.currentTarget.value, error: undefined})
     }
 
     handlePasswordClick() {
@@ -106,8 +120,16 @@ export class LoginPage extends Component<{navigation: NavigateFunction}, LoginPa
     async login() {
         let email = this.state.email
         let password = this.state.password
-        let result = await MainAPI.shared.login(email, password)
-        this.context.setToken(result);
-        this.props.navigation("/")
+        try {
+            let result = await MainAPI.shared.login(email, password)
+            console.log("WE ARE DONE")
+            console.log(result)
+            this.context.setToken(result);
+            this.props.navigation("/")
+        } catch(e) {
+            this.setState({error: e as BaseError})
+            console.log(e)
+            console.log("ASDASD" + e)
+        }
     }
 }

@@ -23,7 +23,7 @@ module.exports.handler = async (event) => {
             return sendResponse(200, response)
         }
     } catch(error) {
-        return sendResponse(400, {status: "ERROR", error})
+        return sendResponse(400, {status: "ERROR", message: error})
     }
 
 }

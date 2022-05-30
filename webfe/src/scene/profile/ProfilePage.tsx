@@ -35,7 +35,6 @@ export class ProfilePage extends Component<{navigation: NavigateFunction}, {prof
     }
 
     maybeDetails() {
-        console.log(this.state)
         if (this.state.profile) {
             return  <Text>{this.state.profile.name}</Text>
         }
@@ -48,7 +47,6 @@ export class ProfilePage extends Component<{navigation: NavigateFunction}, {prof
 
     async componentDidMount() {
         let result = await MainAPI.shared.getProfile()
-        console.log(result)
         this.setState({
             profile: result
         })

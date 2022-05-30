@@ -145,7 +145,12 @@ export class MainAPI {
             body: bodyData,
             headers: headers
         }
-        const response = await fetch(url, params)
+        const response = await fetch(url, params);
+        if (response.status >= 400) {
+            let error = await response.json()
+            throw error
+        }
+        
         return await response.json() as ResponseType
     }
 

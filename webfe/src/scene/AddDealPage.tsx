@@ -86,10 +86,8 @@ export class AddDealPage extends Component<{placeID:string, navigation: Navigate
     }
 
     daysChanged(value: string[]) {
-        console.log(value)
         let ints = value.map(x => parseInt(x))
         this.setState({days: ints})
-        console.log(this.state)
     }
 
     startHourChanged(event: React.FormEvent<HTMLInputElement>) {

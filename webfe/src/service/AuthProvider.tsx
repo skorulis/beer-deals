@@ -25,8 +25,6 @@ class AuthStore implements IAuthContext {
     }
 
     setToken(auth?: AuthResponse) {
-        console.log("Set auth");
-        console.log(auth);
         this.auth = auth
         MainAPI.shared.token = auth?.token
         if (auth) {
