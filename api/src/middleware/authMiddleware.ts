@@ -11,7 +11,7 @@ export function extractAuth(event): EventAuth  {
     } else {
         console.log(event);
         let auth = event.requestContext.authorizer.claims
-        throw "Not implemented yet"
+        return auth
     }
     
 }

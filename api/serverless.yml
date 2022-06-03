@@ -158,6 +158,14 @@ functions:
           method: post
 # Profile
 
+  profile:
+    handler: src/lambda/profile.handler
+    events:
+      - httpApi:
+          path: /user/profile
+          method: get
+
+
 #  profile:
 #    handler: src/lambda/profile.handler
 #    events:
