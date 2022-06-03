@@ -13,7 +13,7 @@ let userDAO = new UserDAO(dynamoDb);
 let api = new GoogleAPI();
 const IMAGE_BUCKET = process.env.IMAGE_BUCKET;
 
-const BUCKET_URL = "https://d8tgumoi4tn1g.cloudfront.net";
+const BUCKET_URL = "https://localdeals.click";
 
 module.exports.handler = async (event) => {
     const body = JSON.parse(event.body) as AddVenueRequest
