@@ -180,7 +180,7 @@ resources:
             Required: false
             Mutable: true
           - Name: name
-            Required: false
+            Required: true
             Mutable: true
         Policies:
           PasswordPolicy:
