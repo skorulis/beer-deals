@@ -27,7 +27,7 @@ export class ProfilePage extends Component<{navigation: NavigateFunction}, {prof
         return <Flex direction="column">
             <PageHeader />
             <Box textAlign="center" fontSize="xl">
-                <Heading>Profile</Heading>
+                <Heading>Profile (under construction)</Heading>
                 <Button onClick={this.logout}>Logout</Button>
                 {this.maybeDetails()}
             </Box>
@@ -47,6 +47,8 @@ export class ProfilePage extends Component<{navigation: NavigateFunction}, {prof
 
     async componentDidMount() {
         let result = await MainAPI.shared.getProfile()
+        console.log("FETCHED PROFILE")
+        console.log(result)
         this.setState({
             profile: result
         })

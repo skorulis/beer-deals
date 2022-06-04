@@ -159,7 +159,7 @@ functions:
 # Profile
 
   profile:
-    handler: src/lambda/profile.handler
+    handler: src/lambda/user/profile.handler
     events:
       - httpApi:
           path: /user/profile
