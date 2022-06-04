@@ -11,9 +11,10 @@ export class UserDAO {
         this.dynamoDB = dynamoDB
     }
 
-    async create(userID: string,  email: string): Promise<Status> {
+    async create(email: string, name: string): Promise<Status> {
+        let userID = email
         let user = {
-            userID, email
+            userID, email, name
         }
 
         const putParams = {

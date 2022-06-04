@@ -16,10 +16,10 @@ module.exports.handler = async (event) => {
     const body = JSON.parse(event.body) as RegisterRequest
     try {
         if (IS_OFFLINE) {
-            let response = await registerOffline(body.email, body.password)
+            let response = await registerOffline(body.email, body.password, body.name)
             return sendResponse(200, response)
         } else {
-            let response = await registerCognito(body.email, body.password)
+            let response = await registerCognito(body.email, body.name, body.password)
             return sendResponse(200, response)
         }
     } catch(error) {
@@ -28,7 +28,7 @@ module.exports.handler = async (event) => {
 
 }
 
-async function registerOffline(email: string, password: string): Promise<AuthResponse> {
+async function registerOffline(email: string, password: string, name: string): Promise<AuthResponse> {
     let result = await userDAO.create(email, email)
     let auth: AuthResponse = {
         token: email,
@@ -39,17 +39,25 @@ async function registerOffline(email: string, password: string): Promise<AuthRes
     return auth
 }
 
-async function registerCognito(email, password): Promise<AuthResponse> {
+async function registerCognito(email, name: string, password): Promise<AuthResponse> {
     const params: AWS.CognitoIdentityServiceProvider.AdminCreateUserRequest = {
         UserPoolId: USER_POOL_ID!,
         Username: email,
         UserAttributes: [{
-          Name: 'email',
-          Value: email
+            Name: 'email',
+            Value: email
         },
         {
-          Name: 'email_verified',
-          Value: 'true'
+            Name: 'email_verified',
+            Value: 'true'
+        },
+        {
+            Name: 'name',
+            Value: name
+        },
+        {
+            Name: "role",
+            Value: "user"
         }
       ],
       MessageAction: 'SUPPRESS'
@@ -67,6 +75,8 @@ async function registerCognito(email, password): Promise<AuthResponse> {
         Permanent: true
     };
     await cognito.adminSetUserPassword(paramsForSetPass).promise()
+
+    await userDAO.create(email, name);
   
     const loginParams = {
         AuthFlow: "ADMIN_NO_SRP_AUTH",

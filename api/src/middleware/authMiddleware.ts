@@ -5,7 +5,7 @@ import publicKeys from "../resource/aws_jwks.json"
 
 export async function extractAuth(event): Promise<EventAuth>  {
     console.log(event);
-    let token = event.headers.Authorization;
+    let token = event.headers.Authorization || event.headers.authorization;
     if (!token || !token.startsWith("Bearer ")) {
         throw `Invalid bearer token: ${token}`
     }

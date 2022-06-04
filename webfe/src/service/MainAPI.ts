@@ -88,9 +88,9 @@ export class MainAPI {
         return this.post(url, body)
     }
 
-    async register(email: string, password: string): Promise<AuthResponse> {
+    async register(email: string, password: string, name: string): Promise<AuthResponse> {
         let url = `${this.baseURL()}auth/register`
-        let body: RegisterRequest = {email, password}
+        let body: RegisterRequest = {email, password, name}
         return this.post(url, body)
     }
 
