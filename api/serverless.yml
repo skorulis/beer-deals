@@ -165,23 +165,6 @@ functions:
           path: /user/profile
           method: get
 
-
-#  profile:
-#    handler: src/lambda/profile.handler
-#    events:
-#      - hthtp:
-#          path: /user/profile
-#          method: get
-#          authorizer:
-#            name: PrivateAuthorizer
-#            type: COGNITO_USER_POOLS
-#            arn:
-#              Fn::GetAtt:
-#                - UserPool
-#                - Arn
-#            claims:
-#              - email
-
 resources:
   Resources:
     UserPool:
@@ -191,6 +174,13 @@ resources:
         Schema:
           - Name: email
             Required: true
+            Mutable: true
+          - Name: role
+            AttributeDataType: String
+            Required: false
+            Mutable: true
+          - Name: name
+            Required: false
             Mutable: true
         Policies:
           PasswordPolicy:
