@@ -114,6 +114,7 @@ export class AddDealPage extends Component<{placeID:string, navigation: Navigate
             placeID: this.props.placeID,
             text: this.state.description,
             days: days,
+            features: [],
             timeStart: timeStart,
             timeEnd: timeEnd
         }

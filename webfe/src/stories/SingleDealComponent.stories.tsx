@@ -18,6 +18,7 @@ Example1.args = {
     compoundID: "ABC",
     created: new Date(),
     days: [1,2],
+    features: [1, 3],
     text: "12pm-4pm Tuesday and Wednesday - $18 250g Rump With your choice of two sides and sauce",
     timeStart: 100,
     timeEnd: 200

@@ -5,6 +5,7 @@ import { VenueDeals } from "../shared/Venue"
 import { Venue } from "../shared/Venue"
 import { DayOfWeek } from "../shared/DayOfWeek";
 import { GooglePlaceDetails } from "../model/GooglePlaceDetails";
+import { DealFeature } from "../shared/deal/DealFeature";
 
 const VENUES_TABLE = process.env.VENUES_TABLE!;
 
@@ -59,7 +60,7 @@ export class VenueDAO {
           return this.combineDeals(result.Items)[0]
     }
 
-    async addDeal(placeID: string, days: DayOfWeek[], text: string, timeStart: number, timeEnd: number, link?: string): Promise<Deal> {
+    async addDeal(placeID: string, days: DayOfWeek[], features: DealFeature[], text: string, timeStart: number, timeEnd: number, link?: string): Promise<Deal> {
         let dealID = crypto.randomUUID()
 
         let item = {
@@ -70,6 +71,7 @@ export class VenueDAO {
             days: days,
             text: text,
             link: link,
+            features: features,
             timeStart: timeStart,
             timeEnd: timeEnd
         }

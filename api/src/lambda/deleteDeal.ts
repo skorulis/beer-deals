@@ -9,6 +9,7 @@ let venueDAO = new VenueDAO(dynamoDb);
 
 module.exports.handler = async (event) => {
     const body = JSON.parse(event.body) as DeleteDealRequest
+    console.log(body)
     try {
         await venueDAO.deleteDeal(body.placeID, body.dealID)
         

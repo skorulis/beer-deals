@@ -6,6 +6,7 @@ import { TimespanComponent } from "./TimespanComponent";
 import { MainAPI } from "../service/MainAPI";
 import { AddReportRequest } from "../shared/AddReportRequest";
 import { AuthContext } from "../service/AuthProvider";
+import { FeatureList } from "./deal/FeatureList";
 
 export class SingleDealComponent extends Component<{placeID: string, deal:Deal}> {
     constructor(props: {placeID: string, deal: Deal}) {
@@ -21,6 +22,7 @@ export class SingleDealComponent extends Component<{placeID: string, deal:Deal}>
             <Text>{this.props.deal.text}</Text>
             <TimespanComponent start={this.props.deal.timeStart} end={this.props.deal.timeEnd} />
             <DaysComponent days={this.props.deal.days} />
+            <FeatureList features={this.props.deal.features} />
             {this.maybeActionButtons()}
         </Flex>
     }

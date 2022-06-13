@@ -17,7 +17,7 @@ module.exports.handler = async (event) => {
             return sendResponse(200, match);
         }
 
-        let result = await venueDAO.addDeal(body.placeID, body.days, body.text, body.timeStart, body.timeEnd, body.link);
+        let result = await venueDAO.addDeal(body.placeID, body.days, body.features, body.text, body.timeStart, body.timeEnd, body.link);
         return sendResponse(200, result);
     } catch(e) {
         console.log(e);

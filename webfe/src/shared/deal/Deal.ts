@@ -1,4 +1,5 @@
 import { DayOfWeek } from "../DayOfWeek"
+import { DealFeature } from "./DealFeature"
 
 export enum DealStatus {
     new = "new", // Needs verification
@@ -12,6 +13,7 @@ export interface Deal {
     status: DealStatus
     compoundID: string
     days: DayOfWeek[]
+    features: DealFeature[]
     text: string
     link?: string
     created: Date
