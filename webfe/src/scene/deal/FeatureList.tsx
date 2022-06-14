@@ -29,6 +29,7 @@ export class FeatureList extends Component<{features:DealFeature[]}> {
             case DealFeature.LUNCH: return "lunch.svg"
             case DealFeature.DINNER: return "dinner.svg"
             case DealFeature.DRINKS: return "drinks.svg"
+            case DealFeature.FOOD: return "food.svg"
             case DealFeature.BEER: return "beer.svg"
             case DealFeature.WINE: return "wine.svg"
             case DealFeature.SPIRITS: return "spririts.png"

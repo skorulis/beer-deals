@@ -3,6 +3,7 @@ export enum DealFeature {
     LUNCH = 1,
     DINNER = 2,
     DRINKS = 3,
+    FOOD = 4,
 
     // Drinks
     BEER = 10,
@@ -24,6 +25,7 @@ export function featureText(feature: DealFeature): string {
         case DealFeature.LUNCH: return "Lunch"
         case DealFeature.DINNER: return "Dinner"
         case DealFeature.DRINKS: return "Drinks"
+        case DealFeature.FOOD: return "Food"
         case DealFeature.BEER: return "Beer"
         case DealFeature.WINE: return "Wine"
         case DealFeature.SPIRITS: return "Spririts"
