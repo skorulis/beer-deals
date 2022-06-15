@@ -9,11 +9,13 @@ module.exports.handler = async (event: APIGatewayEvent) => {
         return sendResponse(400, {status: "Error"})
     }
     console.log(event.queryStringParameters)
-    let q = event.queryStringParameters["query"]
+    let q = event.queryStringParameters["query"] ?? ""
     let lat = event.queryStringParameters["lat"]
     let lng = event.queryStringParameters["lng"]
-    //console.log(req.query)
-    let result = await api.autocomplete(q ?? "", lat, lng);
 
-    return sendResponse(200, result)
+    //let result = await api.autocomplete(q, lat, lng);
+    let alternateResult = await api.textSearch(q, lat, lng);
+    console.log(alternateResult)
+
+    return sendResponse(200, alternateResult)
 }

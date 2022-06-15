@@ -15,7 +15,8 @@ let placeIDs = [
     "ChIJQ5rh58-xEmsRs4MUruAWEuk", // The Alex
     "ChIJNQib7jSwEmsRY3qRbK3d4Hk", // Rose of austrlia
     "ChIJpY9u1NuxEmsRR75IHCbP8NE", // Noble hops
-    "ChIJcfCqf86xEmsRo3Z2wW9rGgA" // The camelia
+    "ChIJcfCqf86xEmsRo3Z2wW9rGgA", // The camelia
+    "ChIJ65n5rmKxEmsR197tvv0f3-E", // Atomic brewery
 ]
 
 function isString(value) {
@@ -89,6 +90,9 @@ async function addDeals() {
     await addDeal("ChIJQ5rh58-xEmsRs4MUruAWEuk", weekdays, "Happy Hour. $7 house pints, wine and spirits.", "https://merivale.com/whatson/the-alex-happy-hour/", "17:00", "19:00", [3, 10, 11, 12])
     await addDeal("ChIJQ5rh58-xEmsRs4MUruAWEuk", weekdays, "Lunch Specials. $25 meal & drink combos.", "https://merivale.com/whatson/lunch-specials-the-alex/", "12:00", "15:00", [3, 4])
     
+    // Atomic brewery
+
+
 }
 
 function toMinutes(time) {

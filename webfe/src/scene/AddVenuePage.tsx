@@ -1,16 +1,16 @@
 import { Button, Center, Text, Flex, Heading, Input, VStack } from "@chakra-ui/react";
-import { Component, KeyboardEventHandler } from "react"; 
+import { Component } from "react"; 
 import { PageHeader } from "./PageHeader";
 import { MainAPI } from "../service/MainAPI";
-import { GooglePlacePrediction } from "../model/GooglePlacePrediction";
 import { VenueSearchRowHOC } from "./VenueSearchRow";
 import { MainContext } from "../service/MainProvider"
+import { VenueAutocomplete } from "../shared/venue/VenueAutocomplete";
 
 
 type AddVenuePageState = {
     query: string
     api: MainAPI
-    results: GooglePlacePrediction[]
+    results: VenueAutocomplete[]
 }
 
 export class AddVenuePage extends Component<{}, AddVenuePageState> {
@@ -63,13 +63,9 @@ export class AddVenuePage extends Component<{}, AddVenuePageState> {
         }
     }
 
-    search() {
+    async search() {
         let loc = this.context.location;
-        let result = this.state.api.autocomplete(this.state.query, this.context.location)
-        result.then(output => {
-            this.setState({
-                results: output.predictions
-            })
-        })
+        let result = await this.state.api.autocomplete(this.state.query, loc)
+        this.setState({results: result.predictions})
     }
 }

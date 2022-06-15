@@ -1,4 +1,3 @@
-import { GooglePlacePrediction, GooglePlacePredictionList } from "../model/GooglePlacePrediction";
 import { AddDealRequest } from "../shared/deal/AddDealRequest";
 import { ActionReportRequest, AddReportRequest } from "../shared/AddReportRequest";
 import { Report } from "../shared/Report";
@@ -7,6 +6,7 @@ import { AuthResponse } from "../shared/AuthResponse";
 import { ProfileModel } from "../shared/ProfileModel";
 import { Venue, VenueDeals} from "../shared/Venue"
 import { DeleteDealRequest } from "../shared/deal/DeleteDealRequest";
+import { VenueAutocomplete, VenueAutocompleteList } from "../shared/venue/VenueAutocomplete";
 
 export class MainAPI {
 
@@ -22,17 +22,15 @@ export class MainAPI {
 
     public static readonly shared = new MainAPI() 
 
-    async autocomplete(text: string, location?: GeolocationCoordinates): Promise<GooglePlacePredictionList> {
+    async autocomplete(text: string, location?: GeolocationCoordinates): Promise<VenueAutocompleteList> {
         let url = `${this.baseURL()}venue/autocomplete?query=${text}`
         if (location) {
             url += `&lat=${location.latitude}&lng=${location.longitude}`
         }
-        const response = await fetch(url);
-        let parsed = await response.json()
-        return parsed as GooglePlacePredictionList
+        return this.get(url)
     }
 
-    async addVenue(place: GooglePlacePrediction): Promise<Venue> {
+    async addVenue(place: VenueAutocomplete): Promise<Venue> {
         let url = `${this.baseURL()}venue/add`
         let body = {placeID: place.place_id}
         return this.post(url, body)
