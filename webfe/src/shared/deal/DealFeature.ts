@@ -17,7 +17,8 @@ export enum DealFeature {
     TACOS = 32,
     PIZZA = 33,
     ROAST = 34,
-    WINGS = 35
+    WINGS = 35,
+    DUMPLINGS = 36,
 }
 
 export function featureText(feature: DealFeature): string {
@@ -36,6 +37,7 @@ export function featureText(feature: DealFeature): string {
         case DealFeature.PIZZA: return "Pizza"
         case DealFeature.ROAST: return "Roast"
         case DealFeature.WINGS: return "Wings"
+        case DealFeature.DUMPLINGS: return "Dumplings"
 
     default:
         return "Unknown"

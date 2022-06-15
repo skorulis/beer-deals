@@ -91,7 +91,10 @@ async function addDeals() {
     await addDeal("ChIJQ5rh58-xEmsRs4MUruAWEuk", weekdays, "Lunch Specials. $25 meal & drink combos.", "https://merivale.com/whatson/lunch-specials-the-alex/", "12:00", "15:00", [3, 4])
     
     // Atomic brewery
-
+    let atomicLink = "https://www.atomic.beer/brewery"
+    await addDeal("ChIJ65n5rmKxEmsR197tvv0f3-E", [1], "Wings & Tins. $1 wings and $5 tins.", atomicLink, undefined, undefined, [3, 4, 10, 35])
+    await addDeal("ChIJ65n5rmKxEmsR197tvv0f3-E", [2], "Dumpling special", atomicLink, undefined, undefined, [4, 36])
+    await addDeal("ChIJ65n5rmKxEmsR197tvv0f3-E", [6], "Atomicha. Yum-Cha inspired set menu & bottomless tap beer.", atomicLink, undefined, undefined, [3, 4, 10])
 
 }
 

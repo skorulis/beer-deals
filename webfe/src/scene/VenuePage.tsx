@@ -1,4 +1,4 @@
-import { Button, Heading, Text, Flex, Image, HStack } from "@chakra-ui/react";
+import { Button, Heading, Text, Flex, Image, HStack, VStack } from "@chakra-ui/react";
 import { Component } from "react"; 
 import { PageHeader } from "./PageHeader";
 import { MainAPI } from "../service/MainAPI";
@@ -33,13 +33,10 @@ export class VenuePage extends Component<{placeID:string}, VenuePageState> {
         if (!venue) {
             return undefined
         }
+        console.log(this.state.venue);
         let addURL = `/venue/${this.props.placeID}/adddeal`
         return <Flex direction="column" padding={4} gap={4}>
-            <HStack>
-                {this.maybeImage()}
-                <Heading>{venue.name}</Heading>
-            </HStack>
-            
+            {this.header(venue)}
             <Flex direction="column" gap={2}>
             {this.dealList()}
             </Flex>
@@ -50,6 +47,36 @@ export class VenuePage extends Component<{placeID:string}, VenuePageState> {
             </RouteLink>
             
         </Flex>
+    }
+
+    header(venue: Venue) {
+        return <HStack>
+            {this.maybeImage()}
+            <VStack alignItems="flex-start">
+                <Heading>{venue.name}</Heading>
+                <HStack>
+                    {this.mapIcon(venue)}
+                    {this.maybeWebIcon(venue)}
+                </HStack>
+            </VStack>
+            
+        </HStack>
+    }
+
+    mapIcon(venue: Venue) {
+        let href = `https://www.google.com/maps/search/?api=1&query=${venue.lat}%2C${venue.lng}&query_place_id=${venue.placeID}`
+        return <a href={href}>
+            <Heading>🗺️</Heading>    
+        </a>
+    }
+
+    maybeWebIcon(venue: Venue) {
+        if (!venue.website) {
+            return
+        }
+        return <a href={venue.website}>
+            <Heading>🌐</Heading>    
+        </a>
     }
 
     dealList() {
