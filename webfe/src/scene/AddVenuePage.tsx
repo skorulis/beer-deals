@@ -31,8 +31,8 @@ export class AddVenuePage extends Component<{}, AddVenuePageState> {
     render() {
         return <Flex direction="column">
             <PageHeader />
-            <Center>
-                <Flex direction="column">
+            <VStack alignItems="flex-start" padding={4}>
+                <Flex direction="column" alignItems="flex-start">
                     <Heading>Add a new venue</Heading>
                     <Flex direction="row" gap={2}>
                         <Input value={this.state.query} onKeyUp={this.keyPressed} placeholder="Venue name" onChange={this.queryChanged}></Input>
@@ -41,14 +41,12 @@ export class AddVenuePage extends Component<{}, AddVenuePageState> {
                     {this.results()}
                 </Flex>
                 
-            </Center>
-            
-            
+            </VStack>
         </Flex>
     }
 
     results() {
-        return <VStack pt={8}>
+        return <VStack pt={8} alignItems="flex-start">
             {this.state.results.map(x => <VenueSearchRowHOC key={x.place_id} venue={x} />) }
         </VStack>
     }

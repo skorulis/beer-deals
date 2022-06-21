@@ -8,7 +8,7 @@ import {
 import {
   Flex,
   ChakraProvider,
-  theme,
+  extendTheme,
 } from "@chakra-ui/react"
 import { Component } from "react"; 
 
@@ -24,7 +24,13 @@ import { AuthProvider } from "./service/AuthProvider";
 import ProfilePageHOC from "./scene/profile/ProfilePage";
 import { MainAPI } from "./service/MainAPI";
 
-import { PrivateRoute, ProtectedRoute } from "./scene/common/PrivateRoute"
+import { ProtectedRoute } from "./scene/common/PrivateRoute"
+
+const theme = extendTheme({
+  colors: {
+    secondary: "#555555"
+  },
+})
 
 export class App extends Component<{}> {
   render() {

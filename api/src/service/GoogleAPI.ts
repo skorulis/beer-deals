@@ -44,12 +44,15 @@ export class GoogleAPI {
         if (lat && lng) {
             url += `&location=${lat}%2C${lng}`
         }
+        console.log("HELLO")
         console.log(url)
         const { data, status } = await axios.get(url);
+        console.log(data)
         let items: VenueAutocomplete[] = data.results.map(x => {
             return {
                 place_id: x.place_id,
-                description: x.name
+                description: x.name,
+                address: x.formatted_address
             }
         })
         return {

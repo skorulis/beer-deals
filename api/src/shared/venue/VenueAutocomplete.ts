@@ -1,6 +1,7 @@
 
 export interface VenueAutocomplete {
     description: string
+    address?: string
     place_id: string
 }
 

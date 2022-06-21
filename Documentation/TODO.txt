@@ -1,9 +1,8 @@
-Waiting on domain registration 
+I need an easy way to delete all deals.
+Purely a thing for testing
 
-"provider.iamRoleStatements" -> "provider.iam.role.statements"
-
-
-
+* Seed categories and start setting them up
+* Store the user who created the thing for traceability and attribution
 
 d36tt3mth46fib.cloudfront.net
 https://d8tgumoi4tn1g.cloudfront.net/Aap_uEAuS5n0Fl_eZzZL-ZM2w1RoeG8m538KDeS94mJdNAivHQqiC59rITWTDJWqZITbkp9JpyuMFm8PdNsIJA78SM7FCU8A9XuuSt1w-KFW0DxMh7PCcQIID7PVcd6qqTZQKR17VVKucI4XkBUUwmqP-rZ2MRauyjilelyzhV4dRfHvwEVf

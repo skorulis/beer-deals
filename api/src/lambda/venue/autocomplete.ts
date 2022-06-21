@@ -13,9 +13,7 @@ module.exports.handler = async (event: APIGatewayEvent) => {
     let lat = event.queryStringParameters["lat"]
     let lng = event.queryStringParameters["lng"]
 
-    //let result = await api.autocomplete(q, lat, lng);
     let alternateResult = await api.textSearch(q, lat, lng);
-    console.log(alternateResult)
 
     return sendResponse(200, alternateResult)
 }

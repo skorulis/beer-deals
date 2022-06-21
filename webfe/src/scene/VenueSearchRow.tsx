@@ -1,4 +1,4 @@
-import { Button, Text, Flex } from "@chakra-ui/react";
+import { Button, Text, Flex, VStack } from "@chakra-ui/react";
 import { Component } from "react"; 
 import { MainAPI } from "../service/MainAPI";
 import { useNavigate, NavigateFunction } from "react-router-dom";
@@ -16,8 +16,16 @@ export class VenueSearchRow extends Component<{venue:VenueAutocomplete, navigati
     }
 
     render() {
+        let address;
+        if (this.props.venue.address) {
+            address = <Text color="secondary" >{this.props.venue.address}</Text>
+        }
         return <Flex align="center" direction="row" gap={2}>
-            <Text>{this.props.venue.description}</Text>
+            <VStack alignItems="flex-start">
+                <Text>{this.props.venue.description}</Text>
+                {address}
+            </VStack>
+            
             <Button onClick={this.addVenue}>Add</Button>
         </Flex>
     }

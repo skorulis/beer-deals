@@ -55,7 +55,7 @@ async function addDeal(placeID, days, text, link, timeStartString, timeEndString
 }
 
 async function doAll() {
-    //await addPlaces()    
+    await addPlaces()    
     await addDeals()
 }
 
