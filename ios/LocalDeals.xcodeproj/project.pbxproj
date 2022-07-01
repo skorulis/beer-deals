@@ -13,6 +13,12 @@
 		FAE93710286C675500977BD2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAE9370D286C675500977BD2 /* Assets.xcassets */; };
 		FAE93711286C675500977BD2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAE9370F286C675500977BD2 /* Preview Assets.xcassets */; };
 		FAE93714286C67BD00977BD2 /* IOC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE93713286C67BD00977BD2 /* IOC.swift */; };
+		FAE93718286EE63700977BD2 /* Venue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE93717286EE63700977BD2 /* Venue.swift */; };
+		FAE9371A286EE6AE00977BD2 /* Deal.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE93719286EE6AE00977BD2 /* Deal.swift */; };
+		FAE9371C286EE7E000977BD2 /* VenueDeals.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE9371B286EE7E000977BD2 /* VenueDeals.swift */; };
+		FAE93720286EE8D900977BD2 /* MainRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE9371F286EE8D900977BD2 /* MainRequests.swift */; };
+		FAE93722286EEA5300977BD2 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE93721286EEA5300977BD2 /* HomeView.swift */; };
+		FAE93724286EEA5900977BD2 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE93723286EEA5900977BD2 /* HomeViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +29,12 @@
 		FAE9370D286C675500977BD2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FAE9370F286C675500977BD2 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		FAE93713286C67BD00977BD2 /* IOC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOC.swift; sourceTree = "<group>"; };
+		FAE93717286EE63700977BD2 /* Venue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Venue.swift; sourceTree = "<group>"; };
+		FAE93719286EE6AE00977BD2 /* Deal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deal.swift; sourceTree = "<group>"; };
+		FAE9371B286EE7E000977BD2 /* VenueDeals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VenueDeals.swift; sourceTree = "<group>"; };
+		FAE9371F286EE8D900977BD2 /* MainRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRequests.swift; sourceTree = "<group>"; };
+		FAE93721286EEA5300977BD2 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		FAE93723286EEA5900977BD2 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +70,7 @@
 		FAE936F1286C3A5D00977BD2 /* LocalDeals */ = {
 			isa = PBXGroup;
 			children = (
+				FAE93716286EE59100977BD2 /* Model */,
 				FAE9370C286C675500977BD2 /* Resource */,
 				FAE93705286C673A00977BD2 /* Scene */,
 				FAE93709286C673A00977BD2 /* Service */,
@@ -83,6 +96,7 @@
 		FAE93705286C673A00977BD2 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				FAE93715286EE51B00977BD2 /* Home */,
 				FAE93706286C673A00977BD2 /* App */,
 			);
 			path = Scene;
@@ -101,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				FAE93712286C67B800977BD2 /* App */,
+				FAE9371D286EE88500977BD2 /* Network */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -128,6 +143,41 @@
 				FAE93713286C67BD00977BD2 /* IOC.swift */,
 			);
 			path = App;
+			sourceTree = "<group>";
+		};
+		FAE93715286EE51B00977BD2 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				FAE93721286EEA5300977BD2 /* HomeView.swift */,
+				FAE93723286EEA5900977BD2 /* HomeViewModel.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		FAE93716286EE59100977BD2 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FAE9371E286EE8CE00977BD2 /* Requests */,
+				FAE93717286EE63700977BD2 /* Venue.swift */,
+				FAE93719286EE6AE00977BD2 /* Deal.swift */,
+				FAE9371B286EE7E000977BD2 /* VenueDeals.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		FAE9371D286EE88500977BD2 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		FAE9371E286EE8CE00977BD2 /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				FAE9371F286EE8D900977BD2 /* MainRequests.swift */,
+			);
+			path = Requests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -204,7 +254,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				FAE9370B286C673A00977BD2 /* ContentView.swift in Sources */,
+				FAE93724286EEA5900977BD2 /* HomeViewModel.swift in Sources */,
+				FAE93718286EE63700977BD2 /* Venue.swift in Sources */,
+				FAE9371A286EE6AE00977BD2 /* Deal.swift in Sources */,
+				FAE9371C286EE7E000977BD2 /* VenueDeals.swift in Sources */,
 				FAE93714286C67BD00977BD2 /* IOC.swift in Sources */,
+				FAE93722286EEA5300977BD2 /* HomeView.swift in Sources */,
+				FAE93720286EE8D900977BD2 /* MainRequests.swift in Sources */,
 				FAE9370A286C673A00977BD2 /* LocalDealsApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -333,7 +389,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"LocalDeals/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"LocalDeals/Resource/Preview Content\"";
 				DEVELOPMENT_TEAM = X4S6MUZL2D;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -363,7 +419,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"LocalDeals/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"LocalDeals/Resource/Preview Content\"";
 				DEVELOPMENT_TEAM = X4S6MUZL2D;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;

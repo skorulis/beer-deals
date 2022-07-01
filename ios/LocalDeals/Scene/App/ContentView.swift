@@ -8,9 +8,11 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @Environment(\.factory) private var factory
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        HomeView(viewModel: factory.resolve())
     }
 }
 

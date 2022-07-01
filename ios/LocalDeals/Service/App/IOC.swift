@@ -11,6 +11,7 @@ final class IOC: IOCService {
     override init() {
         super.init()
         registerServices()
+        registerViewModels()
     }
     
 }
@@ -20,7 +21,13 @@ final class IOC: IOCService {
 private extension IOC {
     
     func registerServices() {
-        container.autoregister(HTTPService.self, initializer: HTTPService.init)
+        container.register(HTTPService.self) { res in
+            return HTTPService(baseURL: "http://localhost:3000")
+        }
+    }
+    
+    func registerViewModels() {
+        container.autoregister(HomeViewModel.self, initializer: HomeViewModel.init)
     }
     
 }

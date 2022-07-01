@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct LocalDealsApp: App {
+    
+    let ioc = IOC()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environment(\.factory, ioc)
         }
     }
 }
