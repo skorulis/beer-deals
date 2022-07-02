@@ -12,7 +12,9 @@ struct ContentView: View {
     @Environment(\.factory) private var factory
     
     var body: some View {
-        HomeView(viewModel: factory.resolve())
+        NavigationView {
+            HomeView(viewModel: factory.resolve())
+        }
     }
 }
 

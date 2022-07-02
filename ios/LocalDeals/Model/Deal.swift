@@ -14,3 +14,7 @@ struct Deal: Codable {
     let status: String
     
 }
+
+extension Deal: Identifiable {
+    var id: String { compoundID }
+}

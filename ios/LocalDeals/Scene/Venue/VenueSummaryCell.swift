@@ -21,7 +21,10 @@ extension VenueSummaryCell: View {
             VStack(alignment: .leading) {
                 Text(venue.name)
                     .font(.title3).bold()
+                    .multilineTextAlignment(.leading)
+                    .foregroundColor(.neutral900)
                 Text("\(venueDeals.deals.count) deals")
+                    .foregroundColor(.neutral900)
             }
             Spacer()
         }
@@ -47,10 +50,12 @@ extension VenueSummaryCell: View {
     private var placeholderImage: some View {
         ZStack {
             Circle()
-                .fill(Color.gray.opacity(0.5))
+                .fill(Color.neutral100)
             Image(systemName: "photo")
                 .resizable()
+                .aspectRatio(contentMode: .fit)
                 .frame(width: Metrics.imageSize/2, height: Metrics.imageSize/2)
+                .foregroundColor(.neutral900)
         }
         .frame(width: Metrics.imageSize, height: Metrics.imageSize)
         
@@ -76,36 +81,11 @@ extension VenueSummaryCell {
 struct VenueSummaryCell_Previews: PreviewProvider {
     
     static var previews: some View {
-        let input = VenueDeals(venue: venue, deals: [deal])
+        let input = VenueDeals(venue: DummyDataProvider.venue,
+                               deals: [DummyDataProvider.deal])
         VenueSummaryCell(venueDeals: input)
     }
     
-    private static var venue: Venue {
-        return Venue(website: "https://google.com",
-                     types: [""],
-                     address: "23 some street",
-                     lng: 100,
-                     lat: 100,
-                     imageURL: "https://localdeals.click/Aap_uECNu4QwvYXnuV91eiQhj_DcmQXPS7gPi1yUrU-hkxLQMUhfBVVpqxJV0dS2hok7mxGyXuqNWacmazUVutqxhPdgIOz2knT354Egze7Gam2bJI62hplvijD3aeNg8UvQLlQYrnTui_s7K6k4qAehqKuyhRmUdRmzGx_EWYT68hF2FCBf.jpeg",
-                     placeID: "ABC",
-                     name: "My venue",
-                     rating: 4,
-                     priceLevel: 1,
-                     compoundID: "ABC"
-        )
-    }
     
-    private static var deal: Deal {
-        return Deal(timeStart: nil,
-                    timeEnd: nil,
-                    days: [0],
-                    features: [1],
-                    placeID: "ABC",
-                    link: nil,
-                    text: "Some deal",
-                    compoundID: "ABC",
-                    status: "NEW"
-        )
-    }
 }
 

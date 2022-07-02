@@ -11,6 +11,7 @@ final class HomeViewModel: ObservableObject {
     private let errorService: PErrorService
     
     @Published var venueList: [VenueDeals] = []
+    @Published var selected: VenueDeals?
     
     init(network: HTTPService,
          errorService: PErrorService
@@ -30,5 +31,9 @@ extension HomeViewModel {
         }
         .handleError(service: errorService)
         
+    }
+    
+    func select(_ venue: VenueDeals) {
+        self.selected = venue
     }
 }

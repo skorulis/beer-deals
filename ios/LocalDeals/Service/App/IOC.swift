@@ -30,6 +30,7 @@ private extension IOC {
     
     func registerViewModels() {
         container.autoregister(HomeViewModel.self, initializer: HomeViewModel.init)
+        container.autoregister(FullVenueViewModel.self, argument: VenueDeals.self, initializer: FullVenueViewModel.init)
     }
     
 }

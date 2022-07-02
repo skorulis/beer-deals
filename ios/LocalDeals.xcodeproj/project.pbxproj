@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		FAC37597286FBE0700AD3647 /* VenueSummaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC37596286FBE0700AD3647 /* VenueSummaryCell.swift */; };
 		FAC3759A286FC23C00AD3647 /* ASSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = FAC37599286FC23C00AD3647 /* ASSwiftUI */; };
+		FAC3759C286FD15C00AD3647 /* FullVenueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3759B286FD15C00AD3647 /* FullVenueView.swift */; };
+		FAC3759E286FD1B200AD3647 /* FullVenueViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3759D286FD1B200AD3647 /* FullVenueViewModel.swift */; };
+		FAC375A1286FD41F00AD3647 /* DummyDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC375A0286FD41F00AD3647 /* DummyDataProvider.swift */; };
+		FAC375A4286FDC4A00AD3647 /* DealCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC375A3286FDC4A00AD3647 /* DealCell.swift */; };
 		FAE93704286C4F1A00977BD2 /* ASKCore in Frameworks */ = {isa = PBXBuildFile; productRef = FAE93703286C4F1A00977BD2 /* ASKCore */; };
 		FAE9370A286C673A00977BD2 /* LocalDealsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE93707286C673A00977BD2 /* LocalDealsApp.swift */; };
 		FAE9370B286C673A00977BD2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE93708286C673A00977BD2 /* ContentView.swift */; };
@@ -28,6 +32,10 @@
 		FAC37592286F158C00AD3647 /* Default.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Default.xcconfig; sourceTree = "<group>"; };
 		FAC37596286FBE0700AD3647 /* VenueSummaryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VenueSummaryCell.swift; sourceTree = "<group>"; };
 		FAC37598286FC23300AD3647 /* ASSwiftUI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = ASSwiftUI; path = Frameworks/ASSwiftUI; sourceTree = "<group>"; };
+		FAC3759B286FD15C00AD3647 /* FullVenueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullVenueView.swift; sourceTree = "<group>"; };
+		FAC3759D286FD1B200AD3647 /* FullVenueViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullVenueViewModel.swift; sourceTree = "<group>"; };
+		FAC375A0286FD41F00AD3647 /* DummyDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyDataProvider.swift; sourceTree = "<group>"; };
+		FAC375A3286FDC4A00AD3647 /* DealCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DealCell.swift; sourceTree = "<group>"; };
 		FAE936EF286C3A5D00977BD2 /* LocalDeals.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LocalDeals.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAE93701286C4D1F00977BD2 /* ASKCore */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = ASKCore; path = Frameworks/ASKCore; sourceTree = "<group>"; };
 		FAE93707286C673A00977BD2 /* LocalDealsApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalDealsApp.swift; sourceTree = "<group>"; };
@@ -69,8 +77,26 @@
 			isa = PBXGroup;
 			children = (
 				FAC37596286FBE0700AD3647 /* VenueSummaryCell.swift */,
+				FAC3759B286FD15C00AD3647 /* FullVenueView.swift */,
+				FAC3759D286FD1B200AD3647 /* FullVenueViewModel.swift */,
 			);
 			path = Venue;
+			sourceTree = "<group>";
+		};
+		FAC3759F286FD41400AD3647 /* Testing */ = {
+			isa = PBXGroup;
+			children = (
+				FAC375A0286FD41F00AD3647 /* DummyDataProvider.swift */,
+			);
+			path = Testing;
+			sourceTree = "<group>";
+		};
+		FAC375A2286FDC4400AD3647 /* Deal */ = {
+			isa = PBXGroup;
+			children = (
+				FAC375A3286FDC4A00AD3647 /* DealCell.swift */,
+			);
+			path = Deal;
 			sourceTree = "<group>";
 		};
 		FAE936E6286C3A5D00977BD2 = {
@@ -122,6 +148,7 @@
 		FAE93705286C673A00977BD2 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				FAC375A2286FDC4400AD3647 /* Deal */,
 				FAC37595286FBDFF00AD3647 /* Venue */,
 				FAE93715286EE51B00977BD2 /* Home */,
 				FAE93706286C673A00977BD2 /* App */,
@@ -184,6 +211,7 @@
 		FAE93716286EE59100977BD2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				FAC3759F286FD41400AD3647 /* Testing */,
 				FAE9371E286EE8CE00977BD2 /* Requests */,
 				FAE93717286EE63700977BD2 /* Venue.swift */,
 				FAE93719286EE6AE00977BD2 /* Deal.swift */,
@@ -281,12 +309,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FAC375A1286FD41F00AD3647 /* DummyDataProvider.swift in Sources */,
 				FAE9370B286C673A00977BD2 /* ContentView.swift in Sources */,
+				FAC3759E286FD1B200AD3647 /* FullVenueViewModel.swift in Sources */,
 				FAE93724286EEA5900977BD2 /* HomeViewModel.swift in Sources */,
 				FAC37597286FBE0700AD3647 /* VenueSummaryCell.swift in Sources */,
 				FAE93718286EE63700977BD2 /* Venue.swift in Sources */,
+				FAC3759C286FD15C00AD3647 /* FullVenueView.swift in Sources */,
 				FAE9371A286EE6AE00977BD2 /* Deal.swift in Sources */,
 				FAE9371C286EE7E000977BD2 /* VenueDeals.swift in Sources */,
+				FAC375A4286FDC4A00AD3647 /* DealCell.swift in Sources */,
 				FAE93714286C67BD00977BD2 /* IOC.swift in Sources */,
 				FAE93722286EEA5300977BD2 /* HomeView.swift in Sources */,
 				FAE93720286EE8D900977BD2 /* MainRequests.swift in Sources */,
