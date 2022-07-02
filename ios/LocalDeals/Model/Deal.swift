@@ -3,9 +3,9 @@
 import Foundation
 
 struct Deal: Codable {
-    let timeStart: Int
-    let timeEnd: Int
-    let days: [Int]
+    let timeStart: Int?
+    let timeEnd: Int?
+    let days: [Int]?
     let features: [Int]
     let placeID: String
     let link: String?

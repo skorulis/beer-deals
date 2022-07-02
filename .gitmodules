@@ -1,3 +1,6 @@
 [submodule "ios/Frameworks/ASKCore"]
 	path = ios/Frameworks/ASKCore
 	url = git@github.com:skorulis/ASKCore
+[submodule "ios/Frameworks/ASSwiftUI"]
+	path = ios/Frameworks/ASSwiftUI
+	url = git@github.com:skorulis/ASSwiftUI.git

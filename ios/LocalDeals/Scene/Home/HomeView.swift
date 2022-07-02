@@ -16,14 +16,20 @@ extension HomeView: View {
     var body: some View {
         content
             .onAppear(perform: viewModel.onAppear)
+            .navigationTitle("Home")
     }
     
     private var content: some View {
         ScrollView {
             VStack {
-                
+                ForEach(viewModel.venueList) { item in
+                    VenueSummaryCell(venueDeals: item)
+                }
             }
+            .padding(.horizontal)
         }
     }
+    
+    
     
 }

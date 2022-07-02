@@ -21,9 +21,11 @@ final class IOC: IOCService {
 private extension IOC {
     
     func registerServices() {
+        container.autoregister(HTTPLogger.self, initializer: HTTPLogger.init)
         container.register(HTTPService.self) { res in
-            return HTTPService(baseURL: "http://localhost:3000")
+            return HTTPService(baseURL: "http://localhost:3000", logger: res.resolve(HTTPLogger.self))
         }
+        container.autoregister(PErrorService.self, initializer: LogErrorService.init)
     }
     
     func registerViewModels() {

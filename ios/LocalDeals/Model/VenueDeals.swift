@@ -8,3 +8,8 @@ struct VenueDeals: Codable {
     let deals: [Deal]
     
 }
+
+extension VenueDeals: Identifiable {
+    
+    var id: String { venue.placeID }
+}

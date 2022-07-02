@@ -8,9 +8,15 @@ import ASKCore
 final class HomeViewModel: ObservableObject {
     
     private let network: HTTPService
+    private let errorService: PErrorService
     
-    init(network: HTTPService) {
+    @Published var venueList: [VenueDeals] = []
+    
+    init(network: HTTPService,
+         errorService: PErrorService
+    ) {
         self.network = network
+        self.errorService = errorService
     }
 }
 
@@ -20,9 +26,9 @@ extension HomeViewModel {
     
     func onAppear() {
         Task { @MainActor in
-            let result = try await network.execute(request: MainRequests.home)
-            print(result)
+            self.venueList = try await network.execute(request: MainRequests.home)
         }
+        .handleError(service: errorService)
         
     }
 }

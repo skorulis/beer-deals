@@ -6,6 +6,6 @@ import ASKCore
 enum MainRequests {
     
     static var home: HTTPJSONRequest<[VenueDeals]> {
-        return HTTPJSONRequest(endpoint: "home")
+        return HTTPJSONRequest(endpoint: "venue")
     }
 }

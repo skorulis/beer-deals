@@ -1,0 +1,11 @@
+//
+//  Default.xcconfig
+//  LocalDeals
+//
+//  Created by Alexander Skorulis on 1/7/2022.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+INFOPLIST_FILE = Config/Info.plist

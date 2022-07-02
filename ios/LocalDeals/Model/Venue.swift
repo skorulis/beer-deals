@@ -11,8 +11,8 @@ struct Venue: Codable {
     let imageURL: String?
     let placeID: String
     let name: String
-    let rating: Double
-    let priceLevel: Int
+    let rating: Double?
+    let priceLevel: Int?
     let compoundID: String
     
 }
