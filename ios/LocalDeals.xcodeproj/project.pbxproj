@@ -13,6 +13,8 @@
 		FAC3759E286FD1B200AD3647 /* FullVenueViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC3759D286FD1B200AD3647 /* FullVenueViewModel.swift */; };
 		FAC375A1286FD41F00AD3647 /* DummyDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC375A0286FD41F00AD3647 /* DummyDataProvider.swift */; };
 		FAC375A4286FDC4A00AD3647 /* DealCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC375A3286FDC4A00AD3647 /* DealCell.swift */; };
+		FAC375A728717A8800AD3647 /* Deal.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC375A628717A8800AD3647 /* Deal.swift */; };
+		FAC375A928717A8E00AD3647 /* DealFeatures.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC375A828717A8E00AD3647 /* DealFeatures.swift */; };
 		FAE93704286C4F1A00977BD2 /* ASKCore in Frameworks */ = {isa = PBXBuildFile; productRef = FAE93703286C4F1A00977BD2 /* ASKCore */; };
 		FAE9370A286C673A00977BD2 /* LocalDealsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE93707286C673A00977BD2 /* LocalDealsApp.swift */; };
 		FAE9370B286C673A00977BD2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE93708286C673A00977BD2 /* ContentView.swift */; };
@@ -20,7 +22,6 @@
 		FAE93711286C675500977BD2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAE9370F286C675500977BD2 /* Preview Assets.xcassets */; };
 		FAE93714286C67BD00977BD2 /* IOC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE93713286C67BD00977BD2 /* IOC.swift */; };
 		FAE93718286EE63700977BD2 /* Venue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE93717286EE63700977BD2 /* Venue.swift */; };
-		FAE9371A286EE6AE00977BD2 /* Deal.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE93719286EE6AE00977BD2 /* Deal.swift */; };
 		FAE9371C286EE7E000977BD2 /* VenueDeals.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE9371B286EE7E000977BD2 /* VenueDeals.swift */; };
 		FAE93720286EE8D900977BD2 /* MainRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE9371F286EE8D900977BD2 /* MainRequests.swift */; };
 		FAE93722286EEA5300977BD2 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE93721286EEA5300977BD2 /* HomeView.swift */; };
@@ -36,6 +37,8 @@
 		FAC3759D286FD1B200AD3647 /* FullVenueViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullVenueViewModel.swift; sourceTree = "<group>"; };
 		FAC375A0286FD41F00AD3647 /* DummyDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyDataProvider.swift; sourceTree = "<group>"; };
 		FAC375A3286FDC4A00AD3647 /* DealCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DealCell.swift; sourceTree = "<group>"; };
+		FAC375A628717A8800AD3647 /* Deal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Deal.swift; sourceTree = "<group>"; };
+		FAC375A828717A8E00AD3647 /* DealFeatures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DealFeatures.swift; sourceTree = "<group>"; };
 		FAE936EF286C3A5D00977BD2 /* LocalDeals.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LocalDeals.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAE93701286C4D1F00977BD2 /* ASKCore */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = ASKCore; path = Frameworks/ASKCore; sourceTree = "<group>"; };
 		FAE93707286C673A00977BD2 /* LocalDealsApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalDealsApp.swift; sourceTree = "<group>"; };
@@ -44,7 +47,6 @@
 		FAE9370F286C675500977BD2 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		FAE93713286C67BD00977BD2 /* IOC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOC.swift; sourceTree = "<group>"; };
 		FAE93717286EE63700977BD2 /* Venue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Venue.swift; sourceTree = "<group>"; };
-		FAE93719286EE6AE00977BD2 /* Deal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deal.swift; sourceTree = "<group>"; };
 		FAE9371B286EE7E000977BD2 /* VenueDeals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VenueDeals.swift; sourceTree = "<group>"; };
 		FAE9371F286EE8D900977BD2 /* MainRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRequests.swift; sourceTree = "<group>"; };
 		FAE93721286EEA5300977BD2 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -95,6 +97,15 @@
 			isa = PBXGroup;
 			children = (
 				FAC375A3286FDC4A00AD3647 /* DealCell.swift */,
+			);
+			path = Deal;
+			sourceTree = "<group>";
+		};
+		FAC375A528717A8800AD3647 /* Deal */ = {
+			isa = PBXGroup;
+			children = (
+				FAC375A628717A8800AD3647 /* Deal.swift */,
+				FAC375A828717A8E00AD3647 /* DealFeatures.swift */,
 			);
 			path = Deal;
 			sourceTree = "<group>";
@@ -211,10 +222,10 @@
 		FAE93716286EE59100977BD2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				FAC375A528717A8800AD3647 /* Deal */,
 				FAC3759F286FD41400AD3647 /* Testing */,
 				FAE9371E286EE8CE00977BD2 /* Requests */,
 				FAE93717286EE63700977BD2 /* Venue.swift */,
-				FAE93719286EE6AE00977BD2 /* Deal.swift */,
 				FAE9371B286EE7E000977BD2 /* VenueDeals.swift */,
 			);
 			path = Model;
@@ -316,13 +327,14 @@
 				FAC37597286FBE0700AD3647 /* VenueSummaryCell.swift in Sources */,
 				FAE93718286EE63700977BD2 /* Venue.swift in Sources */,
 				FAC3759C286FD15C00AD3647 /* FullVenueView.swift in Sources */,
-				FAE9371A286EE6AE00977BD2 /* Deal.swift in Sources */,
 				FAE9371C286EE7E000977BD2 /* VenueDeals.swift in Sources */,
 				FAC375A4286FDC4A00AD3647 /* DealCell.swift in Sources */,
 				FAE93714286C67BD00977BD2 /* IOC.swift in Sources */,
 				FAE93722286EEA5300977BD2 /* HomeView.swift in Sources */,
 				FAE93720286EE8D900977BD2 /* MainRequests.swift in Sources */,
 				FAE9370A286C673A00977BD2 /* LocalDealsApp.swift in Sources */,
+				FAC375A928717A8E00AD3647 /* DealFeatures.swift in Sources */,
+				FAC375A728717A8800AD3647 /* Deal.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

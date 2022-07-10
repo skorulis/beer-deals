@@ -1,5 +1,6 @@
 //  Created by Alexander Skorulis on 2/7/2022.
 
+import ASSwiftUI
 import Foundation
 import SwiftUI
 
@@ -16,13 +17,43 @@ struct FullVenueView {
 extension FullVenueView: View {
     
     var body: some View {
-        ScrollView {
-            VStack {
-                VenueSummaryCell(venueDeals: viewModel.venueDeals)
-                deals
+        ZStack {
+            content
+            
+            NavigationHelper.invisible(selection: $viewModel.isMapShowing) {
+                Text("TEST")
             }
         }
         .navigationBarTitleDisplayMode(.inline)
+    }
+    
+    private var content: some View {
+        ScrollView {
+            VStack {
+                VenueSummaryCell(venueDeals: viewModel.venueDeals)
+                venueDetails
+                deals
+            }
+        }
+    }
+    
+    private var venueDetails: some View {
+        VStack {
+            Text(viewModel.venue.address)
+            icons
+        }
+    }
+    
+    private var icons: some View {
+        HStack {
+            mapButton
+        }
+    }
+    
+    private var mapButton: some View {
+        Button(action: viewModel.showMap) {
+            Image(systemName: "map")
+        }
     }
     
     private var deals: some View {
